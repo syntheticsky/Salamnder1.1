@@ -1,0 +1,194 @@
+options:
+  - name: 'General Options'
+    children:
+      - name    : 'Custom Favicon'
+        desc    : "You can put url of an ico image that will represent your website's favicon.ico (16px x 16px)"
+        id      : 'favicon'
+        default : ''
+        type    : 'upload'
+
+      - name    : 'Apple iPhone Icon Upload'
+        desc    : 'Icon for Apple iPhone (57px x 57px)'
+        id      : 'iphone_icon'
+        default : ''
+        type    : 'upload'
+
+      - name    : 'Apple iPhone Retina Icon Upload'
+        desc    : 'Icon for Apple iPhone Retina Version (114px x 114px)'
+        id      : 'iphone_icon_retina'
+        default : ''
+        type    : 'upload'
+
+      - name    : 'Apple iPad Icon Upload'
+        desc    : 'Icon for Apple iPhone (72px x 72px)'
+        id      : 'ipad_icon'
+        default : ''
+        type    : 'upload'
+
+      - name    : 'Apple iPad Retina Icon Upload'
+        desc    : 'Icon for Apple iPad Retina Version (144px x 144px)'
+        id      : 'ipad_icon_retina'
+        default : ''
+        type    : 'upload'
+
+      - name    : 'Default Sidebar Position'
+        desc    : 'Select the defeault position of the sidebar.'
+        id      : 'default_sidebar_pos'
+        default : 'right'
+        options : {right : 'Right', left : 'Left'}
+        type    : 'select'
+
+      - name    : 'Tracking Code'
+        desc    : 'Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.'
+        id      : 'google_analytics'
+        default : ''
+        type    : 'textarea'
+
+      - name    : 'Allow comments on pages'
+        desc    : 'Allow comments on regular pages.'
+        id      : 'comments_pages'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Disable featured images on pages'
+        desc    : 'Disable featured images on regular pages.'
+        id      : 'featured_images_pages'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Responsive Design'
+        desc    : 'Use the responsive design features.'
+        id      : 'responsive'
+        default : 1
+        type    : 'checkbox'
+
+#      - name    : 'Use Fixed Layout for iPad Portrait'
+#        desc    : 'Check this box to use the fixed layout for the iPad in portrait view.'
+#        id      : 'ipad_potrait'
+#        default : 1
+#        type    : 'checkbox'
+
+      - name    : 'Space before &lt;/head&gt;'
+        desc    : 'Add code before the &lt;/head&gt; tag.'
+        id      : 'head_after'
+        default : ''
+        type    : 'textarea'
+
+      - name    : 'Space before &lt;/body&gt;'
+        desc    : 'Add code before the &lt;/body&gt; tag.'
+        id      : 'space_body'
+        default : ''
+        type    : 'textarea'
+#Header options
+  - name: 'Header Options'
+    children:
+      - name    : 'Select a Header Layout'
+        desc    : ''
+        id      : 'header_layout'
+        default : 'v1'
+        type    : 'radios'
+        img     : true
+        options : {v1 : '/images/patterns/header1.jpg', v2 : '/images/patterns/header2.jpg', v3 : '/images/patterns/header3.jpg', v4 : '/images/patterns/header4.jpg', v5 : '/images/patterns/header5.jpg'}
+#
+#
+#        			'name' : 'Header Top Left Content',
+#        			'desc' : '',
+#        			'id' : 'header_left_content',
+#        			'default' : 'Contact Info',
+#        			'type' : 'select',
+#        			'options' : array('contactinfo' : 'Contact Info', 'socialinks' : 'Social Links', 'nav' : 'Navigation'));
+#
+#
+#        			'name' : 'Header Top Right Content',
+#        			'desc' : '',
+#        			'id' : 'header_right_content',
+#        			'default' : 'Navigation',
+#        			'type' : 'select',
+#        			'options' : array('contactinfo' : 'Contact Info', 'socialinks' : 'Social Links', 'nav' : 'Navigation'));
+#
+#
+#        			'name' : 'Header Tagline Area Content For Header #4',
+#        			'desc' : '',
+#        			'id' : 'header_v4_content',
+#        			'default' : 'Tagline + Search',
+#        			'type' : 'select',
+#        			'options' : array('tagline' : 'Tagline', 'search' : 'Search', 'taglinesearch' : 'Tagline + Search', 'banner' : 'Banner'));
+#
+#
+#        			'name' : 'Banner Code For Header #4',
+#              'desc' : 'Add HTML banner code for Header # 4',
+#              'id' : 'header_banner_code',
+#              'default' : '',
+#              'type' : 'textarea',
+#        		);
+#
+#
+#        			'name' : 'Header Phone Number',
+#        			'desc' : '',
+#        			'id' : 'header_number',
+#        			'default' : 'Call Us Today! 1.555.555.555',
+#        			'type' : 'text',
+#        		);
+#
+#
+#        			'name' : 'Header Email Address',
+#        			'desc' : '',
+#        			'id' : 'header_email',
+#        			'default' : 'info@yourdomain.com',
+#        			'type' : 'text',
+#        		);
+#
+#
+#        			'name' : 'Header Tagline',
+#        			'desc' : '',
+#        			'id' : 'header_tagline',
+#        			'default' : 'Insert Any Headline Or Link You Want Here',
+#        			'type' : 'text',
+#        		);
+#
+#
+#        			'name' : 'Background Image For Header Area',
+#        			'desc' : 'Please choose an image or insert an image url to use for the header backgroud.',
+#        			'id' : 'header_bg_image',
+#        			'default' : '',
+#        			'mode' : 'mini',
+#        			'type' : 'media',
+#        		);
+#
+#
+#        			'name' : '100% Background Image',
+#        			'desc' : 'Have header background image always at 100% in width and height and scale according to the browser size.',
+#        			'id' : 'header_bg_full',
+#        			'default' : 0,
+#        			'type' : 'checkbox',
+#        		);
+#
+#
+#        			'name' : 'Background Repeat',
+#        			'desc' : '',
+#        			'id' : 'header_bg_repeat',
+#        			'default' : '',
+#        			'type' : 'select',
+#        			'options' : array(
+#        				'repeat' : 'repeat',
+#        				'repeat-x' : 'repeat-x',
+#        				'repeat-y' : 'repeat-y',
+#        				'no-repeat' : 'no-repeat',
+#        			),
+#        		);
+#
+#
+#        			'name' : 'Display social icons on header of the page:',
+#        			'desc' : 'Select the checkbox to show social media icons on the header of the page.',
+#        			'id' : 'icons_header',
+#        			'default' : 1,
+#        			'type' : 'checkbox',
+#        		);
+#
+#
+#        			'name' : 'Open social icons on header in a new window',
+#        			'desc' : '',
+#        			'id' : 'icons_header_new',
+#        			'default' : 0,
+#        			'type' : 'checkbox',
+#        		);
