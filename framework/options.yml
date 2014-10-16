@@ -31,12 +31,12 @@ options:
         default : ''
         type    : 'upload'
 
-      - name    : 'Default Sidebar Position'
-        desc    : 'Select the defeault position of the sidebar.'
-        id      : 'default_sidebar_pos'
-        default : 'right'
-        options : {right : 'Right', left : 'Left'}
-        type    : 'select'
+#      - name    : 'Default Sidebar Position'
+#        desc    : 'Select the defeault position of the sidebar.'
+#        id      : 'default_sidebar_pos'
+#        default : 'right'
+#        options : {right : 'Right', left : 'Left'}
+#        type    : 'select'
 
       - name    : 'Tracking Code'
         desc    : 'Paste your Google Analytics (or other) tracking code here. This will be added into the footer template of your theme.'
@@ -89,6 +89,11 @@ options:
         type    : 'radios'
         img     : true
         options : {v1 : '/images/patterns/header1.jpg', v2 : '/images/patterns/header2.jpg', v3 : '/images/patterns/header3.jpg', v4 : '/images/patterns/header4.jpg', v5 : '/images/patterns/header5.jpg'}
+      - name    : 'Fixed menu'
+        desc    : 'Fixed main menu.'
+        id      : 'fixed_menu'
+        default : 0
+        type    : 'checkbox'
 #
 #
 #        			'name' : 'Header Top Left Content',

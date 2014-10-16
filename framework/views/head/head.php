@@ -37,9 +37,8 @@
     if (!$ipad || !Salamander::getData('ipad_potrait')) :
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<?php
-    endif;
-?>
+<?php endif; ?>
+
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/media.css" />
 <?php if (!Salamander::getData('ipad_potrait')) : ?>
 <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/ipad.css" />
@@ -67,7 +66,7 @@
     }
   }
 </style>
-<?php if((bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPhone')) : ?>
+  <?php if((bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPhone')) : ?>
 <style type="text/css">
   @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     #wrapper .ei-slider {
@@ -75,7 +74,13 @@
     }
   }
 </style>
+  <?php endif; ?>
 <?php endif; ?>
-<?php
-  endif;
-?>
+<?php if ( Salamander::getData( 'fixed_menu' ) ) : ?>
+<style type="text/css">
+  body {
+    min-height: 2000px;
+    padding-top: 70px;
+  }
+</style>
+<?php endif; ?>

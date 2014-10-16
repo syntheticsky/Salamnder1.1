@@ -63,8 +63,8 @@ add_action('admin_head', array($salamander->init, 'adminSetJs'));
 
 add_action('init', 'mediauploader_init');
 
-//add_action('wp_enqueue_scripts', array($salamander->init, 'stylesheets'), 0, 1);
-//add_action('wp_enqueue_scripts', array($salamander->init, 'scripts'));
+add_action('wp_enqueue_scripts', array($salamander->init, 'stylesheets'), 0, 1);
+add_action('wp_enqueue_scripts', array($salamander->init, 'scripts'));
 ////set latest theme options to theme object
 //if (!is_admin())
 //{
@@ -140,3 +140,48 @@ add_image_size('portfolio-four', 220, 161, true);
 add_image_size('portfolio-full', 940, 400, true);
 add_image_size('recent-posts', 700, 441, true);
 add_image_size('recent-works-thumbnail', 66, 66, true);
+
+
+
+/**
+ * Menu fallback. Link to the menu editor if that is useful.
+ *
+ * @param  array $args
+ * @return string
+ */
+function link_to_menu_editor( $args ) {
+  if ( ! current_user_can( 'manage_options' ) ) {
+    return;
+  }
+  extract( $args );
+
+  $defaults = array( 'menu' => '', 'container' => 'div', 'container_class' => '', 'container_id' => '', 'menu_class' => 'menu', 'menu_id' => '',
+    'echo' => true, 'fallback_cb' => 'wp_page_menu', 'before' => '', 'after' => '', 'link_before' => '', 'link_after' => '', 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+    'depth' => 0, 'walker' => '', 'theme_location' => '' );
+  $args = wp_parse_args( $args, $defaults );
+
+  $link = $link_before
+    . '<a href="' . home_url() . '">' . $before . __('Home', 'salamander') . $after . '</a>'
+    . $link_after;
+
+  // We have a list
+  if ( FALSE !== stripos( $items_wrap, '<ul' )
+    or FALSE !== stripos( $items_wrap, '<ol' )
+  )
+  {
+    $link = "<li>$link</li>";
+  }
+
+  $output = sprintf( $items_wrap, $menu_id, $menu_class, $link );
+  if ( ! empty ( $container ) )
+  {
+    $output  = "<$container class='$container_class' id='$container_id'>$output</$container>";
+  }
+
+  if ( $echo )
+  {
+    echo $output;
+  }
+
+  return $output;
+}

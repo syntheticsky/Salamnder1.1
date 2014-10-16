@@ -9,7 +9,7 @@
   <?php wp_head(); ?>
   <?php print Salamander::getHtml('head'); ?>
   <?php print Salamander::getHtml('favicon'); ?>
-  <?php print Salamander::getHtml('javascripts'); ?>
+  <?php //print Salamander::getHtml('javascripts'); ?>
   <?php // print Salamander::getHtml('css'); ?>
 
   <style type="text/css">
