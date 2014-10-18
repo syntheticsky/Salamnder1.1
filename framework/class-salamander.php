@@ -25,7 +25,7 @@ class Salamander
 		global $post;
 		$this->post = $post;
 		//SalamanderInit class defined in framwork folder
-    $this->init = Salamander_Init::get_instance();
+    $this->init = Salamander_Init::get_instance( is_admin() );
     //Set current page ID
     $this->currentPageID = $this->getCurrentPageId();
     self::$pageID = $this->getCurrentPageId();

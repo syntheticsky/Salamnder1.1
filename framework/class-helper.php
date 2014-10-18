@@ -622,14 +622,12 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public static function optionsframework_uploader_function($id, $std, $mod = '')
+	public static function optionsframework_uploader_function($id, $default, $mod = '')
 	{
-
 	  $data = get_option(THEME_OPTIONS);
 		$uploader = '';
-	  $upload = $data[$id];
+	  $upload = isset( $data[$id] ) ? $data[$id] : $default;
 		$hide = '';
-
 		if ($mod == "min")
 		{
 			$hide ='hide';
@@ -641,7 +639,7 @@ class Helper
 		}
 		else
 		{
-			$val = $std;
+			$val = $default;
 			$hide = 'hide';
 		}
 
@@ -674,12 +672,12 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public static function optionsframework_media_uploader_function($id, $std, $int, $mod)
+	public static function optionsframework_media_uploader_function($id, $default, $int, $mod)
 	{
 
     $data = get_option(THEME_OPTIONS);
 		$uploader = '';
-    $upload = $data[$id];
+    $upload = isset( $data[$id] ) ? $data['id'] : $default;
 		$hide = '';
 		if ($mod == "min")
 		{
@@ -996,7 +994,7 @@ class Helper
 	  	foreach ( $element['#options'] as $val => $name ) {
 	  		if ( $element['#images'] ) {
           $selected = '';
-          if(NULL!=checked($default_value, $val, false)) {
+          if( NULL != checked( $default_value, $val, false ) ) {
             $selected = 'of-radio-img-selected';
           }
           $output .= '<div class="fieldset">';

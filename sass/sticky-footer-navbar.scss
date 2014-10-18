@@ -1,18 +1,13 @@
 /* Sticky footer styles
 -------------------------------------------------- */
-/* line 3, ../sass/sticky-footer-navbar.scss */
 html {
   position: relative;
   min-height: 100%;
 }
-
-/* line 7, ../sass/sticky-footer-navbar.scss */
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
-
-/* line 11, ../sass/sticky-footer-navbar.scss */
 #footer {
   position: absolute;
   bottom: 0;
@@ -21,6 +16,7 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
+
 
 /* Custom page CSS
 -------------------------------------------------- */

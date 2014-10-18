@@ -1,0 +1,596 @@
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* line 2, ../sass/ipad.scss */
+  #wrapper {
+    width: auto !important;
+  }
+
+  /* line 5, ../sass/ipad.scss */
+  #main {
+    padding-bottom: 50px;
+  }
+
+  /* line 8, ../sass/ipad.scss */
+  .columns .col {
+    float: none;
+    width: 100% !important;
+    padding: 0 0 20px;
+  }
+
+  /* line 13, ../sass/ipad.scss */
+  .avada-container .columns {
+    float: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* line 18, ../sass/ipad.scss */
+  .avada-container .columns .col {
+    float: left;
+  }
+
+  /* line 19, ../sass/ipad.scss */
+  .avada-container .col img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* line 23, ../sass/ipad.scss */
+  .review {
+    float: none;
+    width: 100%;
+  }
+
+  /* line 27, ../sass/ipad.scss */
+  .footer-area .columns .col {
+    float: left;
+    width: 98% !important;
+    padding: 0 2% 20px 0;
+  }
+
+  /* line 32, ../sass/ipad.scss */
+  .social-networks,
+  .copyright {
+    float: none;
+    padding: 0 0 15px;
+    text-align: center;
+  }
+
+  /* line 38, ../sass/ipad.scss */
+  .copyright:after,
+  .social-networks:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  /* line 44, ../sass/ipad.scss */
+  .social-networks li,
+  .copyright li {
+    float: none;
+    display: inline-block;
+  }
+
+  /* line 49, ../sass/ipad.scss */
+  .continue {
+    display: none;
+  }
+
+  /* line 50, ../sass/ipad.scss */
+  .mobile-button {
+    display: block !important;
+    float: none;
+  }
+
+  /* line 54, ../sass/ipad.scss */
+  .page-title {
+    width: auto;
+    padding-top: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* line 59, ../sass/ipad.scss */
+  .page-title-wrapper {
+    width: auto;
+  }
+
+  /* line 62, ../sass/ipad.scss */
+  .page-title h1 {
+    float: none;
+  }
+
+  /* line 65, ../sass/ipad.scss */
+  .page-title ul {
+    float: none;
+    text-align: left;
+    padding-top: 0 !important;
+    line-height: 11px !important;
+  }
+
+  /* line 71, ../sass/ipad.scss */
+  #header {
+    padding: 20px;
+  }
+
+  /* line 74, ../sass/ipad.scss */
+  #header .logo {
+    float: none;
+    text-align: center;
+    margin: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* line 80, ../sass/ipad.scss */
+  #header .nav-holder {
+    float: none;
+  }
+
+  /* line 83, ../sass/ipad.scss */
+  .nav-holder ul, .top-menu .menu {
+    display: none;
+  }
+
+  /* line 84, ../sass/ipad.scss */
+  .nav-holder .dd-container, .top-menu .dd-container {
+    display: block !important;
+    width: 100%;
+  }
+
+  /* line 85, ../sass/ipad.scss */
+  .one_half, .one_third, .two_third, .three_fourth, .one_fourth {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* line 89, ../sass/ipad.scss */
+  .one_half > div, .one_third > div, .two_third > div, .three_fourth > div, .one_fourth > div {
+    margin-bottom: 0;
+  }
+
+  /* line 93, ../sass/ipad.scss */
+  .title {
+    margin-top: 0px !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* line 98, ../sass/ipad.scss */
+  #content {
+    width: 100% !important;
+    float: none !important;
+    margin-bottom: 50px;
+  }
+
+  /* line 104, ../sass/ipad.scss */
+  #sidebar {
+    width: 100% !important;
+    float: none !important;
+  }
+
+  /* line 109, ../sass/ipad.scss */
+  #sidebar .social_links .social li {
+    width: auto;
+    margin-right: 5px;
+  }
+
+  /* line 114, ../sass/ipad.scss */
+  #comment-input {
+    margin-bottom: 0;
+  }
+
+  /* line 117, ../sass/ipad.scss */
+  #comment-input input {
+    width: 90%;
+    float: none;
+    margin-bottom: 10px;
+  }
+
+  /* line 122, ../sass/ipad.scss */
+  #comment-textarea textarea {
+    width: 90%;
+  }
+
+  /* line 126, ../sass/ipad.scss */
+  .pagination {
+    margin-top: 40px;
+  }
+
+  /* line 130, ../sass/ipad.scss */
+  .portfolio-one .portfolio-item .image {
+    float: none;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  /* line 137, ../sass/ipad.scss */
+  h5.toggle span.toggle-title {
+    width: 80%;
+  }
+
+  /* line 141, ../sass/ipad.scss */
+  .full-boxed-pricing {
+    width: 97%;
+  }
+
+  /* line 144, ../sass/ipad.scss */
+  .full-boxed-pricing .column {
+    width: 100%;
+    border: 1px solid #E5E4E3 !important;
+    margin-bottom: 10px;
+  }
+
+  /* line 149, ../sass/ipad.scss */
+  .full-boxed-pricing ul {
+    width: 100%;
+  }
+
+  /* line 153, ../sass/ipad.scss */
+  .sep-boxed-pricing .column {
+    width: 97%;
+  }
+
+  /* line 156, ../sass/ipad.scss */
+  .sep-boxed-pricing ul {
+    width: 100%;
+  }
+
+  /* line 159, ../sass/ipad.scss */
+  .sep-boxed-pricing ul li {
+    width: 100%;
+  }
+
+  /* line 163, ../sass/ipad.scss */
+  .page-title h1 {
+    margin-bottom: 5px;
+  }
+
+  /* line 166, ../sass/ipad.scss */
+  .page-title h1, .page-title ul {
+    float: none;
+    line-height: normal;
+  }
+
+  /* line 171, ../sass/ipad.scss */
+  .share-box {
+    height: auto;
+  }
+
+  /* line 174, ../sass/ipad.scss */
+  #wrapper .share-box h4 {
+    float: none;
+    line-height: 20px !important;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  /* line 180, ../sass/ipad.scss */
+  .share-box ul {
+    float: none;
+    overflow: hidden;
+    padding: 0 25px;
+    padding-bottom: 25px;
+    margin-top: 0px;
+  }
+
+  /* line 188, ../sass/ipad.scss */
+  .project-content .project-description {
+    margin-bottom: 50px;
+  }
+
+  /* line 191, ../sass/ipad.scss */
+  .project-content .project-description, .project-content .project-info {
+    width: 100%;
+  }
+
+  /* line 195, ../sass/ipad.scss */
+  .portfolio-half .flexslider {
+    width: 100%;
+  }
+
+  /* line 198, ../sass/ipad.scss */
+  .portfolio-half .project-content {
+    width: 100%;
+  }
+
+  /* line 202, ../sass/ipad.scss */
+  #style_selector {
+    display: none;
+  }
+
+  /* line 206, ../sass/ipad.scss */
+  .portfolio-tabs {
+    height: auto;
+    border-bottom: 0;
+  }
+
+  /* line 211, ../sass/ipad.scss */
+  .portfolio-tabs li {
+    float: none;
+    margin-right: 0;
+    border-bottom: 1px solid #E7E6E6;
+  }
+
+  /* line 216, ../sass/ipad.scss */
+  .post-content .rev_slider_wrapper {
+    margin-left: -5px !important;
+  }
+
+  /* line 217, ../sass/ipad.scss */
+  .rev_slider_wrapper .tparrows, .rev_slider_wrapper:hover .tparrows {
+    display: none !important;
+  }
+
+  /* line 218, ../sass/ipad.scss */
+  .ls-avada .ls-nav-prev, .ls-avada .ls-nav-next {
+    display: none !important;
+  }
+
+  /* line 220, ../sass/ipad.scss */
+  nav#nav {
+    margin-right: 0;
+  }
+
+  /* line 222, ../sass/ipad.scss */
+  #footer .social-networks {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    left: -11px;
+  }
+
+  /* line 224, ../sass/ipad.scss */
+  .rev_slider .button, .ls-layer .button {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  /* line 230, ../sass/ipad.scss */
+  .shortcode-tabs .tab-holder .tabs, .tab-holder .tabs {
+    height: auto !important;
+  }
+
+  /* line 233, ../sass/ipad.scss */
+  .shortcode-tabs .tab-hold .tabs li {
+    width: 100% !important;
+  }
+
+  /* line 237, ../sass/ipad.scss */
+  #wrapper .page-title-container {
+    height: auto !important;
+    max-height: 87px;
+    padding-bottom: 20px;
+  }
+
+  /* line 239, ../sass/ipad.scss */
+  .error_page .useful_links {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  /* line 241, ../sass/ipad.scss */
+  #gmap {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* line 243, ../sass/ipad.scss */
+  .social_links_shortcode .social li {
+    width: 10% !important;
+  }
+
+  /* line 245, ../sass/ipad.scss */
+  .header-social {
+    padding-top: 10px;
+  }
+
+  /* line 247, ../sass/ipad.scss */
+  .header-v2 .header-social .alignleft, .header-v3 .header-social .alignleft {
+    margin-left: 20px !important;
+  }
+
+  /* line 248, ../sass/ipad.scss */
+  .header-v2 .header-social .alignright, .header-v3 .header-social .alignright {
+    margin-right: 20px !important;
+  }
+
+  /* line 250, ../sass/ipad.scss */
+  .header-v4 .header-social .alignleft {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* line 251, ../sass/ipad.scss */
+  .header-v4 .header-social .alignright {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* line 252, ../sass/ipad.scss */
+  .header-v4 .header-social .social-networks {
+    width: 100%;
+    margin-top: 0;
+    padding-bottom: 0;
+    height: 26px;
+  }
+
+  /* line 253, ../sass/ipad.scss */
+  .header-v4 .header-social .social-networks li {
+    float: none;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  /* line 254, ../sass/ipad.scss */
+  .header-v4 .header-social .social-networks li a {
+    margin-bottom: 0;
+  }
+
+  /* line 255, ../sass/ipad.scss */
+  .header-v4 .header-social {
+    padding-bottom: 0;
+  }
+
+  /* line 256, ../sass/ipad.scss */
+  .header-v4 #header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* line 257, ../sass/ipad.scss */
+  .header-v4 #header .logo {
+    float: left;
+  }
+
+  /* line 258, ../sass/ipad.scss */
+  .header-v4 #small-nav {
+    padding: 6px 20px;
+  }
+
+  /* line 259, ../sass/ipad.scss */
+  .header-v4 #small-nav #nav {
+    width: 100%;
+  }
+
+  /* line 261, ../sass/ipad.scss */
+  .header-v5 .header-social .alignleft {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* line 262, ../sass/ipad.scss */
+  .header-v5 .header-social .alignright {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* line 263, ../sass/ipad.scss */
+  .header-v5 .header-social .social-networks {
+    width: 100%;
+    padding-bottom: 0;
+    height: 26px;
+  }
+
+  /* line 264, ../sass/ipad.scss */
+  .header-v5 .header-social .social-networks li {
+    float: none;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  /* line 265, ../sass/ipad.scss */
+  .header-v5 .header-social .social-networks li a {
+    margin-bottom: 0;
+  }
+
+  /* line 266, ../sass/ipad.scss */
+  .header-v5 .header-social {
+    padding-bottom: 0;
+  }
+
+  /* line 267, ../sass/ipad.scss */
+  .header-v5 #small-nav {
+    padding: 6px 20px;
+  }
+
+  /* line 268, ../sass/ipad.scss */
+  .header-v5 #small-nav #nav {
+    width: 100%;
+  }
+
+  /* line 270, ../sass/ipad.scss */
+  #wrapper .ei-slider {
+    width: 100% !important;
+  }
+
+  /* line 272, ../sass/ipad.scss */
+  .tfs-slider .slides {
+    width: auto !important;
+  }
+
+  /* line 273, ../sass/ipad.scss */
+  #wrapper .ei-slider {
+    height: 200px !important;
+  }
+
+  /* line 275, ../sass/ipad.scss */
+  .progress-bar {
+    margin-bottom: 10px !important;
+  }
+
+  /* line 277, ../sass/ipad.scss */
+  .large-alternate .post-content {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* line 279, ../sass/ipad.scss */
+  .medium-alternate .date-and-formats {
+    float: none;
+    margin-bottom: 20px;
+  }
+
+  /* line 280, ../sass/ipad.scss */
+  .medium-alternate .flexslider {
+    float: none !important;
+  }
+
+  /* line 281, ../sass/ipad.scss */
+  .medium-alternate .post-content {
+    float: none;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* line 283, ../sass/ipad.scss */
+  .content-boxes-icon-boxed .col {
+    height: auto !important;
+    padding-bottom: 20px;
+  }
+
+  /* line 284, ../sass/ipad.scss */
+  .content-boxes-icon-on-top .col, .content-boxes-icon-boxed .col {
+    margin-bottom: 55px;
+  }
+
+  /* line 286, ../sass/ipad.scss */
+  .counter-circle-wrapper {
+    margin-bottom: 20px;
+  }
+
+  /* line 287, ../sass/ipad.scss */
+  .counters-circle .counter-circle-wrapper:last-child {
+    margin-bottom: 0;
+  }
+
+  /* line 288, ../sass/ipad.scss */
+  .counters-box .counter-box-wrapper {
+    margin-bottom: 20px;
+    width: 95.3%;
+  }
+
+  /* line 289, ../sass/ipad.scss */
+  .counters-box .counter-box-wrapper:last-child {
+    margin-bottom: 0;
+  }
+
+  /* line 291, ../sass/ipad.scss */
+  .tagline-shadow {
+    display: none;
+  }
+
+  /* line 293, ../sass/ipad.scss */
+  .popup {
+    display: none !important;
+  }
+
+  /* line 295, ../sass/ipad.scss */
+  .share-box .social-networks {
+    text-align: left;
+  }
+}

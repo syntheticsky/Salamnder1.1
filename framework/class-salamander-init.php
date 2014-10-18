@@ -15,7 +15,7 @@ class Salamander_Init
   private $default_values;
 	private $optionsMachine = array(); //default
 
-	private function __construct()
+	private function __construct($is_admin)
 	{
 		global $pagenow;
 		$this->pageNow = $pagenow;
@@ -23,8 +23,10 @@ class Salamander_Init
 		$this->defineConstants();
 		$this->helper = Helper::get_instance();
     $this->options = get_option(THEME_OPTIONS);
-    $this->get_default_options();
-    $this->parse_options($this->default_options);
+    if ( $is_admin ) {
+      $this->get_default_options();
+      $this->parse_options($this->default_options);
+    }
 //    k($this->default_options, $this->options, $this->default_values);
 //		$this->setOptions();
 //		$this->optionsMachine = $this->helper->optionsMachine($this->options);
@@ -32,11 +34,11 @@ class Salamander_Init
 //		new Widgets();
 	}
 
-	public static function get_instance()
+	public static function get_instance($is_admin = true)
 	{
 	  if (self::$instance == null)
 	  {
-	    self::$instance = new self();
+	    self::$instance = new self($is_admin);
 	  }
 
 	  return self::$instance;
@@ -328,6 +330,7 @@ class Salamander_Init
 		$params = array(
 			'headerClassesArray' => $classes,
       'default_options' => $this->default_options,
+      'default_values' => $this->default_values,
       'options' => $this->options,
       'helper' => $this->helper,
 		);
@@ -391,7 +394,6 @@ class Salamander_Init
 				die('1');
 				break;
 			case 'import_options':
-				$data = $_POST['data'];
 				$data = unserialize(base64_decode($data)); //100% safe - ignore theme check nag
 				update_option(THEME_OPTIONS, $data);
 				die('1');
@@ -404,7 +406,7 @@ class Salamander_Init
 				die('1');
 				break;
 			case 'reset':
-				update_option(THEME_OPTIONS, $this->optionsMachine['defaults']);
+				update_option(THEME_OPTIONS, $this->default_values);
 				die('1');
 				break;
 		}
@@ -4240,12 +4242,16 @@ class Salamander_Init
   private function parse_options( $default_options ) {
     if ( is_array($default_options) && !empty( $default_options )) {
        foreach ( $default_options as $values ) {
-         foreach ($values['children'] as $value) {
-           if ($value['type'] == 'checkboxes') {
-             foreach ($value['default'] as $k => $v) {
-               $this->default_valuess[$value['id']][$k] = true;
+         foreach ( $values['children'] as $value ) {
+           if ( $value['type'] == 'checkboxes' ) {
+             foreach ( $value['default'] as $k => $v ) {
+               $this->default_values[$value['id']][$k] = true;
              }
-           } else {
+           }
+           elseif ( $value['type'] == 'upload' && ! empty( $value['default'] ) ) {
+             $this->default_values[$value['id']] = get_bloginfo( 'template_directory' ) . $value['default'];
+           }
+           else {
              $this->default_values[$value['id']] = $value['default'];
            }
          }

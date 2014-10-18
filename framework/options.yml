@@ -89,69 +89,59 @@ options:
         type    : 'radios'
         img     : true
         options : {v1 : '/images/patterns/header1.jpg', v2 : '/images/patterns/header2.jpg', v3 : '/images/patterns/header3.jpg', v4 : '/images/patterns/header4.jpg', v5 : '/images/patterns/header5.jpg'}
+
       - name    : 'Fixed menu'
         desc    : 'Fixed main menu.'
         id      : 'fixed_menu'
         default : 0
         type    : 'checkbox'
-#
-#
-#        			'name' : 'Header Top Left Content',
-#        			'desc' : '',
-#        			'id' : 'header_left_content',
-#        			'default' : 'Contact Info',
-#        			'type' : 'select',
-#        			'options' : array('contactinfo' : 'Contact Info', 'socialinks' : 'Social Links', 'nav' : 'Navigation'));
-#
-#
-#        			'name' : 'Header Top Right Content',
-#        			'desc' : '',
-#        			'id' : 'header_right_content',
-#        			'default' : 'Navigation',
-#        			'type' : 'select',
-#        			'options' : array('contactinfo' : 'Contact Info', 'socialinks' : 'Social Links', 'nav' : 'Navigation'));
-#
-#
-#        			'name' : 'Header Tagline Area Content For Header #4',
-#        			'desc' : '',
-#        			'id' : 'header_v4_content',
-#        			'default' : 'Tagline + Search',
-#        			'type' : 'select',
-#        			'options' : array('tagline' : 'Tagline', 'search' : 'Search', 'taglinesearch' : 'Tagline + Search', 'banner' : 'Banner'));
-#
-#
-#        			'name' : 'Banner Code For Header #4',
-#              'desc' : 'Add HTML banner code for Header # 4',
-#              'id' : 'header_banner_code',
-#              'default' : '',
-#              'type' : 'textarea',
-#        		);
-#
-#
-#        			'name' : 'Header Phone Number',
-#        			'desc' : '',
-#        			'id' : 'header_number',
-#        			'default' : 'Call Us Today! 1.555.555.555',
-#        			'type' : 'text',
-#        		);
-#
-#
-#        			'name' : 'Header Email Address',
-#        			'desc' : '',
-#        			'id' : 'header_email',
-#        			'default' : 'info@yourdomain.com',
-#        			'type' : 'text',
-#        		);
-#
-#
-#        			'name' : 'Header Tagline',
-#        			'desc' : '',
-#        			'id' : 'header_tagline',
-#        			'default' : 'Insert Any Headline Or Link You Want Here',
-#        			'type' : 'text',
-#        		);
-#
-#
+
+      - name    : 'Header Top Left Content'
+        desc    : 'Not for Header #1'
+        id      : 'header_left_content'
+        default : 'contactinfo'
+        type    : 'select'
+        options : {header-info : 'Contact Info', header-social : 'Social Links', header-menu : 'Navigation'}
+
+      - name    : 'Header Top Right Content'
+        desc    : 'Not for Header #1'
+        id      : 'header_right_content'
+        default : 'nav'
+        type    : 'select'
+        options : {header-info : 'Contact Info', header-social : 'Social Links', header-menu : 'Navigation'}
+
+      - name    : 'Header Tagline Area Content For Header #4'
+        desc    : ''
+        id      : 'header_v4_content'
+        default : 'taglinesearch'
+        type    : 'select'
+        options : {tagline : 'Tagline', search : 'Search', taglinesearch : 'Tagline + Search', banner : 'Banner'}
+
+      - name    : 'Banner Code For Header #4'
+        desc    : 'Add HTML banner code for Header # 4'
+        id      : 'header_banner_code'
+        default : ''
+        type    : 'textarea'
+
+      - name    : 'Header Phone Number'
+        desc    : ''
+        id      : 'header_number'
+        default : 'Call Us Today! 1.555.555.555'
+        type    : 'text'
+
+      - name    : 'Header Email Address'
+        desc    : ''
+        id      : 'header_email'
+        default : 'info@yourdomain.com'
+        type    : 'text'
+
+      - name    : 'Header Tagline'
+        desc    : ''
+        id      : 'header_tagline'
+        default : 'Insert Any Headline Or Link You Want Here'
+        type    : 'text'
+
+
 #        			'name' : 'Background Image For Header Area',
 #        			'desc' : 'Please choose an image or insert an image url to use for the header backgroud.',
 #        			'id' : 'header_bg_image',
@@ -197,3 +187,52 @@ options:
 #        			'default' : 0,
 #        			'type' : 'checkbox',
 #        		);
+      - name    : 'Logo'
+        desc    : 'Please choose an image file for your logo'
+        id      : 'logo'
+        default : '/images/logo.png'
+        mod     : 'min'
+        type    : 'upload'
+
+      - name    : 'Logo (Retina Version @2x)'
+        desc    : 'Please choose an image file for the retina version of the logo. It should be 2x the size of main logo.'
+        id      : 'logo_retina'
+        default : ''
+        mod     : 'min'
+        type    : 'upload'
+
+      - name    : 'Standard Logo Width for Retina Logo'
+        desc    : 'If retina logo is uploaded, please enter the standard logo (1x) version width, do not enter the retina logo width.'
+        id      : 'retina_logo_width'
+        default : '110'
+        type    : 'text'
+
+      - name    : 'Standard Logo Height for Retina Logo'
+        desc    : 'If retina logo is uploaded, please enter the standard logo (1x) version height, do not enter the retina logo height.'
+        id      : 'retina_logo_height'
+        default : '22'
+        type    : 'text'
+
+      - name    : 'Logo Left Margin'
+        desc    : '(in pixels)'
+        id      : 'margin_left_logo'
+        default : '0px'
+        type    : 'text'
+
+      - name    : 'Logo Right Margin'
+        desc    : '(in pixels)'
+        id      : 'margin_right_logo'
+        default : '0px'
+        type    : 'text'
+
+      - name    : 'Logo Top Margin'
+        desc    : '(in pixels)'
+        id      : 'margin_top_logo'
+        default : '12px'
+        type    : 'text'
+
+      - name    : 'Logo Bottom Margin'
+        desc    : '(in pixels)'
+        id      : 'margin_bottom_logo'
+        default : '0px'
+        type    : 'text'

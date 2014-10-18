@@ -1,0 +1,114 @@
+/* Template-specific stuff
+ *
+ * Customizations just for the template; these are not necessary for anything
+ * with disabling the responsiveness.
+ */
+/* Account for fixed navbar */
+/* line 8, ../sass/non-responsive.scss */
+body {
+  min-width: 970px;
+}
+
+/* Non-responsive overrides
+ *
+ * Utilitze the following CSS to disable the responsive-ness of the container,
+ * grid system, and navbar.
+ */
+/* Reset the container */
+/* line 19, ../sass/non-responsive.scss */
+.container {
+  width: 970px;
+  max-width: none !important;
+}
+/* line 23, ../sass/non-responsive.scss */
+.container .navbar-header,
+.container .navbar-collapse {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* Always float the navbar header */
+/* line 31, ../sass/non-responsive.scss */
+.navbar-header {
+  float: left;
+}
+
+/* Undo the collapsing navbar */
+/* line 36, ../sass/non-responsive.scss */
+.navbar-collapse {
+  display: block !important;
+  height: auto !important;
+  padding-bottom: 0;
+  overflow: visible !important;
+}
+
+/* line 43, ../sass/non-responsive.scss */
+.navbar-toggle {
+  display: none;
+}
+
+/* line 46, ../sass/non-responsive.scss */
+.navbar-collapse {
+  border-top: 0;
+}
+
+/* line 50, ../sass/non-responsive.scss */
+.navbar-brand {
+  margin-left: -15px;
+}
+
+/* Always apply the floated nav */
+/* line 55, ../sass/non-responsive.scss */
+.navbar-nav {
+  float: left;
+  margin: 0;
+}
+/* line 59, ../sass/non-responsive.scss */
+.navbar-nav > li {
+  float: left;
+}
+/* line 63, ../sass/non-responsive.scss */
+.navbar-nav > li > a {
+  padding: 15px;
+}
+
+/* Redeclare since we override the float above */
+/* line 70, ../sass/non-responsive.scss */
+.navbar-nav.navbar-right {
+  float: right;
+}
+
+/* Undo custom dropdowns */
+/* line 76, ../sass/non-responsive.scss */
+.navbar .navbar-nav .open .dropdown-menu {
+  position: absolute;
+  float: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-width: 0 1px 1px;
+  border-radius: 0 0 4px 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+/* line 88, ../sass/non-responsive.scss */
+.navbar .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar .navbar-nav .open .dropdown-menu > li > a:focus,
+.navbar .navbar-nav .open .dropdown-menu > .active > a,
+.navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+  color: #fff !important;
+  background-color: #428bca !important;
+}
+/* line 96, ../sass/non-responsive.scss */
+.navbar .navbar-nav .open .dropdown-menu > .disabled > a,
+.navbar .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+.navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+  color: #999 !important;
+  background-color: transparent !important;
+}
+
+/* line 104, ../sass/non-responsive.scss */
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+  color: #333;
+}
