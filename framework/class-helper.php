@@ -622,8 +622,7 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public static function optionsframework_uploader_function($id, $default, $mod = '')
-	{
+	public static function optionsframework_uploader_function( $id, $default, $mod = '' ) {
 	  $data = get_option(THEME_OPTIONS);
 		$uploader = '';
 	  $upload = isset( $data[$id] ) ? $data[$id] : $default;
@@ -672,27 +671,25 @@ class Helper
 	 *
 	 * @return string
 	 */
-	public static function optionsframework_media_uploader_function($id, $default, $int, $mod)
-	{
-
+	public static function optionsframework_media_uploader_function( $id, $default, $int, $mod ) {
     $data = get_option(THEME_OPTIONS);
-		$uploader = '';
-    $upload = isset( $data[$id] ) ? $data['id'] : $default;
-		$hide = '';
-		if ($mod == "min")
-		{
-			$hide ='hide';
-		}
-		if(!empty($upload))
-		{
-			$val = $upload;
-			$hide = '';
-		}
-		else
-		{
-			$val = '';
-			$hide = 'hide';
-		}
+    $uploader = '';
+    $upload = isset( $data[$id] ) ? $data[$id] : $default;
+    $hide = '';
+    if ($mod == "min")
+    {
+      $hide ='hide';
+    }
+    if(!empty($upload))
+    {
+      $val = $upload;
+      $hide = '';
+    }
+    else
+    {
+      $val = $default;
+      $hide = 'hide';
+    }
 
 		$uploader .= '<input class="' . $hide.' upload of-input" name="' . $id . '" id="' . $id . '_upload" value="' . $val . '" />';
 		$uploader .= '<div class="upload_button_div"><span class="button media_upload_button" id="' . $id . '" rel="' . $int . '">Upload</span>';

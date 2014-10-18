@@ -96,9 +96,9 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
               'id' => $value['id'],
               'name' => $value['id'],
               'class' => $value['type'] . $fold,
-              'value' => ( !empty( $options[$value['id']] ) ? $options[$value['id']] : '' )
+              'value' => ( !empty( $options[$value['id']] ) ? $options[$value['id']] : $default_values[$value['id']] )
             ),
-            '#default_value' => ( isset($options[$value['id']]) ? $options[$value['id']] : $value['default'] ),
+            '#default_value' => ( isset($options[$value['id']]) ? $options[$value['id']] : $default_values[$value['id']] ),
             '#options' => (isset( $value['options'] ) ? $value['options']: array()),
             '#container' => array(
               'tag' => 'div',
@@ -114,7 +114,12 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
               <div class="controls">
               <?php switch ($value['type']) :
                 case 'upload':
-                  echo $helper::optionsframework_uploader_function($value['id'],$value['default']);
+                  echo $helper::optionsframework_uploader_function( $value['id'],$default_values[$value['id']], $mode );
+                  break;
+                case 'media':
+                  $_id = strip_tags( strtolower($value['id']) );
+                  $int = optionsframework_mlu_get_silentpost( $_id );
+                  echo $helper::optionsframework_media_uploader_function( $value['id'],$default_values[$value['id']], $int, $mode );
                   break;
                 case 'images':
 

@@ -141,65 +141,51 @@ options:
         default : 'Insert Any Headline Or Link You Want Here'
         type    : 'text'
 
+      - name    : 'Background Image For Header Area'
+        desc    : 'Please choose an image or insert an image url to use for the header backgroud.'
+        id      : 'header_bg_image'
+        default : ''
+        mode    : 'mini'
+        type    : 'media'
 
-#        			'name' : 'Background Image For Header Area',
-#        			'desc' : 'Please choose an image or insert an image url to use for the header backgroud.',
-#        			'id' : 'header_bg_image',
-#        			'default' : '',
-#        			'mode' : 'mini',
-#        			'type' : 'media',
-#        		);
-#
-#
-#        			'name' : '100% Background Image',
-#        			'desc' : 'Have header background image always at 100% in width and height and scale according to the browser size.',
-#        			'id' : 'header_bg_full',
-#        			'default' : 0,
-#        			'type' : 'checkbox',
-#        		);
-#
-#
-#        			'name' : 'Background Repeat',
-#        			'desc' : '',
-#        			'id' : 'header_bg_repeat',
-#        			'default' : '',
-#        			'type' : 'select',
-#        			'options' : array(
-#        				'repeat' : 'repeat',
-#        				'repeat-x' : 'repeat-x',
-#        				'repeat-y' : 'repeat-y',
-#        				'no-repeat' : 'no-repeat',
-#        			),
-#        		);
-#
-#
-#        			'name' : 'Display social icons on header of the page:',
-#        			'desc' : 'Select the checkbox to show social media icons on the header of the page.',
-#        			'id' : 'icons_header',
-#        			'default' : 1,
-#        			'type' : 'checkbox',
-#        		);
-#
-#
-#        			'name' : 'Open social icons on header in a new window',
-#        			'desc' : '',
-#        			'id' : 'icons_header_new',
-#        			'default' : 0,
-#        			'type' : 'checkbox',
-#        		);
+      - name    : '100% Background Image'
+        desc    : 'Have header background image always at 100% in width and height and scale according to the browser size.'
+        id      : 'header_bg_full'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Background Repeat'
+        desc    : ''
+        id      : 'header_bg_repeat'
+        default : ''
+        type    : 'select'
+        options : {repeat : 'repeat', repeat-x : 'repeat-x', repeat-y : 'repeat-y', no-repeat : 'no-repeat'}
+
+      - name    : 'Display social icons on header of the page:'
+        desc    : 'Select the checkbox to show social media icons on the header of the page.'
+        id      : 'header_social'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Open social icons on header in a new window'
+        desc    : ''
+        id      : 'header_social_target'
+        default : 0
+        type    : 'checkbox'
+
       - name    : 'Logo'
         desc    : 'Please choose an image file for your logo'
         id      : 'logo'
         default : '/images/logo.png'
-        mod     : 'min'
-        type    : 'upload'
+        mode     : 'min'
+        type    : 'media'
 
       - name    : 'Logo (Retina Version @2x)'
         desc    : 'Please choose an image file for the retina version of the logo. It should be 2x the size of main logo.'
         id      : 'logo_retina'
         default : ''
-        mod     : 'min'
-        type    : 'upload'
+        mode     : 'min'
+        type    : 'media'
 
       - name    : 'Standard Logo Width for Retina Logo'
         desc    : 'If retina logo is uploaded, please enter the standard logo (1x) version width, do not enter the retina logo width.'
@@ -235,4 +221,79 @@ options:
         desc    : '(in pixels)'
         id      : 'margin_bottom_logo'
         default : '0px'
+        type    : 'text'
+
+      - name    : 'Main Nav Height'
+        desc    : "(Only use number without 'px', default is 83)"
+        id      : 'nav_height'
+        default : '83'
+        type    : 'text'
+
+      - name    : 'Dropdown Menu Width'
+        desc    : '(in pixels)'
+        id      : 'dropdown_menu_width'
+        default : '170px'
+        type    : 'text'
+
+      - name    : 'Page Title Bar'
+        desc    : 'Show page titl bar'
+        id      : 'page_title_bar'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Page Title Bar Height'
+        desc    : '(in pixels)'
+        id      : 'page_title_height'
+        default : '87px'
+        type    : 'text'
+
+      - name    : 'Page Title Bar Background'
+        desc    : ''
+        id      : 'page_title_bg'
+        default : '/images/page_title_bg.png'
+        mode    : 'mini'
+        type    : 'media'
+
+      - name    : 'Page Title Bar Background (Retina Version @2x)'
+        desc    : ''
+        id      : 'page_title_bg_retina'
+        default : ''
+        mode    : 'mini'
+        type    : 'media'
+
+      - name    : 'Page Title Bar Background Color'
+        desc    : ''
+        id      : 'page_title_bg_color'
+        default : '#F6F6F6'
+        type    : 'color'
+
+      - name    :  'Page Title Bar Borders'
+        desc    : ''
+        id      : 'page_title_border_color'
+        default : '#d2d3d4'
+        type    : 'color'
+
+      - name    : 'Breadcrumbs or Search Box?'
+        desc    : 'Show breadcrumbs or searchbox on page title bar?'
+        id      : 'page_title_bar_bs'
+        default : 'Breadcrumbs'
+        options : {breadcrumbs: 'Breadcrumbs', search: 'Search Box'}
+        type    : 'select'
+
+      - name    : 'Breadcrumb Menu'
+        desc    : 'Show breadcrumb in general'
+        id      : 'breadcrumb'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Breadcrumb on Mobile Devices'
+        desc    : 'Show breadcrumbs on mobile dvices'
+        id      : 'breadcrumb_mobile'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Breadcrumb Menu Prefix'
+        desc    : 'The text before the bradcrumb menu'
+        id      : 'breacrumb_prefix'
+        default : ''
         type    : 'text'

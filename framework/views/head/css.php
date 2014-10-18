@@ -1058,3 +1058,78 @@
             transition-property: top, left, opacity;
   }
 </style>
+
+<?php if ( ! Salamander::getData( 'responsive' ) ) : ?>
+  <link rel="stylesheet" href="<?php echo get_bloginfo( 'template_directory' ); ?>/css/non-responsive.css" />
+<?php endif; ?>
+
+<?php if ( Salamander::getData( 'fixed_menu' ) ) : ?>
+<style type="text/css">
+  body {
+    min-height: 2000px;
+    padding-top: 70px;
+  }
+</style>
+<?php endif; ?>
+
+<style type="text/css">
+    <?php if ( Salamander::getData( 'nav_height' ) ) : ?>
+    #nav li > a,
+    #nav li.current-menu-ancestor a {
+        height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
+        line-height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
+    }
+    #nav li > a,
+    #nav li.current-menu-ancestor a {
+        height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
+        line-height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
+    }
+
+    #nav ul {
+        top:<?php echo Salamander::getData( 'nav_height' )+3; ?>px;
+    }
+
+    /* Preview CSS for DEMO */
+    <?php if(is_page('header-4') || is_page('header-5')) : ?>
+    #nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
+    #nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
+    #nav ul ul{top:43px;}
+    <?php endif; ?>
+
+    <?php endif; ?>
+
+    #nav.nav-center {
+        margin: 0 auto;
+        width: 970px;
+    }
+
+    <?php if ( Salamander::getData( 'header_bg_image' ) ) : ?>
+    header {
+        background-image:url(<?php echo Salamander::getData( 'header_bg_image' ); ?>);
+        background-repeat:<?php echo Salamander::getData( 'header_bg_repeat' ); ?>;
+      <?php if( Salamander::getData( 'header_bg_full' ) ) : ?>
+        background-attachment:fixed;
+        background-position:center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      <?php endif; ?>
+    }
+    .navbar-default {
+        background: none;
+    }
+    <?php endif; ?>
+    .logo {
+        margin-right: <?php echo Salamander::getData( 'margin_right_logo' ); ?>;
+        margin-top: <?php echo Salamander::getData( 'margin_top_logo' ); ?>;
+        margin-left: <?php echo Salamander::getData( 'margin_left_logo' ); ?>;
+        margin-bottom: <?php echo Salamander::getData( 'margin_bottom_logo' ); ?>;
+    }
+</style>
+
+<style type="text/css">
+  <?php print Salamander::getData('custom_css'); ?>
+</style>
+<style type="text/css" id="ss"></style>
+<link rel="stylesheet" id="style_selector_ss" href="#" />

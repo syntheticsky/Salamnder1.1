@@ -76,11 +76,3 @@
 </style>
   <?php endif; ?>
 <?php endif; ?>
-<?php if ( Salamander::getData( 'fixed_menu' ) ) : ?>
-<style type="text/css">
-  body {
-    min-height: 2000px;
-    padding-top: 70px;
-  }
-</style>
-<?php endif; ?>

@@ -4248,7 +4248,8 @@ class Salamander_Init
                $this->default_values[$value['id']][$k] = true;
              }
            }
-           elseif ( $value['type'] == 'upload' && ! empty( $value['default'] ) ) {
+           elseif ( $value['type'] == 'upload' && ! empty( $value['default'] )
+           || ( $value['type'] == 'media' && ! empty( $value['default'] ) ) ) {
              $this->default_values[$value['id']] = get_bloginfo( 'template_directory' ) . $value['default'];
            }
            else {
