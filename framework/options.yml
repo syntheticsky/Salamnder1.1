@@ -1,4 +1,5 @@
 options:
+#General Options
   - name: 'General Options'
     children:
       - name    : 'Custom Favicon'
@@ -275,8 +276,8 @@ options:
 
       - name    : 'Breadcrumbs or Search Box?'
         desc    : 'Show breadcrumbs or searchbox on page title bar?'
-        id      : 'page_title_bar_bs'
-        default : 'Breadcrumbs'
+        id      : 'page_title_bar_content'
+        default : 'breadcrumbs'
         options : {breadcrumbs: 'Breadcrumbs', search: 'Search Box'}
         type    : 'select'
 
@@ -292,8 +293,54 @@ options:
         default : 0
         type    : 'checkbox'
 
+      - name    : 'Breadcrumbs position'
+        desc    : 'Breadcrumbs menu align.'
+        id      : 'breadcrumb_position'
+        default : 'right'
+        options : {right: 'Right', left: 'Left'}
+        type    : 'select'
+
       - name    : 'Breadcrumb Menu Prefix'
         desc    : 'The text before the bradcrumb menu'
         id      : 'breacrumb_prefix'
         default : ''
         type    : 'text'
+#Footer options
+  - name: 'Footer options'
+    children:
+      - name    : 'Copyright Bar'
+        desc    : 'Show copyright bar'
+        id      : 'footer_copyright'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Copyright Text'
+        desc    : ''
+        id      : 'footer_text'
+        default : 'Copyright 2014 Salamander | All Rights Reserved | Powered by <a href="http://wordpress.org">WordPress</a>  |  <a href="#">Salamander Theme</a>'
+        type    : 'textarea'
+
+      - name    : 'Footer Widgets'
+        desc    : 'Show footer widgets'
+        id      : 'footer_widgets'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Number of Footer Columns'
+        desc    : ''
+        id      : 'footer_widgets_columns'
+        default : '4'
+        options : {1: '1', 2: '2', 3: '3', 4: '4'}
+        type    : 'select'
+
+      - name    : 'Display social icons on footer of the page:'
+        desc    : 'Select the checkbox to show social media icons on the footer of the page.'
+        id      : 'icons_footer'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Open social icons on footer in a new window'
+        desc    : ''
+        id      : 'icons_footer_new'
+        default : 0
+        type    : 'checkbox'

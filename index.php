@@ -107,7 +107,7 @@
           <?php //themefusion_pagination($pages = '', $range = 2); ?>
         </div>
         <?php if ( Salamander::getData( 'blog_sidebar_position' ) == 'left' || Salamander::getData( 'blog_sidebar_position' ) == 'both' ) : ?>
-          <aside id="left-sidebar" class="<?php print Salamander::classes('data', 'blog_sidebar_position', 'left-sidebar')?>">
+          <aside id="left-sidebar" class="<?php print Salamander::classes('blog_sidebar_position', 'left-sidebar')?>">
             <?php
             if ( is_home() ) :
               $name = get_post_meta( get_option( 'page_for_posts' ), 'salamander_selected_sidebar_replacement', true );
@@ -121,7 +121,7 @@
           </aside>
         <?php endif;?>
         <?php if ( Salamander::getData( 'blog_sidebar_position' ) == 'right' || Salamander::getData( 'blog_sidebar_position' ) == 'both' ) : ?>
-          <aside id="right-sidebar" class="<?php print Salamander::classes( 'data', 'blog_sidebar_position', 'right-sidebar' )?>">
+          <aside id="right-sidebar" class="<?php print Salamander::classes( 'blog_sidebar_position', 'right-sidebar' )?>">
             <?php
             if ( is_home() && Salamander::getData( 'blog_sidebar_position' ) != 'both' ) :
               $name = get_post_meta( get_option( 'page_for_posts' ), 'salamander_selected_sidebar_replacement', true );

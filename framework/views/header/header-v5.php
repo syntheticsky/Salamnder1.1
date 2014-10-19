@@ -10,9 +10,7 @@
         </div>
         <div class="col-xs-9 visible-xs-block">
           <div class="pull-right">
-            <?php
-            get_template_part( 'framework/views/header/' . Salamander::getData( 'header_right_content' ) );
-            ?>
+            <?php get_template_part( 'framework/views/header/' . Salamander::getData( 'header_right_content' ) ); ?>
           </div>
         </div>
         <div class="col-xs-2">

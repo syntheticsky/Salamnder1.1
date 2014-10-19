@@ -78,8 +78,8 @@
 						),
 						'#default_value' => get_post_meta($post->ID, 'sl_meta_page_title', true),
 						'#options' => array(
-							'true' => 'Show',
-							'false' => 'Hide',
+							'show' => 'Show',
+							'hide' => 'Hide',
 						),
 					);
 					print Helper::renderElement(array_merge($field, $default_field_data));
@@ -94,8 +94,8 @@
 						),
 						'#default_value' => get_post_meta($post->ID, 'sl_meta_page_title_text', true),
 						'#options' => array(
-							'true' => 'Show',
-							'false' => 'Hide',
+							'show' => 'Show',
+							'hide' => 'Hide',
 						),
 					);
 					print Helper::renderElement(array_merge($field, $default_field_data));

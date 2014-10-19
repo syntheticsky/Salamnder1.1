@@ -994,7 +994,7 @@ jQuery(document).ready(function($) {
         }
 
         if(name == 'v4' || name == 'v5') {
-            $('#nav_height').attr('value', '40');
+            $('#nav_height').attr('value', '83');
         } else {
             $('#nav_height').attr('value', '83');
         }

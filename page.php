@@ -36,12 +36,12 @@
       <?php endif; ?>
 			</div>
       <?php if ( Salamander::getData( 'blog_sidebar_position' ) == 'left' || Salamander::getData( 'blog_sidebar_position' ) == 'both' ) : ?>
-        <aside id="left-sidebar" class="<?php print Salamander::classes( 'data', 'blog_sidebar_position', 'left-sidebar' )?>">
+        <aside id="left-sidebar" class="<?php print Salamander::classes( 'blog_sidebar_position', 'left-sidebar' )?>">
           <?php if ( !function_exists( 'dynamic_sidebar' ) || !dynamic_sidebar( 'Blog Left Sidebar' ) ): endif; ?>
         </aside>
       <?php endif;?>
       <?php if ( Salamander::getData( 'blog_sidebar_position' ) == 'right' || Salamander::getData( 'blog_sidebar_position' ) == 'both' ) : ?>
-        <aside id="right-sidebar" class="<?php print Salamander::classes( 'data', 'blog_sidebar_position', 'right-sidebar' )?>">
+        <aside id="right-sidebar" class="<?php print Salamander::classes( 'blog_sidebar_position', 'right-sidebar' )?>">
           <?php if ( !function_exists( 'dynamic_sidebar' ) || !dynamic_sidebar( 'Blog Right Sidebar' ) ): endif; ?>
         </aside>
       <?php endif;?>

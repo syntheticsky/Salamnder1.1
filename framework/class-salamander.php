@@ -4,31 +4,20 @@
  * Main theme framework class
  */
 
-class Salamander
-{
-	public $post;
-	public $currentPageID;
+class Salamander {
 	public $init;
 	public $multiSidebars;
 	public $metaBoxes;
 	public $shortCodes;
-
-  public static $pageID;
 
 	private static $instance;
 	private static $data;
 	private static $helper;
 
 
-	private function __construct()
-	{
-		global $post;
-		$this->post = $post;
+	private function __construct() {
 		//SalamanderInit class defined in framwork folder
     $this->init = Salamander_Init::get_instance( is_admin() );
-    //Set current page ID
-    $this->currentPageID = $this->getCurrentPageId();
-    self::$pageID = $this->getCurrentPageId();
     //Init multipleSidebars
     //Register Custom Sidebars (widget zones)
 //    $this->multiSidebars = MultipleSidebars::getInstance();
@@ -50,81 +39,85 @@ class Salamander
     return self::$instance;
   }
 
-  public static function getCurrentPostId()
-  {
-    return self::$pageID;
-  }
-
-	public static function __callStatic($method, $args)
-	{
-		if ($args && $args[0] == 'data')
-		{
-		    $delimiter = '';
-			switch ($method) {
-				case 'layout_type':
-					return (self::getData($method) == 'fluid') ? '-fluid': '';
-					break;
-				case 'classes':
-					if ($args[1] == 'layout_type')
-					{
-						return (self::getData($args[1]) == 'fluid') ? $args[2] . '-fluid': $args[2];
-					}
-					if ($args[1] == 'blog_sidebar_position')
-					{
+  public static function __callStatic( $method, $args ) {
+    if ( $args ) {
+      $cols = '';
+      if ( ! isset($args[1]) ) {
+        $args[1] = '';
+      }
+      switch ( $method ) {
+        case 'layout_type':
+          return (self::getData( $method ) == 'fluid') ? '-fluid' : '';
+          break;
+        case 'classes':
+          if ( $args[0] == 'layout_type' ) {
+            return (self::getData( $args[0] ) == 'fluid') ? $args[1] . '-fluid' : $args[1];
+          }
+          if ( $args[0] == 'blog_sidebar_position' ) {
             //Left Sidebar
-						if ($args[2] == 'left-sidebar')
-						{
-							$cols = (self::getData($args[1]) == 'both') ? 'col-xs-16 col-sm-4 col-sm-pull-8 col-md-4 col-md-pull-8' : 'col-xs-16 col-sm-4 col-sm-pull-12 col-md-4 col-md-pull-12';
-						}
+            if ( $args[1] == 'left-sidebar' ) {
+              $cols = (self::getData( $args[0] ) == 'both') ? 'col-xs-16 col-sm-4 col-sm-pull-8 col-md-4 col-md-pull-8' : 'col-xs-16 col-sm-4 col-sm-pull-12 col-md-4 col-md-pull-12';
+            }
             //Right Sidebar
-            if ($args[2] == 'right-sidebar')
-            {
-              $cols = (self::getData($args[1]) == 'both') ? 'col-xs-16 col-sm-4 col-md-4' : 'col-xs-16 col-sm-4 col-sm-4 col-md-4 col-md-4';
+            if ( $args[1] == 'right-sidebar' ) {
+              $cols = (self::getData( $args[0] ) == 'both') ? 'col-xs-16 col-sm-4 col-md-4' : 'col-xs-16 col-sm-4 col-sm-4 col-md-4 col-md-4';
             }
             //content
-						if ($args[2] == 'main-content')
-						{
-              if (self::getData($args[1]) == 'both') {
-						    $cols = 'col-xs-16 col-sm-8 col-sm-push-4 col-md-8 col-md-push-4';
+            if ( $args[1] == 'main-content' ) {
+              if ( self::getData( $args[0] ) == 'both' ) {
+                $cols = 'col-xs-16 col-sm-8 col-sm-push-4 col-md-8 col-md-push-4';
               }
-              if (self::getData($args[1]) == 'left') {
+              if ( self::getData( $args[0] ) == 'left' ) {
                 $cols = 'col-xs-16 col-sm-12 col-sm-push-4 col-md-12 col-md-push-4';
               }
-              if (self::getData($args[1]) == 'right') {
+              if ( self::getData( $args[0] ) == 'right' ) {
                 $cols = 'col-xs-16 col-sm-12 col-md-12';
               }
-						}
-						return $args[2] . ' ' . $cols;
-					}
-					break;
-				default:
-					return self::getData($method);
-					break;
-			}
-		}
+            }
+            return $args[1] . ' ' . $cols;
+          }
+          if ( $args[0] == 'footer_widgets' ) {
+            static $i = 0;
+            $columns = (int) self::getData( 'footer_widgets_columns' );
+            switch ( $columns ) {
+              case 1:
+                if ( $i < $columns )
+                  $cols = 'col-xs-16 col-sm-16 col-md-16';
+                else
+                  $cols = 'hidden';
+                break;
+              case 2:
+                if ( $i < $columns )
+                  $cols = 'col-xs-16 col-sm-16 col-md-8';
+                else
+                  $cols = 'hidden';
+                break;
+              case 3:
+                if ( $i < $columns ) {
+                  if ( $i == 1 )
+                    $cols = 'col-xs-16 col-sm-16 col-md-6';
+                  else
+                    $cols = 'col-xs-16 col-sm-16 col-md-5';
+                }
+                else
+                  $cols = 'hidden';
+                break;
+              case 4:
+                $cols = 'col-xs-16 col-sm-16 col-md-4';
+                break;
+            }
+            $i++;
+            return $args[1] . ' ' . $cols;
+          }
+          break;
+        default:
+          return self::getData( $method );
+          break;
+      }
+    }
 
-		return '';
-	}
-
-	private function getCurrentPageId()
-	{
-//    var_dump( get_option('page_for_posts'));
-//		 if((get_option('show_on_front') && get_option('page_for_posts') && is_home()) ||
-//	     (get_option('page_for_posts') && is_archive() && !is_post_type_archive()))
-//     {
-//	     $page_id = get_option('page_for_posts');
-//	   } else {
-//	     $page_id = $this->post->ID;
-//
-//	     if(class_exists('Woocommerce')) {
-//	       if(is_shop()) {
-//	         $page_id = get_option('woocommerce_shop_page_id');
-//	       }
-//	     }
-//	   }
-//
-//	   return $page_id;
-	}
+    return '';
+  }
 
 	public function registerNavMenus()
 	{
@@ -194,4 +187,8 @@ class Salamander
 		}
 		return false;
 	}
+
+  static public function breadcrumbs() {
+    return self::$helper->breadcrumbs();
+  }
 }

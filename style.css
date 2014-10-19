@@ -158,3 +158,67 @@ html[xmlns] .flexslider .slides {display: block;}
     -o-background-size:35px 36px;
     background-size:35px 36px;
 }
+
+
+/** Main Menu **/
+.navbar {
+    margin-bottom: 0;
+}
+#nav ul ul {
+    display: none;
+    position: absolute;
+    top: 83px;
+    left: 0px;
+    width: 170px;
+    border-top: 3px solid #a0ce4e;
+    border-bottom: 3px solid #a0ce4e;
+    background-color: #fff;
+    z-index: 99999;
+}
+
+#nav > ul li:hover >ul {
+    display: block;
+}
+
+#nav ul.sub-menu li {
+    height: 40px;
+    line-height: 40px;
+}
+
+
+/** Page title Bar **/
+.page-title-container {
+    height: 87px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #f6f6f6;
+    border-top: 1px solid #d2d3d4;
+    border-bottom: 1px solid #d2d3d4;
+    display: table;
+    width: 100%;
+}
+
+/** Breadcrumbs **/
+.breadcrumb {
+    display: inline-block;
+    background-color: transparent;
+}
+
+/** Footer **/
+/** disable JS for it **/
+ul.social-networks a:hover + div.popup {
+    opacity: 1;
+}
+
+.popup {
+    position: absolute;
+    padding: 0 0 6px;
+    color: #d1d1d2;
+    font-size: 11px;
+    line-height: 15px;
+    bottom: 110%;
+    left: -17px;
+    background: url(images/bg-popup.png) no-repeat 0 100%;
+    opacity: 0;
+    transition: opacity 1s ease-out 0.5s;
+}

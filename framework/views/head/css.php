@@ -1,3 +1,49 @@
+<!-- Styleshhet -->
+<link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet">
+
+<?php
+if (Salamander::getData('responsive')) :
+  $ipad = (bool) strpos($_SERVER['HTTP_USER_AGENT'], 'iPad');
+  ?>
+
+  <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/media.css" />
+  <?php if (!Salamander::getData('ipad_potrait')) : ?>
+  <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/css/ipad.css" />
+<?php else : ?>
+  <style type="text/css">
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+      #wrapper .ei-slider {
+        width:100% !important;
+      }
+    }
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+      #wrapper .ei-slider {
+        width:100% !important;
+      }
+    }
+  </style>
+<?php endif; ?>
+<?php
+else:
+  ?>
+  <style type="text/css">
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+      #wrapper .ei-slider {
+        width:100% !important;
+      }
+    }
+  </style>
+  <?php if((bool) strpos($_SERVER['HTTP_USER_AGENT'],'iPhone')) : ?>
+  <style type="text/css">
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+      #wrapper .ei-slider {
+        width:100% !important;
+      }
+    }
+  </style>
+<?php endif; ?>
+<?php endif; ?>
+
 <style type="text/css">
   <?php if($data['primary_color']): ?>
   a:hover,
@@ -1074,28 +1120,22 @@
 
 <style type="text/css">
     <?php if ( Salamander::getData( 'nav_height' ) ) : ?>
-    #nav li > a,
-    #nav li.current-menu-ancestor a {
+    #nav > ul > li > a,
+    #nav > ul > li.current-menu-ancestor > a {
         height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
         line-height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
     }
-    #nav li > a,
-    #nav li.current-menu-ancestor a {
-        height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
-        line-height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
-    }
-
     #nav ul {
         top:<?php echo Salamander::getData( 'nav_height' )+3; ?>px;
     }
 
-    /* Preview CSS for DEMO */
+    /* Preview CSS for DEMO
     <?php if(is_page('header-4') || is_page('header-5')) : ?>
     #nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
     #nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
     #nav ul ul{top:43px;}
     <?php endif; ?>
-
+    */
     <?php endif; ?>
 
     #nav.nav-center {
@@ -1120,6 +1160,66 @@
         background: none;
     }
     <?php endif; ?>
+
+<?php $c_pageID =0; if ( get_post_meta($c_pageID, 'sl_mets_page_title_bar_bg', true ) ) : ?>
+    .page-title-container{
+      background-image:url(<?php echo get_post_meta($c_pageID, 'sl_mets_page_title_bar_bg', true ); ?>) !important;
+    }
+<?php elseif ( Salamander::getData( 'page_title_bg' ) ) : ?>
+    .page-title-container {
+      background-image:url(<?php echo Salamander::getData( 'page_title_bg' ); ?>) !important;
+    }
+<?php endif; ?>
+<?php if(get_post_meta($c_pageID, 'sl_meta_page_title_bar_bg_retina', true)): ?>
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+        .page-title-container {
+            background-image: url(<?php echo get_post_meta($c_pageID, 'sl_meta_page_title_bar_bg_retina', true); ?>) !important;
+            -webkit-background-size:cover;
+            -moz-background-size:cover;
+            -o-background-size:cover;
+            background-size:cover;
+        }
+    }
+<?php elseif( Salamander::getData( 'page_title_bg_retina' ) ) : ?>
+    @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+        .page-title-container {
+            background-image: url(<?php echo Salamander::getData( 'page_title_bg_retina' ); ?>) !important;
+            -webkit-background-size:cover;
+            -moz-background-size:cover;
+            -o-background-size:cover;
+            background-size:cover;
+        }
+    }
+<?php endif; ?>
+<?php if ( Salamander::getData( 'page_title_height') ): ?>
+    .page-title-container {
+        height:<?php echo Salamander::getData( 'page_title_height' ); ?> !important;
+    }
+<?php endif; ?>
+<?php if ( get_post_meta( $c_pageID, 'sl_meta_page_title_bar_bg', true ) ) : ?>
+    .page-title-container{
+        background-image:url(<?php echo get_post_meta($c_pageID, 'sl_meta_page_title_bar_bg', true); ?>) !important;
+    }
+<?php elseif ( Salamander::getData( 'page_title_bg' ) ) : ?>
+    .page-title-container{
+        background-image:url(<?php echo Salamander::getData( 'page_title_bg' ); ?>) !important;
+    }
+<?php endif; ?>
+<?php if ( get_post_meta($c_pageID, 'sl_meta_page_title_bar_bg_color', true ) ) : ?>
+    .page-title-container{
+        background-color:<?php echo get_post_meta( $c_pageID, 'sl_meta_page_title_bar_bg_color', true ); ?>;
+    }
+<?php elseif ( Salamander::getData( 'page_title_bg_color' ) ): ?>
+    .page-title-container{
+        background-color:<?php echo Salamander::getData( 'page_title_bg_color' ); ?>;
+    }
+<?php endif; ?>
+<?php if ( Salamander::getData( 'page_title_border_color' ) ) : ?>
+    .page-title-container {
+        border-color:<?php echo Salamander::getData( 'page_title_border_color' ); ?> !important;
+    }
+<?php endif; ?>
+
     .logo {
         margin-right: <?php echo Salamander::getData( 'margin_right_logo' ); ?>;
         margin-top: <?php echo Salamander::getData( 'margin_top_logo' ); ?>;

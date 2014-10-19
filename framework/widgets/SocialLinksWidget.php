@@ -14,7 +14,7 @@ class SocialLinksWidget extends WP_Widget
     $instance['title'] = apply_filters('widget_title', $instance['title']);
     $params['instance'] = $instance;
 
-    print Helper::render(VIEWS_PATH . 'widgets' . DS . 'social.php', $params);
+    print Helper::render(VIEWS_PATH . 'widgets' . DS . 'footer-social.php', $params);
   }
 
   public function update($new_instance, $old_instance)

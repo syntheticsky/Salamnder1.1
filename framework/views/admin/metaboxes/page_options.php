@@ -2,14 +2,14 @@
 <?php
 $this->select(	'page_title',
 				'Page Title Bar',
-				array('yes' => 'Show', 'no' => 'Hide'),
+				array('show' => 'Show', 'hide' => 'Hide'),
 				''
 			);
 ?>
 <?php
 $this->select(	'page_title_text',
 				'Page Title Bar Text',
-				array('yes' => 'Show', 'no' => 'Hide'),
+				array('show' => 'Show', 'hide' => 'Hide'),
 				''
 			);
 ?>

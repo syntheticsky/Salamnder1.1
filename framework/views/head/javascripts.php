@@ -1,3 +1,6 @@
+<!-- W3TC-include-js-head -->
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3.exp&amp;sensor=false&amp;language=<?php print substr(get_locale(), 0, 2); ?>"></script>
+
 <?php
 global $post;
   $c_pageID = $post->ID;

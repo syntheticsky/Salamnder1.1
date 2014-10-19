@@ -47,8 +47,7 @@ add_action('init', array($salamander, 'registerPosts'));
 //Register Basic Sidebars (widget zones)
 add_action('init', array($salamander, 'registerSidebars'));
 //Setup default options when theme enabled
-if (is_admin() && isset($_GET['activated'] ) && $pagenow == 'themes.php' )
-{
+if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == 'themes.php' ) {
   add_action('admin_head', array($salamander->init, 'optionsSetup'));
 }
 $salamander->setData();
@@ -65,6 +64,7 @@ add_action('init', 'mediauploader_init');
 
 add_action('wp_enqueue_scripts', array($salamander->init, 'stylesheets'), 0, 1);
 add_action('wp_enqueue_scripts', array($salamander->init, 'scripts'));
+
 ////set latest theme options to theme object
 //if (!is_admin())
 //{
@@ -166,20 +166,17 @@ function link_to_menu_editor( $args ) {
 
   // We have a list
   if ( FALSE !== stripos( $items_wrap, '<ul' )
-    or FALSE !== stripos( $items_wrap, '<ol' )
-  )
-  {
+    || FALSE !== stripos( $items_wrap, '<ol' )
+  ) {
     $link = "<li>$link</li>";
   }
 
   $output = sprintf( $items_wrap, $menu_id, $menu_class, $link );
-  if ( ! empty ( $container ) )
-  {
+  if ( ! empty ( $container ) ) {
     $output  = "<$container class='$container_class' id='$container_id'>$output</$container>";
   }
 
-  if ( $echo )
-  {
+  if ( $echo ) {
     echo $output;
   }
 

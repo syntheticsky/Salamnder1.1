@@ -114,12 +114,15 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
               <div class="controls">
               <?php switch ($value['type']) :
                 case 'upload':
-                  echo $helper::optionsframework_uploader_function( $value['id'],$default_values[$value['id']], $mode );
+                  echo $helper::upload_field( $value['id'], $default_values[$value['id']], $mode );
                   break;
                 case 'media':
-                  $_id = strip_tags( strtolower($value['id']) );
-                  $int = optionsframework_mlu_get_silentpost( $_id );
-                  echo $helper::optionsframework_media_uploader_function( $value['id'],$default_values[$value['id']], $int, $mode );
+                  echo $helper::media_upload_field( $value['id'], $default_values[$value['id']], $mode );
+                  break;
+                case 'color':
+                  $output = '<div id="' . $value['id'] . '_picker" class="colorSelector"><div style="background-color: '.$options[$value['id']].'"></div></div>';
+                  $output .= '<input class="of-color" name="'.$value['id'].'" id="'. $value['id'] .'" type="text" value="'. $options[$value['id']] .'" />';
+                  echo $output;
                   break;
                 case 'images':
 
