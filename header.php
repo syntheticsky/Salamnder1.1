@@ -35,9 +35,10 @@
   <?php echo Salamander::getData('head_after'); ?>
 </head>
 <body <?php body_class(strtolower(Salamander::getData('scheme_type'))); ?>>
-  <div id="wrapper">
+  <div id="wrapper" class="<?php echo Salamander::classes('layout'); ?>">
+    <div class="row">
     <?php echo Salamander::getHtml('header'); ?>
-  <?php if ( Salamander::getData( 'page_title_bar' ) ) : ?>
-      <?php get_template_part( 'framework/views/page-title' ); ?>
-  <?php endif; ?>
+<?php if ( Salamander::getData( 'page_title_bar' ) ) : ?>
+  <?php get_template_part( 'framework/views/page-title' ); ?>
+<?php endif; ?>
 

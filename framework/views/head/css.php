@@ -250,59 +250,7 @@ else:
   }
   ?>
 
-  <?php if($data['layout'] == 'Boxed'): ?>
-  body{
-    <?php if(get_post_meta($c_pageID, 'pyre_page_bg_color', true)): ?>
-    background-color:<?php echo get_post_meta($c_pageID, 'pyre_page_bg_color', true); ?>;
-    <?php else: ?>
-    background-color:<?php echo $data['bg_color']; ?>;
-    <?php endif; ?>
 
-    <?php if(get_post_meta($c_pageID, 'pyre_page_bg', true)): ?>
-    background-image:url(<?php echo get_post_meta($c_pageID, 'pyre_page_bg', true); ?>);
-    background-repeat:<?php echo get_post_meta($c_pageID, 'pyre_page_bg_repeat', true); ?>;
-      <?php if(get_post_meta($c_pageID, 'pyre_page_bg_full', true) == 'yes'): ?>
-      background-attachment:fixed;
-      background-position:center center;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      <?php endif; ?>
-    <?php elseif($data['bg_image']): ?>
-    background-image:url(<?php echo $data['bg_image']; ?>);
-    background-repeat:<?php echo $data['bg_repeat']; ?>;
-      <?php if($data['bg_full']): ?>
-      background-attachment:fixed;
-      background-position:center center;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      <?php endif; ?>
-    <?php endif; ?>
-
-    <?php if($data['bg_pattern_option'] && $data['bg_pattern'] && !(get_post_meta($c_pageID, 'pyre_page_bg_color', true) || get_post_meta($c_pageID, 'pyre_page_bg', true))): ?>
-    background-image:url("<?php echo get_bloginfo('template_directory') . '/images/patterns/' . $data['bg_pattern'] . '.png'; ?>");
-    background-repeat:repeat;
-    <?php endif; ?>
-  }
-  #wrapper{
-    background:#fff;
-    width:1000px;
-    margin:0 auto;
-  }
-  @media only screen and (min-width: 801px) and (max-width: 1014px){
-    #wrapper{
-      width:auto;
-    }
-  }
-  @media only screen and (min-device-width: 801px) and (max-device-width: 1014px){
-    #wrapper{
-      width:auto;
-    }
-  }
-  <?php endif; ?>
 
   <?php if(get_post_meta($c_pageID, 'pyre_page_title_bar_bg', true)): ?>
   .page-title-container{
@@ -1105,63 +1053,115 @@ else:
   }
 </style>
 
+<?php $c_pageID =0; /**************************  Salamander  Style ***************************/ ?>
+
 <?php if ( ! Salamander::getData( 'responsive' ) ) : ?>
   <link rel="stylesheet" href="<?php echo get_bloginfo( 'template_directory' ); ?>/css/non-responsive.css" />
 <?php endif; ?>
 
-<?php if ( Salamander::getData( 'fixed_menu' ) ) : ?>
 <style type="text/css">
-  body {
-    min-height: 2000px;
-    padding-top: 70px;
-  }
-</style>
+<?php if(Salamander::getData( 'layout' )  == 'boxed'): ?>
+body{
+  <?php if(get_post_meta($c_pageID, 'pyre_page_bg_color', true)): ?>
+    background-color:<?php echo get_post_meta($c_pageID, 'sl_meta_page_bg_color', true); ?>;
+  <?php else: ?>
+    background-color:<?php echo Salamander::getData( 'bg_color' ) ;  ?>;
+  <?php endif; ?>
+  <?php if(get_post_meta($c_pageID, 'sl_meta_page_bg', true)): ?>
+    background-image:url(<?php echo get_post_meta($c_pageID, 'sl_meta_page_bg', true); ?>);
+    background-repeat:<?php echo get_post_meta($c_pageID, 'sl_meta_page_bg_repeat', true); ?>;
+    <?php if(get_post_meta($c_pageID, 'sl_meta_page_bg_full', true) == 'yes'): ?>
+    background-attachment:fixed;
+    background-position:center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    <?php endif; ?>
+  <?php elseif(Salamander::getData( 'bg_image' ) ) : ?>
+    background-image:url(<?php echo Salamander::getData( 'bg_image' ) ;  ?>);
+    background-repeat:<?php echo Salamander::getData( 'bg_repeat' ) ;  ?>;
+    <?php if(Salamander::getData( 'bg_full' ) ) : ?>
+    background-attachment:fixed;
+    background-position:center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    <?php endif; ?>
+  <?php endif; ?>
+
+  <?php if(Salamander::getData( 'bg_pattern_option' )   && Salamander::getData( 'bg_pattern' )   && !(get_post_meta($c_pageID, 'sl_meta_page_bg_color', true) || get_post_meta($c_pageID, 'sl_meta_page_bg', true))): ?>
+    background-image:url("<?php echo get_bloginfo('template_directory') . '/images/patterns/' . Salamander::getData( 'bg_pattern' )   . '.png'; ?>");
+    background-repeat:repeat;
+<?php endif; ?>
+}
 <?php endif; ?>
 
-<style type="text/css">
-    <?php if ( Salamander::getData( 'nav_height' ) ) : ?>
-    #nav > ul > li > a,
-    #nav > ul > li.current-menu-ancestor > a {
-        height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
-        line-height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
-    }
-    #nav ul {
-        top:<?php echo Salamander::getData( 'nav_height' )+3; ?>px;
-    }
+<?php if ( Salamander::getData( 'fixed_menu' ) ) : ?>
+body {
+    min-height: 2000px;
+    padding-top: 70px;
+}
+<?php endif; ?>
+<?php if ( Salamander::getData( 'nav_height' ) ) : ?>
+#nav > ul > li > a,
+#nav > ul > li.current-menu-ancestor > a {
+    height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
+    line-height:<?php echo Salamander::getData( 'nav_height' ); ?>px;
+}
+#nav ul {
+    top:<?php echo Salamander::getData( 'nav_height' )+3; ?>px;
+}
 
     /* Preview CSS for DEMO
-    <?php if(is_page('header-4') || is_page('header-5')) : ?>
-    #nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
-    #nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
-    #nav ul ul{top:43px;}
-    <?php endif; ?>
+<?php if(is_page('header-4') || is_page('header-5')) : ?>
+#nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
+#nav > li > a,#nav li.current-menu-ancestor a{height:40px;line-height:40px;}
+#nav ul ul{top:43px;}
+<?php endif; ?>
     */
-    <?php endif; ?>
+<?php endif; ?>
+#nav.nav-center {
+    margin: 0 auto;
+    width: 970px;
+}
+#content{
+  <?php if ( get_post_meta($c_pageID, 'sl_meta_page_bg_color', true) ) : ?>
+    background-image:url(<?php echo get_post_meta($c_pageID, 'sl_meta_page_bg_color', true); ?>);
+    background-repeat:<?php echo get_post_meta($c_pageID, 'sl_meta_page_bg_repeat', true) ; ?>;
+  <?php else: ?>
+    background-image:url(<?php echo Salamander::getData( 'content_bg_image' ) ; ?>);
+    background-repeat:<?php echo Salamander::getData( 'content_bg_repeat' ) ; ?>;
+  <?php endif; ?>
+  <?php if(Salamander::getData( 'content_bg_full' ) ): ?>
+    background-attachment:fixed;
+    background-position:center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  <?php endif; ?>
+}
+<?php if ( Salamander::getData( 'header_bg_image' ) ) : ?>
+header {
+    background-image:url(<?php echo Salamander::getData( 'header_bg_image' ); ?>);
+    background-repeat:<?php echo Salamander::getData( 'header_bg_repeat' ); ?>;
+  <?php if( Salamander::getData( 'header_bg_full' ) ) : ?>
+    background-attachment:fixed;
+    background-position:center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  <?php endif; ?>
+}
+.navbar-default {
+    background: none;
+}
+<?php endif; ?>
 
-    #nav.nav-center {
-        margin: 0 auto;
-        width: 970px;
-    }
-
-    <?php if ( Salamander::getData( 'header_bg_image' ) ) : ?>
-    header {
-        background-image:url(<?php echo Salamander::getData( 'header_bg_image' ); ?>);
-        background-repeat:<?php echo Salamander::getData( 'header_bg_repeat' ); ?>;
-      <?php if( Salamander::getData( 'header_bg_full' ) ) : ?>
-        background-attachment:fixed;
-        background-position:center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      <?php endif; ?>
-    }
-    .navbar-default {
-        background: none;
-    }
-    <?php endif; ?>
-
-<?php $c_pageID =0; if ( get_post_meta($c_pageID, 'sl_mets_page_title_bar_bg', true ) ) : ?>
+<?php if ( get_post_meta($c_pageID, 'sl_mets_page_title_bar_bg', true ) ) : ?>
     .page-title-container{
       background-image:url(<?php echo get_post_meta($c_pageID, 'sl_mets_page_title_bar_bg', true ); ?>) !important;
     }

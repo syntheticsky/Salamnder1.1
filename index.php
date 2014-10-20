@@ -1,7 +1,7 @@
 <?php get_header(); ?>
-    <div class="container">
+    <div id="content" class="<?php echo Salamander::classes('layout'); ?>">
       <div class="row">
-        <div class="main-content">
+        <div class="main-content col-xs-16 col-md-16">
           <div id="posts-container">
           <?php
             $post_count = 1;

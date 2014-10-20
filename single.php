@@ -22,9 +22,9 @@
 		}
 	}
 	?>
-	<div class="container">
-		<div class="row">
-			<div class="main-content">
+  <div id="content" class="<?php echo Salamander::classes('layout'); ?>">
+    <div class="row">
+      <div class="main-content col-xs-16 col-md-16">
 				<?php
 					wp_reset_query();
 					$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;

@@ -124,8 +124,8 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
                   $output .= '<input class="of-color" name="'.$value['id'].'" id="'. $value['id'] .'" type="text" value="'. $options[$value['id']] .'" />';
                   echo $output;
                   break;
-                case 'images':
-
+                case 'info':
+                  echo '<div class="info-title">' . $value['default'] . '</div>';
                   break;
                 case 'radios':
                   $field['#images'] = ( isset( $value['img'] ) ) ? $value['img'] : '';

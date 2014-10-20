@@ -46,12 +46,12 @@ class Salamander {
         $args[1] = '';
       }
       switch ( $method ) {
-        case 'layout_type':
-          return (self::getData( $method ) == 'fluid') ? '-fluid' : '';
-          break;
         case 'classes':
-          if ( $args[0] == 'layout_type' ) {
-            return (self::getData( $args[0] ) == 'fluid') ? $args[1] . '-fluid' : $args[1];
+          if ($args[0] == 'layout') {
+            return (self::getData( $args[0] ) == 'wide' ? 'container-fluid' : 'container');
+          }
+          if ( $args[0] == 'layout' ) {
+            return (self::getData( $args[0] ) == 'wide') ? $args[1] . '-fluid' : $args[1];
           }
           if ( $args[0] == 'blog_sidebar_position' ) {
             //Left Sidebar

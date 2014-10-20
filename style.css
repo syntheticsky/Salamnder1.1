@@ -21,6 +21,11 @@ Author URI:
  * Contributing author: Tyler Smith (@mbmufffin)
  */
 
+/*** Content ****/
+#content {
+    background-color: #fff;
+}
+
 
 /* Browser Resets */
 .flex-container a:active,

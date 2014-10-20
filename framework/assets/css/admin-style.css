@@ -866,10 +866,24 @@ html body * span.clear, html body * div.clear, html body * li.clear, html body *
 #section-header_layout .of-radio-img-selected{border:3px solid #8b8b8b !important;}
 
 
+.info-title {
+    padding: 15px 10px;
+    line-height: 1.5em;
+    font-size: 13px;
+    background-color: #E7E6E6;
+    border: 1px solid #D0D0D0;
+    color: #9D9D9D;
+}
+
+.info-title h3{
+    text-transform: uppercase;
+}
+
 div.fieldset {
     position: relative;
     min-height: 75px;
     margin: 20px 0;
+    float: left;
 }
 div.fieldset label {
     position: absolute;

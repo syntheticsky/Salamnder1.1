@@ -255,12 +255,13 @@ class Helper
     $output .= '<div class="upload_button_div"><span class="button media_upload_button" id="' . $id . '" rel="' . $int . '">Upload</span>';
     $output .= '<span class="button mlu_remove_button ' . $hide . '" id="reset_' . $id . '" title="' . $id . '">Remove</span>';
     $output .='</div>' . "\n";
+    $output .= '<div class="screenshot">';
     if ( ! empty( $upload ) ) {
-      $output .= '<div class="screenshot">';
       $output .= '<a class="of-uploaded-image" href="' . $upload . '">';
       $output .= '<img class="of-option-image" id="image_' . $id . '" src="' . $upload . '" alt="" />';
-      $output .= '</a></div>';
+      $output .= '</a>';
     }
+    $output .= '</a></div>';
     $output .= '<div class="clear"></div>' . "\n";
 
     return $output;
@@ -295,13 +296,14 @@ class Helper
     $output .= '<span class="button image_reset_button ' . $hide . '" id="reset_' . $id . '" title="' . $id . '">Remove</span>';
     $output .='</div>' . "\n";
     $output .= '<div class="clear"></div>' . "\n";
+    $output .= '<div class="screenshot">';
     if( ! empty( $upload )
       && false === strstr($id, 'font') ) {
-      $output .= '<div class="screenshot">';
       $output .= '<a class="of-uploaded-image" href="' . $upload . '">';
       $output .= '<img class="of-option-image" id="image_' . $id . '" src="' . $upload . '" alt="" />';
-      $output .= '</a></div>';
+      $output .= '</a>';
     }
+    $output .= '</div>';
     $output .= '<div class="clear"></div>' . "\n";
 
     return $output;

@@ -1,7 +1,7 @@
 options:
 #General Options
-  - name: 'General Options'
-    children:
+  - name        : 'General Options'
+    children    :
       - name    : 'Custom Favicon'
         desc    : "You can put url of an ico image that will represent your website's favicon.ico (16px x 16px)"
         id      : 'favicon'
@@ -81,8 +81,15 @@ options:
         default : ''
         type    : 'textarea'
 #Header options
-  - name: 'Header Options'
-    children:
+  - name        : 'Header Options'
+    children    :
+      - name    : 'Header Info'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Header Content Options</h3>'
+        icon    : true
+        type    : 'info'
+
       - name    : 'Select a Header Layout'
         desc    : ''
         id      : 'header_layout'
@@ -174,6 +181,13 @@ options:
         default : 0
         type    : 'checkbox'
 
+      - name    : 'Header Info'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Logo Options</h3>'
+        icon    : true
+        type    : 'info'
+
       - name    : 'Logo'
         desc    : 'Please choose an image file for your logo'
         id      : 'logo'
@@ -224,6 +238,13 @@ options:
         default : '0px'
         type    : 'text'
 
+      - name    : 'Header Info'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Menu Options</h3>'
+        icon    : true
+        type    : 'info'
+
       - name    : 'Main Nav Height'
         desc    : "(Only use number without 'px', default is 83)"
         id      : 'nav_height'
@@ -235,6 +256,13 @@ options:
         id      : 'dropdown_menu_width'
         default : '170px'
         type    : 'text'
+
+        name    : 'Header Info'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Page Title Bar Options</h3>'
+        icon    : true
+        type    : 'info'
 
       - name    : 'Page Title Bar'
         desc    : 'Show page titl bar'
@@ -274,6 +302,13 @@ options:
         default : '#d2d3d4'
         type    : 'color'
 
+      - name    : 'Header Info'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Breadcrumb Options</h3>'
+        icon    : true
+        type    : 'info'
+
       - name    : 'Breadcrumbs or Search Box?'
         desc    : 'Show breadcrumbs or searchbox on page title bar?'
         id      : 'page_title_bar_content'
@@ -306,8 +341,8 @@ options:
         default : ''
         type    : 'text'
 #Footer options
-  - name: 'Footer options'
-    children:
+  - name        : 'Footer options'
+    children    :
       - name    : 'Copyright Bar'
         desc    : 'Show copyright bar'
         id      : 'footer_copyright'
@@ -344,3 +379,86 @@ options:
         id      : 'icons_footer_new'
         default : 0
         type    : 'checkbox'
+
+  - name      : 'Background Options'
+    children  :
+      - name    : 'Layout'
+        desc    : 'Boxed or wide layout?'
+        id      : 'layout'
+        default : 'wide'
+        type    : 'select'
+        options : {boxed: 'Boxed', wide: 'Wide'}
+
+      - name    : 'Boxed Mode Only'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Background options below only work in boxed mode.</h3>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Background Image For Outer Areas In Boxed Mode'
+        desc    : 'Please choose an image or insert an image url to use for the backgroud.'
+        id      : 'bg_image'
+        default : ''
+        mode    : 'mini'
+        type    : 'media'
+
+      - name    : '100% Background Image'
+        desc    : 'Have background image always at 100% in width and height and scale according to the browser size.'
+        id      : 'bg_full'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Background Repeat'
+        desc    : ''
+        id      : 'bg_repeat'
+        default : ''
+        type    : 'select'
+        options : {repeat: 'repeat', repeat-x: 'repeat-x', repeat-y: 'repeat-y', no-repeat: 'no-repeat'}
+
+      - name    :  'Background Color'
+        desc    : 'Pick a background color.'
+        id      : 'bg_color'
+        default : '#d7d6d6'
+        type    : 'color'
+
+      - name    : 'Background Pattern?'
+        desc    : 'If yes, select the pattern from below:'
+        id      : 'bg_pattern_option'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Select a Background Pattern'
+        desc    : ''
+        id      : 'bg_pattern'
+        default : 'pattern1'
+        type    : 'radios'
+        img     : true
+        options : {pattern1: '/images/patterns/pattern1.png', pattern2: '/images/patterns/pattern2.png', pattern3: '/images/patterns/pattern3.png', pattern4: '/images/patterns/pattern4.png', pattern5: '/images/patterns/pattern5.png', pattern6: '/images/patterns/pattern6.png', pattern7: '/images/patterns/pattern7.png', pattern8: '/images/patterns/pattern8.png', pattern9: '/images/patterns/pattern9.png', pattern10: '/images/patterns/pattern10.png' }
+
+      - name    : 'Both Modes'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Background Options Below Work For Boxed & Wide Mode</h3>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Background Image For Main Content Area'
+        desc    : 'Please choose an image or insert an image url to use for the main content area backgroud.'
+        id      : 'content_bg_image'
+        default : ''
+        mode    : 'mini'
+        type    : 'media'
+
+      - name    : '100% Background Image'
+        desc    : 'Have background image always at 100% in width and height and scale according to the browser size.'
+        id      : 'content_bg_full'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Background Repeat'
+        desc    : ''
+        id      : 'content_bg_repeat'
+        default : ''
+        type    : 'select'
+        options : {repeat: 'repeat', repeat-x: 'repeat-x', repeat-y: 'repeat-y', no-repeat: 'no-repeat'}

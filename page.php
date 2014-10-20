@@ -7,9 +7,9 @@
 	 	  endif;
 	  endif;
 	?>
-<div class="container">
-  <div class="row">
-    <div class="main-content">
+  <div id="content" class="<?php echo Salamander::classes('layout'); ?>">
+    <div class="row">
+      <div class="main-content col-xs-16 col-md-16">
 			<?php if( have_posts() ): the_post(); ?>
       <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
         <?php if ( !Salamander::getData( 'featured_images_pages' ) && has_post_thumbnail() ): ?>

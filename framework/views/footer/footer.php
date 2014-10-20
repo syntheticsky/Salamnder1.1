@@ -1,6 +1,6 @@
 <?php if ( Salamander::getData( 'footer_widgets' ) ) : ?>
   <div class="footer-top footer-widgets">
-    <div class="container">
+    <div class="<?php echo Salamander::classes('layout'); ?>">
       <section class="row columns columns-<?php print Salamander::getData( 'footer_widgets_columns' ); ?>">
         <article class="<?php echo Salamander::classes('footer_widgets', 'first'); ?>">
           <?php if ( ! function_exists( 'dynamic_sidebar' ) || ! dynamic_sidebar( 'Footer Widget 1' ) ) :
@@ -24,13 +24,15 @@
 <?php endif; ?>
 <?php if ( Salamander::getData( 'footer_copyright' ) ) : ?>
   <div class="footer-bottom footer-social">
-    <div class="container">
-      <?php if ( Salamander::getData( 'icons_footer' ) ) : ?>
-        <?php get_template_part( 'framework/views/footer-social' ); ?>
-      <?php endif; ?>
-      <ul class="copyright">
-        <li><?php print Salamander::getData( 'footer_text' ) ?></li>
-      </ul>
+    <div class="<?php echo Salamander::classes('layout'); ?>">
+      <div class="row">
+        <?php if ( Salamander::getData( 'icons_footer' ) ) : ?>
+          <?php get_template_part( 'framework/views/footer-social' ); ?>
+        <?php endif; ?>
+        <ul class="copyright">
+          <li><?php print Salamander::getData( 'footer_text' ) ?></li>
+        </ul>
+      </div>
     </div>
   </div>
 <?php endif; ?>
