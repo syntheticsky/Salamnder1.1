@@ -1,4 +1,4 @@
-      <footer id="footer" class="footer-area">
+      <footer id="footer" class="<?php echo Salamander::classes('layout'); ?>">
       <?php print Salamander::getHtml( 'footer' ); ?>
       </footer>
       </div> <!-- .row end -->

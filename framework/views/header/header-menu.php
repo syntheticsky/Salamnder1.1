@@ -1,4 +1,4 @@
-<div class='top-nav'>
+<div class="top-nav">
 <?php
   $defaults = array(
     'theme_location'  => 'top_navigation',

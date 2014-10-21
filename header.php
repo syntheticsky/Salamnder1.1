@@ -34,8 +34,8 @@
   <!-- include custom code -->
   <?php echo Salamander::getData('head_after'); ?>
 </head>
-<body <?php body_class(strtolower(Salamander::getData('scheme_type'))); ?>>
-  <div id="wrapper" class="<?php echo Salamander::classes('layout'); ?>">
+<body <?php body_class( Salamander::getData( 'scheme_type' ) ); ?>>
+  <div id="wrapper" class="<?php echo Salamander::classes( 'layout' ); ?>">
     <div class="row">
     <?php echo Salamander::getHtml('header'); ?>
 <?php if ( Salamander::getData( 'page_title_bar' ) ) : ?>

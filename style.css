@@ -8,7 +8,7 @@ Author URI:
 */
 
 @import url('css/theme.css');
-/*@import url('css/sticky-footer-navbar.css');*/
+@import url('css/sticky-footer-navbar.css');
 
 /*
  * jQuery FlexSlider v2.0
@@ -25,7 +25,6 @@ Author URI:
 #content {
     background-color: #fff;
 }
-
 
 /* Browser Resets */
 .flex-container a:active,

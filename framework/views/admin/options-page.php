@@ -82,12 +82,12 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
       <?php foreach ( $default_options as $values ) : ?>
         <div class="group" id="<?php echo 'of-option-' . str_replace(' ', '', strtolower( $values['name'] ) ); ?>">
           <h2><?php echo $values['name']; ?></h2>
-        <?php foreach ($values['children'] as $value) : ?>
+        <?php foreach ( $values['children'] as $value ) : ?>
           <?php
-          $mode = isset($value['mode'])
+          $mode = isset( $value['mode'] )
             ? $value['mode'] : '';
-          $fold = (array_key_exists('folds', $value)) ? ' fld' : '';
-          ( !isset($options[$value['id']]) ) ? $options[$value['id']] = '' : '';
+          $fold = ( array_key_exists( 'fold', $value ) ) ? ' fold' : '';
+          ( !isset( $options[$value['id']] ) ) ? $options[$value['id']] = '' : '';
           $field = array(
             '#label' => '',
             '#type' => $value['type'],
@@ -98,7 +98,7 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
               'class' => $value['type'] . $fold,
               'value' => ( !empty( $options[$value['id']] ) ? $options[$value['id']] : $default_values[$value['id']] )
             ),
-            '#default_value' => ( isset($options[$value['id']]) ? $options[$value['id']] : $default_values[$value['id']] ),
+            '#default_value' => ( !empty($options[$value['id']]) ? $options[$value['id']] : $default_values[$value['id']] ),
             '#options' => (isset( $value['options'] ) ? $value['options']: array()),
             '#container' => array(
               'tag' => 'div',
@@ -120,8 +120,9 @@ var tb_closeImage = "<?php print SITE_URL . '/' . WPINC . '/js/thickbox/tb-close
                   echo $helper::media_upload_field( $value['id'], $default_values[$value['id']], $mode );
                   break;
                 case 'color':
-                  $output = '<div id="' . $value['id'] . '_picker" class="colorSelector"><div style="background-color: '.$options[$value['id']].'"></div></div>';
-                  $output .= '<input class="of-color" name="'.$value['id'].'" id="'. $value['id'] .'" type="text" value="'. $options[$value['id']] .'" />';
+                  $default_value = ( !empty($options[$value['id']]) ? $options[$value['id']] : $default_values[$value['id']] );
+                  $output = '<div id="' . $value['id'] . '_picker" class="colorSelector"><div style="background-color: ' . $default_value .'"></div></div>';
+                  $output .= '<input class="of-color" name="'.$value['id'].'" id="'. $value['id'] .'" type="text" value="' . $default_value .'" />';
                   echo $output;
                   break;
                 case 'info':
