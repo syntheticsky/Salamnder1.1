@@ -1,0 +1,1 @@
+<a class="button <?php echo $size; ?> <?php echo $color; ?>" href="<?php echo $link; ?>" target="<?php echo $target; ?>"><?php echo $content; ?></a>

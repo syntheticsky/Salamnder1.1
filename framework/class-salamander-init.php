@@ -351,8 +351,7 @@ class Salamander_Init
 		//echo $_POST['data'];
 
 		//Uploads
-		switch ($operation)
-		{
+		switch ($operation) {
 			case 'upload':
 				$cID = $_POST['data']; // Acts as the name
 				$filename = $_FILES[$cID];
@@ -364,12 +363,10 @@ class Salamander_Init
 				$currentOptions[$cID] = $uploaded_file['url'];
 				update_option(THEME_OPTIONS, $currentOptions ) ;
 
-				if(!empty($uploaded_file['error']))
-				{
+				if(!empty($uploaded_file['error'])) {
 					echo 'Upload Error: ' . $uploaded_file['error'];
 				}
-				else
-				{
+				else {
 					echo $uploaded_file['url'];
 				}
 				break;

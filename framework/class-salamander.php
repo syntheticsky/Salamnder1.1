@@ -23,8 +23,8 @@ class Salamander {
 //    $this->multiSidebars = MultipleSidebars::getInstance();
 //    //Add metaboxes to posts and pages
 //    $this->metaBoxes = new Metaboxes();
-//    //Init Shortcodes
-//    $this->shortCodes = new ShortCodes();
+    //Init Shortcodes
+    $this->shortCodes = new Short_Codes();
     //Initialze Helper
     self::$helper = Helper::get_instance();
 	}

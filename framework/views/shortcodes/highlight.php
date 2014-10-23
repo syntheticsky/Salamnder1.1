@@ -1,0 +1,1 @@
+<span class="<?php echo $class; ?>" style="background-color:<?php echo color; ?>;"><?php echo$content; ?></span>

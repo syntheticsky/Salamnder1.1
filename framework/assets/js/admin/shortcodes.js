@@ -28,8 +28,7 @@ jQuery(function($)
     /* get current template */
     var def = getShortCodeTemplate($('#shortcode-type').val());
     /* add ajax calback on shortcodes type change */
-    $('#shortcode-type').on('change', function()
-    {
+    $('#shortcode-type').on('change', function() {
         getShortCodeTemplate($(this).val());
     });
     /* parse shortcodes form */

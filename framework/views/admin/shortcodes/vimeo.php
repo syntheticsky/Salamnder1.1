@@ -13,4 +13,4 @@
 		  <input type="number" name="height" class="form-control" id="video-height" step="1" min="10" />
 		</div>
 	</div>
-<div>
+</div>
