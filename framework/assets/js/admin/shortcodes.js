@@ -1,19 +1,14 @@
 // Salamander Theme Tinymce plugin
-jQuery(function($)
-{
+jQuery(function($) {
     /* Register button */
-    tinymce.create('tinymce.plugins.SSCButtons',
-    {
-        init : function(editor, url)
-        {
-            editor.addButton('ssc_button',
-            {
+    tinymce.create('tinymce.plugins.SSCButtons', {
+        init : function(editor, url) {
+            editor.addButton('ssc_button', {
                 title: 'Salamander ShortCodes',
                 // icon: 'gavickpro-own-icon',
                 icon: false,
                 text: 'Short Codes',
-                onclick: function()
-                {
+                onclick: function() {
                     var width = jQuery(window).width(), H = jQuery(window).height(), W = ( 720 < width ) ? 720 : width;
                     W = W - 80;
                     H = H - 84;
@@ -32,8 +27,7 @@ jQuery(function($)
         getShortCodeTemplate($(this).val());
     });
     /* parse shortcodes form */
-    $('#insert').click(function()
-    {
+    $('#insert').click(function() {
         var data = $("#shortcodes-form").find("select, textarea, input, checkbox").serializeArray();
         var shortcode = getShortcode(data);
         tinyMCE.activeEditor.execCommand('mceInsertContent', 0, shortcode);
@@ -41,21 +35,25 @@ jQuery(function($)
         return false;
     });
 
-    function getShortcode(data)
-    {
+    function getShortcode(data) {
+        var cnt = '';
+        var shortcodeType = '';
         var string = '[', assoc = {};
         $.each(data, function(k, v) {
-            if (typeof(assoc[v.name]) == 'undefined' && assoc[v.name] == null)
-            {
+            if (typeof(assoc[v.name]) == 'undefined' && assoc[v.name] == null) {
                 assoc[v.name] = [];
                 assoc[v.name].push(v.value);
             }
-            else
-            {
+            else {
                 assoc[v.name].push(v.value);
             }
         });
-        string += assoc['shortcode_type'][0];
+        shortcodeType = assoc['shortcode_type'][0];
+        string += shortcodeType;
+        if ('content' in assoc) {
+            cnt = assoc['content'];
+        }
+        delete assoc['content'];
         delete assoc['shortcode_type'];
         $.each(assoc, function(k, v) {
             v = v.join(', ');
@@ -63,17 +61,19 @@ jQuery(function($)
         });
         string += ']';
 
+        if (cnt) {
+            string += cnt + '[/' + shortcodeType + ']';
+        }
+
         return string;
     }
 
-    function getShortCodeTemplate(type)
-    {
+    function getShortCodeTemplate(type) {
         $.post(
             //global var viewsDir
             viewsDir + 'admin/shortcodes/' + type + '.php',
             {},
-            function(data)
-            {
+            function(data) {
                 $('#shortcode-data').replaceWith($(data).find('#shortcode-data'));
             },
             'html'

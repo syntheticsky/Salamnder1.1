@@ -27,7 +27,7 @@ class Short_Codes {
 		// Dropcap short code
 		add_shortcode( 'dropcap', array( $this, 'shortcode_dropcap' ) );
 		//Highlight shortcode
-		add_shortcode( 'highlight', array( 'shortcode_highlight' ) );
+		add_shortcode( 'highlight', array( $this, 'shortcode_highlight' ) );
 		// Check list short code
 		add_shortcode('checklist', array( $this, 'shortcode_checklist' ) );
 		// Add buttons to tinyMCE
@@ -39,7 +39,7 @@ class Short_Codes {
 		// opening tag
 		$rep = preg_replace ( "/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/", "[$2$3]", $content );
 		// closing tag
-		$rep = preg_replace ( "/(<p>)?\[\/($block)](<\/p>|<br \/>)/", "[/$2]", $rep );
+		$rep = preg_replace ( "/(<p>)?\[\/($block)](<\/p>|<br \/>)?/", "[/$2]", $rep );
 
 		return $rep;
 	}
@@ -106,8 +106,8 @@ class Short_Codes {
 				'url' => '',
 				'width' => '100%',
 				'height' => 81,
-				'comments' => 'true',
-				'auto_play' => 'true',
+				'comments' => 'false',
+				'auto_play' => 'false',
 				'color' => 'ff7700',
 			), $params);
 
@@ -123,7 +123,7 @@ class Short_Codes {
 			$params['auto_play'] = 'false';
 		}
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'sound_cloud.php', $params);
+		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'soundcloud.php', $params);
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Short_Codes {
 	 * @param $params
 	 * @param null $content
 	 * @return string
-	 * Highlight shortcode
+	 * Highlight short code
 	 */
 	public function shortcode_highlight($params, $content = null) {
 		$params = shortcode_atts(

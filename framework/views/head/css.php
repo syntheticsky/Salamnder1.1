@@ -18,7 +18,7 @@ if((get_option('show_on_front') && get_option('page_for_posts') && is_home()) ||
 <style type="text/css">
 
 /*** Fonts ***/
-
+<?php $custom_font = false;?>
 <?php if ( Salamander::getData ( 'custom_font_woff' )
             && Salamander::getData ( 'custom_font_ttf' )
             && Salamander::getData ( 'custom_font_svg' )

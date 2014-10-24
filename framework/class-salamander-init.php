@@ -418,9 +418,9 @@ class Salamander_Init
 	public function stylesheets()
 	{
 		if ( ! is_admin() && ! in_array($this->pageNow, array('wp-login.php', 'wp-register.php' ) ) ) {
-    	wp_deregister_style('normalize');
-	    wp_register_style('normalize', TEMPLATE_DIR . '/css/normalize.css', array(), false, 'all');
-	    wp_enqueue_style('normalize');
+//    	wp_deregister_style('normalize');
+//	    wp_register_style('normalize', TEMPLATE_DIR . '/css/normalize.css', array(), false, 'all');
+//	    wp_enqueue_style('normalize');
     }
 	}
 
@@ -434,7 +434,7 @@ class Salamander_Init
         $slider_page_id = get_option('page_for_posts');
     }
 
-    wp_enqueue_script( 'jquery', false, array(), false, true);
+    wp_enqueue_script( 'jquery', false, array(), false, false);
 
     wp_deregister_script( 'bootstrap' );
     wp_register_script( 'bootstrap', get_bloginfo('template_directory').'/js/bootstrap.js', array(), false, true);
@@ -456,8 +456,8 @@ class Salamander_Init
     wp_register_script( 'jquery.prettyPhoto', get_bloginfo('template_directory').'/js/jquery.prettyPhoto.js', array(), false, true);
     wp_enqueue_script( 'jquery.prettyPhoto' );
 
-    wp_deregister_script( 'jquery.isotope' );
-    wp_register_script( 'jquery.isotope', get_bloginfo('template_directory').'/js/jquery.isotope.min.js', array(), false, true);
+//    wp_deregister_script( 'jquery.isotope' );
+//    wp_register_script( 'jquery.isotope', get_bloginfo('template_directory').'/js/jquery.isotope.min.js', array(), false, true);
     /*if(
         is_page_template('portfolio-one-column.php') || is_page_template('portfolio-one-column-text.php') ||
         is_page_template('portfolio-two-column.php') || is_page_template('portfolio-two-column-text.php') ||
@@ -466,7 +466,7 @@ class Salamander_Init
         (is_home() && $data['blog_layout'] == 'Grid') || is_page_template('demo-gridblog.php') ||
         is_page_template('demo-timelineblog.php')
     ) {*/
-        wp_enqueue_script( 'jquery.isotope' );
+//        wp_enqueue_script( 'jquery.isotope' );
     //}
 
     wp_deregister_script( 'jquery.flexslider' );
@@ -509,14 +509,14 @@ class Salamander_Init
     wp_register_script( 'jquery.waypoint', get_bloginfo('template_directory').'/js/jquery.waypoint.js', array(), false, true);
     wp_enqueue_script( 'jquery.waypoint' );
 
-    //wp_deregister_script('gmaps.api');
-    //wp_register_script('gmaps.api', 'https://maps.google.com/maps/api/js?v=3.exp&amp;sensor=false&amp;language='.substr(get_locale(), 0, 2), array(), false, true);
-    //if(is_page_template('contact.php') || is_page_template('contact-2.php')) {
-        //wp_enqueue_script( 'gmaps.api' );
-    //}
+    wp_deregister_script('gmaps.api');
+    wp_register_script('gmaps.api', 'http://maps.google.com/maps/api/js?sensor=false&amp;language=' . substr(get_locale(), 0, 2), array(), false, false);
+//    if(is_page_template('contact.php') || is_page_template('contact-2.php')) {
+        wp_enqueue_script( 'gmaps.api' );
+//    }
 
     wp_deregister_script( 'jquery.ui.map' );
-    wp_register_script( 'jquery.ui.map', get_bloginfo('template_directory').'/js/gmap.js', array(), false, true);
+    wp_register_script( 'jquery.ui.map', get_bloginfo('template_directory').'/js/gmap.js', array(), false, false);
     //if(is_page_template('contact.php') || is_page_template('contact-2.php')) {
         wp_enqueue_script( 'jquery.ui.map' );
     //}
