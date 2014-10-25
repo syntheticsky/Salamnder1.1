@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
       <label for="button-link">Button text</label>
-      <input type="text" name="content" class="form-control" id="button-text" />
+      <input type="text" name="cnt" class="form-control" id="button-text" />
     </div>
   </div>
 </div>

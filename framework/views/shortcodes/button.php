@@ -1,1 +1,1 @@
-<a class="btn <?php echo $size; ?>" href="<?php echo $link; ?>" target="<?php echo $target; ?>" style="<?php echo $color; ?>"><?php echo $content; ?></a>
+<a class="btn <?php echo $size; ?>" href="<?php echo $link; ?>" target="<?php echo $target; ?>" style="background-color:<?php echo $color; ?>;"><?php echo $content; ?></a>

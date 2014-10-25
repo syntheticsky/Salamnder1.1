@@ -11,8 +11,8 @@
 		<div id="shortcode-data">
 		</div>
 		<hr>
-		<div class="form-group">
-			<button name="add" id="insert" class="button button-primary button-large">Insert Shortcode</button>
-		</div>
+<!--		<div class="form-group">-->
+<!--			<button name="add" id="insert" class="button button-primary button-large">Insert Shortcode</button>-->
+<!--		</div>-->
 	</div>
 </div>

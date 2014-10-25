@@ -2,26 +2,51 @@
 jQuery(function($) {
     /* Register button */
     tinymce.create('tinymce.plugins.SSCButtons', {
-        init : function(editor, url) {
-            editor.addButton('ssc_button', {
-                title: 'Salamander ShortCodes',
-                // icon: 'gavickpro-own-icon',
-                icon: false,
-                text: 'Short Codes',
-                onclick: function() {
-                    var width = jQuery(window).width(), H = jQuery(window).height(), W = ( 720 < width ) ? 720 : width;
-                    W = W - 80;
-                    H = H - 84;
-                    tb_show('Insert Salamander ShortCodes.', '#TB_inline?width=' + W + '&height=' + H + '&inlineId=shrtcodes-form-wrapper');
-                }
+        init: function( editor, url )  {
+
+            // Add the Insert Gistpen button
+            editor.addButton( 'ssc_button', {
+                //text: 'Insert Shortcode',
+                icon: 'icons dashicons-icon',
+                tooltip: 'Insert Shortcode',
+                cmd: 'plugin_command'
             });
-        },
+
+            // Called when we click the Insert Gistpen button
+            editor.addCommand( 'plugin_command', function() {
+                // Calls the pop-up modal
+                editor.windowManager.open({
+                    // Modal settings
+                    title: 'Insert Shortcode',
+                    width: jQuery( window ).width() * 0.7,
+                    // minus head and foot of dialog box
+                    height: (jQuery( window ).height() - 36 - 50) * 0.7,
+                    inline: 1,
+                    id: 'plugin-slug-insert-dialog',
+                    buttons: [{
+                        text: 'Insert',
+                        id: 'plugin-slug-button-insert',
+                        class: 'insert',
+                        onclick: function( e ) {
+                            insertShortcode();
+                        },
+                    },
+                    {
+                        text: 'Cancel',
+                        id: 'plugin-slug-button-cancel',
+                        onclick: 'close'
+                    }],
+                });
+                //Move form to dialog
+                $( '#plugin-slug-insert-dialog-body' ).append( $('#shortcodes-form') );
+
+            });
+        }
     });
     /* Start the buttons */
     tinymce.PluginManager.add('ssc_button', tinymce.plugins.SSCButtons);
 
-    /* get current template */
-    var def = getShortCodeTemplate($('#shortcode-type').val());
+    getShortCodeTemplate($('#shortcode-type').val());
     /* add ajax calback on shortcodes type change */
     $('#shortcode-type').on('change', function() {
         getShortCodeTemplate($(this).val());
@@ -30,15 +55,25 @@ jQuery(function($) {
     $('#insert').click(function() {
         var data = $("#shortcodes-form").find("select, textarea, input, checkbox").serializeArray();
         var shortcode = getShortcode(data);
-        tinyMCE.activeEditor.execCommand('mceInsertContent', 0, shortcode);
         tb_remove();
+        tinyMCE.activeEditor.selection.setContent(shortcode.toString());
+
         return false;
     });
+
+    function insertShortcode() {
+        var data = $("#shortcodes-form").find("select, textarea, input, checkbox").serializeArray();
+        tinyMCE.activeEditor.selection.setContent(getShortcode(data));
+        //move for back to wrapper
+        $('#shrtcodes-form-wrapper').append($('#shortcodes-form'));
+        tinyMCE.activeEditor.windowManager.close();
+    }
 
     function getShortcode(data) {
         var cnt = '';
         var shortcodeType = '';
-        var string = '[', assoc = {};
+        var string = '[';
+        var assoc = {};
         $.each(data, function(k, v) {
             if (typeof(assoc[v.name]) == 'undefined' && assoc[v.name] == null) {
                 assoc[v.name] = [];
@@ -50,10 +85,10 @@ jQuery(function($) {
         });
         shortcodeType = assoc['shortcode_type'][0];
         string += shortcodeType;
-        if ('content' in assoc) {
-            cnt = assoc['content'];
+        if ('cnt' in assoc) {
+            cnt = assoc['cnt'];
         }
-        delete assoc['content'];
+        delete assoc['cnt'];
         delete assoc['shortcode_type'];
         $.each(assoc, function(k, v) {
             v = v.join(', ');

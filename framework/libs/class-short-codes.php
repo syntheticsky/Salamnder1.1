@@ -11,9 +11,9 @@ class Short_Codes {
 	public function __construct() {
 		$this->helper = Helper::get_instance ();
 		$this->short_code_list = array("youtube", "vimeo", "soundcloud", "button", "dropcap", "highlight", "checklist", "tabs", "tab", "accordian", "toggle", "one_half", "one_third", "one_fourth", "two_third", "three_fourth", "tagline_box", "pricing_table", "pricing_column", "pricing_price", "pricing_row", "pricing_footer", "content_boxes", "content_box", "slider", "slide", "testimonials", "testimonial", "progress", "person", "recent_posts", "recent_works", "alert", "fontawesome", "social_links", "clients", "client", "title", "separator", "tooltip", "fullwidth", "map", "counters_circle", "counter_circle", "counters_box", "counter_box", "flexslider", "blog", "imageframe", "images", "image", "sharing");
-		add_filter ( 'widget_text', 'do_shortcode' );
-		add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
-		add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
+//		add_filter ( 'widget_text', 'do_shortcode' );
+//		add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
+//		add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
 		// Google Map
 		add_shortcode ( 'map', array($this, 'shortcode_gm') );
 		// Vimeo short code
@@ -3069,10 +3069,10 @@ class Short_Codes {
    	}
 	}
 
+
 	public function short_codes_form()
 	{
 		$params = array(
-    	// 'list' = $this->short_code_list,
     	'list' => array(
 				'vimeo' => 'Vimeo',
 				'map' => 'Google Map',
