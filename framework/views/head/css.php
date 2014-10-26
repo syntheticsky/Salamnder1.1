@@ -362,7 +362,7 @@ h5.toggle:hover a,
 #right-sidebar .widget_archive li a:hover:before,
 #left-sidebar .widget_pages li a:hover:before,
 #right-sidebar .widget_pages li a:hover:before,
-#left-sidebar .widget_links li a:hover:before,.side-nav .arrow:hover:after {
+#left-sidebar .widget_links li a:hover:before,.side-nav .arrow:hover:after,
 #right-sidebar .widget_links li a:hover:before,.side-nav .arrow:hover:after {
     color:<?php echo Salamander::getData( 'primary_color' ); ?> !important;
 }
@@ -394,6 +394,68 @@ h5.toggle.active span.arrow,
 }
 <?php endif; ?>
 
+/** Short codes styling options **/
+<?php if(Salamander::getData( 'accordian_inactive_color' ) ): ?>
+h5.toggle span.arrow{background-color:<?php echo Salamander::getData( 'accordian_inactive_color' ); ?>;}
+<?php endif; ?>
+<?php if(Salamander::getData( 'counter_filled_color' )): ?>
+.progress-bar-content{background-color:<?php echo Salamander::getData( 'counter_filled_color' ); ?> !important;border-color:<?php echo Salamander::getData( 'counter_filled_color' ); ?> !important;}
+.content-box-percentage{color:<?php echo Salamander::getData( 'counter_filled_color' ); ?> !important;}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'counter_unfilled_color' )): ?>
+.progress-bar{background-color:<?php echo Salamander::getData( 'counter_unfilled_color' ); ?>;border-color:<?php echo Salamander::getData( 'counter_unfilled_color' ); ?>;}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'arrow_color' )): ?>
+.more a:after,.read-more:after,#sidebar .widget_nav_menu li a:before,#sidebar .widget_categories li a:before,
+#sidebar .widget .recentcomments:before,#sidebar .widget_recent_entries li a:before,
+#sidebar .widget_archive li a:before,#sidebar .widget_pages li a:before,
+#sidebar .widget_links li a:before,.side-nav .arrow:after,.single-navigation a[rel=prev]:before,
+.single-navigation a[rel=next]:after,.pagination-prev:before,
+.pagination-next:after{color:<?php echo Salamander::getData( 'arrow_color' ); ?> !important;}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'dates_box_color' )): ?>
+.date-and-formats .format-box{background-color:<?php echo Salamander::getData( 'dates_box_color' ); ?>;}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'carousel_nav_color' )): ?>
+.es-nav-prev,.es-nav-next{background-color:<?php echo Salamander::getData( 'carousel_nav_color' ); ?>;}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'carousel_hover_color' )): ?>
+.es-nav-prev:hover,.es-nav-next:hover{background-color:<?php echo Salamander::getData( 'carousel_hover_color' ); ?>;}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'content_box_bg_color' )): ?>
+.content-boxes .col{background-color:<?php echo Salamander::getData( 'content_box_bg_color' ); ?>;}
+<?php endif; ?>
+<?php if(Salamander::getData( 'title_border_color' )): ?>
+.title-sep{
+  border-color:<?php echo Salamander::getData( 'title_border_color' ); ?> !important;
+}
+<?php endif; ?>
+<?php if(Salamander::getData( 'icon_circle_color' )): ?>
+.fontawesome-icon.circle-yes{
+  background-color:<?php echo Salamander::getData( 'icon_circle_color' ); ?> !important;
+}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'icon_border_color' )): ?>
+.fontawesome-icon.circle-yes{
+  border-color:<?php echo Salamander::getData( 'icon_border_color' ); ?> !important;
+}
+<?php endif; ?>
+
+<?php if(Salamander::getData( 'icon_color' )): ?>
+.fontawesome-icon{
+  color:<?php echo Salamander::getData( 'icon_color' ); ?> !important;
+}
+<?php endif; ?>
+
+
+/** Header options **/
 <?php if ( Salamander::getData( 'header_bg_color' ) ): ?>
 header,
 #small-nav {

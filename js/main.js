@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
 		if(menuItems%2 == 0) {
 			var itemWidth = Math.ceil(menuWidth/menuItems)-2;
 		} else {
-			var itemWidth = Math.ceil(menuWidth/menuItems)-1;
+			var itemWidth = Math.ceil(menuWidth/menuItems)-2;
 		}
 
 	    jQuery(this).css({'width': menuWidth +'px'});

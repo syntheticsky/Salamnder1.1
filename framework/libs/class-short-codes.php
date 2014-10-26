@@ -11,9 +11,9 @@ class Short_Codes {
 	public function __construct() {
 		$this->helper = Helper::get_instance ();
 		$this->short_code_list = array("youtube", "vimeo", "soundcloud", "button", "dropcap", "highlight", "checklist", "tabs", "tab", "accordian", "toggle", "one_half", "one_third", "one_fourth", "two_third", "three_fourth", "tagline_box", "pricing_table", "pricing_column", "pricing_price", "pricing_row", "pricing_footer", "content_boxes", "content_box", "slider", "slide", "testimonials", "testimonial", "progress", "person", "recent_posts", "recent_works", "alert", "fontawesome", "social_links", "clients", "client", "title", "separator", "tooltip", "fullwidth", "map", "counters_circle", "counter_circle", "counters_box", "counter_box", "flexslider", "blog", "imageframe", "images", "image", "sharing");
-//		add_filter ( 'widget_text', 'do_shortcode' );
-//		add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
-//		add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
+		add_filter ( 'widget_text', 'do_shortcode' );
+		add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
+		add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
 		// Google Map
 		add_shortcode ( 'map', array($this, 'shortcode_gm') );
 		// Vimeo short code
@@ -30,6 +30,9 @@ class Short_Codes {
 		add_shortcode( 'highlight', array( $this, 'shortcode_highlight' ) );
 		// Check list short code
 		add_shortcode('checklist', array( $this, 'shortcode_checklist' ) );
+    // Tabs shortcode
+    add_shortcode('tabs', array( $this, 'shortcode_tabs' ) );
+    add_shortcode('tab', array( $this, 'shortcode_tab' ) );
 		// Add buttons to tinyMCE
 		add_action ( 'init', array( $this, 'add_Button' ) );
 	}
@@ -37,9 +40,9 @@ class Short_Codes {
 	public function shortcodes_formatter( $content ) {
 		$block = join ( "|", $this->short_code_list );
 		// opening tag
-		$rep = preg_replace ( "/(<p>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>)?/", "[$2$3]", $content );
+		$rep = preg_replace ( "/(<p>|<pre>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>|<\/pre>)?/", "[$2$3]", $content );
 		// closing tag
-		$rep = preg_replace ( "/(<p>)?\[\/($block)](<\/p>|<br \/>)?/", "[/$2]", $rep );
+		$rep = preg_replace ( "/(<p>|<pre>)?\[\/($block)](<\/p>|<br \/>|<\/pre>)?/", "[/$2]", $rep );
 
 		return $rep;
 	}
@@ -190,85 +193,62 @@ class Short_Codes {
 		$params = shortcode_atts(
 			array(
 				'icon' => 'arrow',
-				'iconcolor' => '',
-				'circle' => 'yes'
+				'color' => '',
+				'circle' => 'yes',
 			), $params);
 
-		if( ! $params['iconcolor'] ) {
-			$params['iconcolor'] = strtolower( Salamander::getData( 'checklist_icons_color' ) );
+    $class = '';
+		if( ! $params['color'] ) {
+			 $class = 'list-icon-color-' . strtolower( Salamander::getData( 'checklist_icons_color' ) );
 		}
-		$params['content'] = str_replace('<ul>', '<ul class="list-icon circle-' . $params['circle'] . ' list-icon-' . $params['icon'] . '">', $content);
+		$params['content'] = str_replace('<ul>', '<ul class="list-icon circle-' . $params['circle'] . ' list-icon-' . $params['icon'] . ' ' . $class . '">', $content);
 		$checklist_counter++;
 
 		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'checklist.php', $params);
 	}
 
-////////////////////////////////////////////////////////////////////
-//// Tabs shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('tabs', 'shortcode_tabs');
-//	function shortcode_tabs( $atts, $content = null ) {
-//		global $data;
-//
-//		extract(shortcode_atts(array(
-//			'layout' => 'horizontal',
-//			'backgroundcolor' => '',
-//			'inactivecolor' => ''
-//		), $atts));
-//
-//		if(!$backgroundcolor) {
-//			$backgroundcolor = $data['tabs_bg_color'];
-//		}
-//
-//		if(!$inactivecolor) {
-//			$inactivecolor = $data['tabs_inactive_color'];
-//		}
-//
-//		static $avada_tabs_counter = 1;
-//
-//		$out = "<style type='text/css'>
-//	#tabs-{$avada_tabs_counter},#tabs-{$avada_tabs_counter}.tabs-vertical .tabs,#tabs-{$avada_tabs_counter}.tabs-vertical .tab_content{border-color:{$inactivecolor} !important;}
-//	#main #tabs-{$avada_tabs_counter}.tabs-horizontal,#tabs-{$avada_tabs_counter}.tabs-vertical .tab_content,.pyre_tabs .tabs-container{background-color:{$backgroundcolor} !important;}
-//	body #tabs-{$avada_tabs_counter}.shortcode-tabs .tab-hold .tabs li,body.dark #sidebar .tab-hold .tabs li{border-right:1px solid {$backgroundcolor} !important;}
-//	body #tabs-{$avada_tabs_counter}.shortcode-tabs .tab-hold .tabs li:last-child{border-right:0 !important;}
-//	body #main #tabs-{$avada_tabs_counter} .tab-hold .tabs li a{background:{$inactivecolor} !important;border-bottom:0 !important;color:{$data[body_text_color]} !important;}
-//	body #main #tabs-{$avada_tabs_counter} .tab-hold .tabs li a:hover{background:{$backgroundcolor} !important;border-bottom:0 !important;}
-//	body #main #tabs-{$avada_tabs_counter} .tab-hold .tabs li.active a,body #main #tabs-{$avada_tabs_counter} .tab-hold .tabs li.active{background:{$backgroundcolor} !important;border-bottom:0 !important;}
-//	#sidebar .tab-hold .tabs li.active a{border-top-color:{$data[primary_color]} !important;}
-//	</style>";
-//
-//		$out .= '<div id="tabs-'.$avada_tabs_counter.'" class="tab-holder shortcode-tabs clearfix tabs-'.$layout.'">';
-//
-//		$out .= '<div class="tab-hold tabs-wrapper">';
-//
-//		$out .= '<ul id="tabs" class="tabset tabs">';
-//		foreach ($atts as $key => $tab) {
-//			if($key != 'layout' && $key != 'backgroundcolor' && $key != 'inactivecolor') {
-//				$out .= '<li><a href="#' . $key . '">' . $tab . '</a></li>';
-//			}
-//		}
-//		$out .= '</ul>';
-//
-//		$out .= '<div class="tab-box tabs-container">';
-//
-//		$out .= do_shortcode($content) .'</div></div></div>';
-//
-//		$avada_tabs_counter++;
-//
-//		return $out;
-//	}
-//
-//add_shortcode('tab', 'shortcode_tab');
-//	function shortcode_tab( $atts, $content = null ) {
-//		extract(shortcode_atts(array(
-//		), $atts));
-//
-//		$out = '';
-//		$out .= '<div id="tab' . $atts['id'] . '" class="tab tab_content">' . do_shortcode($content) .'</div>';
-//
-//		return $out;
-//	}
-//
+  //[tabs tab1=\"Tab 1\" tab2=\"Tab 2\" tab3=\"Tab 3\" layout="horizontal or vertical" backgroundcolor="" inactivecolor=""]<br /><br />[tab id=1]Tab content 1[/tab]<br />[tab id=2]Tab content 2[/tab]<br />[tab id=3]Tab content 3[/tab]<br /><br />[/tabs]
+	public function shortcode_tabs( $params, $content = null ) {
+    static $tabs_counter = 1;
+    $tabs_counter++;
+    $tabs = array();
+    foreach ( $params as $key => $val) {
+      if (substr($key, 0, 3) == 'tab') {
+        $tabs[$key] = $val;
+      }
+    }
+    if ( ! empty ( $tabs ) ) {
+      $params = shortcode_atts(
+        array(
+          'layout' => 'horizontal',
+          'bg_color' => '',
+          'inactive_color' => '',
+          'content' => do_shortcode($content),
+        ), $params);
+
+      if(!$params['bg_color']) {
+        $params['bg_color'] = Salamander::getData( 'tabs_bg_color' );
+      }
+
+      if(!$params['inactive_color']) {
+        $params['inactive_color'] = Salamander::getData( 'tabs_inactive_color' );
+      }
+      $params['counter'] = $tabs_counter;
+      $params['primary_color'] = Salamander::getData( 'primary_color' );
+      $params['body_text_color'] = Salamander::getData( 'body_text_color' );
+      $params['tabs'] = $tabs;
+
+      return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'tabs.php', $params);
+    }
+	}
+
+	public function shortcode_tab( $params, $content = null ) {
+    if ( isset( $params['id'] ) ) {
+      $params['content'] = do_shortcode($content);
+      return '<div id="tab' . $params['id'] . '" class="tab tab_content">' . $params['content'] . '</div>';
+    }
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Accordian
 ////////////////////////////////////////////////////////////////////
@@ -3082,6 +3062,7 @@ class Short_Codes {
 				'dropcap' => 'Dropcap',
 				'highlight' => 'Highlight',
 				'checklist' => 'Checklist',
+				'tabs' => 'Tabs',
 			),
     );
 

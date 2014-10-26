@@ -107,30 +107,6 @@ if (Salamander::getData('responsive')) :
 <?php endif; ?>
 }
 
-<?php if($data['icon_circle_color']): ?>
-.fontawesome-icon.circle-yes{
-  background-color:<?php echo $data['icon_circle_color']; ?> !important;
-}
-<?php endif; ?>
-
-<?php if($data['icon_border_color']): ?>
-.fontawesome-icon.circle-yes{
-  border-color:<?php echo $data['icon_border_color']; ?> !important;
-}
-<?php endif; ?>
-
-<?php if($data['icon_color']): ?>
-.fontawesome-icon{
-  color:<?php echo $data['icon_color']; ?> !important;
-}
-<?php endif; ?>
-
-<?php if($data['title_border_color']): ?>
-.title-sep{
-  border-color:<?php echo $data['title_border_color']; ?> !important;
-}
-<?php endif; ?>
-
 <?php if($data['testimonial_bg_color']): ?>
 .review blockquote q,.post-content blockquote{
   background-color:<?php echo $data['testimonial_bg_color']; ?> !important;
@@ -243,44 +219,6 @@ if (Salamander::getData('responsive')) :
   padding-left:<?php echo $data['sidebar_padding']; ?>%;
   padding-right:<?php echo $data['sidebar_padding']; ?>%;
 }
-<?php endif; ?>
-
-<?php if($data['accordian_inactive_color']): ?>
-h5.toggle span.arrow{background-color:<?php echo $data['accordian_inactive_color']; ?>;}
-<?php endif; ?>
-
-<?php if($data['counter_filled_color']): ?>
-.progress-bar-content{background-color:<?php echo $data['counter_filled_color']; ?> !important;border-color:<?php echo $data['counter_filled_color']; ?> !important;}
-.content-box-percentage{color:<?php echo $data['counter_filled_color']; ?> !important;}
-<?php endif; ?>
-
-<?php if($data['counter_unfilled_color']): ?>
-.progress-bar{background-color:<?php echo $data['counter_unfilled_color']; ?>;border-color:<?php echo $data['counter_unfilled_color']; ?>;}
-<?php endif; ?>
-
-<?php if($data['arrow_color']): ?>
-.more a:after,.read-more:after,#sidebar .widget_nav_menu li a:before,#sidebar .widget_categories li a:before,
-#sidebar .widget .recentcomments:before,#sidebar .widget_recent_entries li a:before,
-#sidebar .widget_archive li a:before,#sidebar .widget_pages li a:before,
-#sidebar .widget_links li a:before,.side-nav .arrow:after,.single-navigation a[rel=prev]:before,
-.single-navigation a[rel=next]:after,.pagination-prev:before,
-.pagination-next:after{color:<?php echo $data['arrow_color']; ?> !important;}
-<?php endif; ?>
-
-<?php if($data['dates_box_color']): ?>
-.date-and-formats .format-box{background-color:<?php echo $data['dates_box_color']; ?>;}
-<?php endif; ?>
-
-<?php if($data['carousel_nav_color']): ?>
-.es-nav-prev,.es-nav-next{background-color:<?php echo $data['carousel_nav_color']; ?>;}
-<?php endif; ?>
-
-<?php if($data['carousel_hover_color']): ?>
-.es-nav-prev:hover,.es-nav-next:hover{background-color:<?php echo $data['carousel_hover_color']; ?>;}
-<?php endif; ?>
-
-<?php if($data['content_box_bg_color']): ?>
-.content-boxes .col{background-color:<?php echo $data['content_box_bg_color']; ?>;}
 <?php endif; ?>
 
 <?php if($data['tabs_bg_color'] && $data['tabs_inactive_color']): ?>

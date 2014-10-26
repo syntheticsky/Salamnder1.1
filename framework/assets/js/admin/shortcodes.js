@@ -95,7 +95,6 @@ jQuery(function($) {
             string += ' ' + k + '="' + v + '"';
         });
         string += ']';
-
         if (cnt) {
             string += cnt + '[/' + shortcodeType + ']';
         }
