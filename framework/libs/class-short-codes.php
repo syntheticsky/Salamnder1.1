@@ -4,211 +4,229 @@
  * Salamander Theme
  */
 class Short_Codes {
-	private $helper;
+  private $helper;
 
-	private $short_code_list;
+  private $short_code_list;
 
-	public function __construct() {
-		$this->helper = Helper::get_instance ();
-		$this->short_code_list = array("youtube", "vimeo", "soundcloud", "button", "dropcap", "highlight", "checklist", "tabs", "tab", "accordian", "toggle", "one_half", "one_third", "one_fourth", "two_third", "three_fourth", "tagline_box", "pricing_table", "pricing_column", "pricing_price", "pricing_row", "pricing_footer", "content_boxes", "content_box", "slider", "slide", "testimonials", "testimonial", "progress", "person", "recent_posts", "recent_works", "alert", "fontawesome", "social_links", "clients", "client", "title", "separator", "tooltip", "fullwidth", "map", "counters_circle", "counter_circle", "counters_box", "counter_box", "flexslider", "blog", "imageframe", "images", "image", "sharing");
-		add_filter ( 'widget_text', 'do_shortcode' );
-		add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
-		add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
-		// Google Map
-		add_shortcode ( 'map', array($this, 'shortcode_gm') );
-		// Vimeo short code
-		add_shortcode ( 'vimeo', array($this, 'shortcode_vimeo') );
-		// YouTube short code
-		add_shortcode( 'youtube', array( $this, 'shortcode_youtube' ) );
-		//sound cloud short code
-		add_shortcode( 'soundcloud', array( $this, 'shortcode_soundcloud' ) );
-		// button short code
-		add_shortcode( 'button', array( $this, 'shortcode_button' ) );
-		// Dropcap short code
-		add_shortcode( 'dropcap', array( $this, 'shortcode_dropcap' ) );
-		//Highlight shortcode
-		add_shortcode( 'highlight', array( $this, 'shortcode_highlight' ) );
-		// Check list short code
-		add_shortcode('checklist', array( $this, 'shortcode_checklist' ) );
+  public function __construct() {
+    $this->helper = Helper::get_instance ();
+    $this->short_code_list = array("youtube", "vimeo", "soundcloud", "button", "dropcap", "highlight", "checklist", "tabs", "tab", "accordion", "toggle", "one_half", "one_third", "one_fourth", "two_third", "three_fourth", "tagline_box", "pricing_table", "pricing_column", "pricing_price", "pricing_row", "pricing_footer", "content_boxes", "content_box", "slider", "slide", "testimonials", "testimonial", "progress", "person", "recent_posts", "recent_works", "alert", "fontawesome", "social_links", "clients", "client", "title", "separator", "tooltip", "fullwidth", "map", "counters_circle", "counter_circle", "counters_box", "counter_box", "flexslider", "blog", "imageframe", "images", "image", "sharing");
+    add_filter ( 'widget_text', 'do_shortcode' );
+    add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
+    add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
+    // Google Map
+    add_shortcode ( 'map', array($this, 'shortcode_gm') );
+    // Vimeo short code
+    add_shortcode ( 'vimeo', array($this, 'shortcode_vimeo') );
+    // YouTube short code
+    add_shortcode( 'youtube', array( $this, 'shortcode_youtube' ) );
+    //sound cloud short code
+    add_shortcode( 'soundcloud', array( $this, 'shortcode_soundcloud' ) );
+    // button short code
+    add_shortcode( 'button', array( $this, 'shortcode_button' ) );
+    // Dropcap short code
+    add_shortcode( 'dropcap', array( $this, 'shortcode_dropcap' ) );
+    //Highlight shortcode
+    add_shortcode( 'highlight', array( $this, 'shortcode_highlight' ) );
+    // Check list short code
+    add_shortcode('checklist', array( $this, 'shortcode_checklist' ) );
     // Tabs shortcode
     add_shortcode('tabs', array( $this, 'shortcode_tabs' ) );
     add_shortcode('tab', array( $this, 'shortcode_tab' ) );
-		// Add buttons to tinyMCE
-		add_action ( 'init', array( $this, 'add_Button' ) );
-	}
+    // Accordion
+    add_shortcode('accordion', array($this, 'shortcode_accordion'));
+    // Toggle shortcode
+    add_shortcode('toggle', array($this, 'shortcode_toggle'));
+    // Column one_half shortcode
+    add_shortcode('one_half', array($this, 'shortcode_one_half'));
+    // Column one_third shortcode
+    add_shortcode('one_third', array($this, 'shortcode_one_third'));
+    // Column two_third shortcode
+    add_shortcode('two_third', array($this, 'shortcode_two_third'));
+    // Column one_fourth shortcode
+    add_shortcode('one_fourth', array($this, 'shortcode_one_fourth'));
+    // Column three_fourth shortcode
+    add_shortcode('three_fourth', array($this, 'shortcode_three_fourth'));
+    // Tagline box shortcode
+    add_shortcode('tagline_box', array($this, 'shortcode_tagline_box'));
 
-	public function shortcodes_formatter( $content ) {
-		$block = join ( "|", $this->short_code_list );
-		// opening tag
-		$rep = preg_replace ( "/(<p>|<pre>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>|<\/pre>)?/", "[$2$3]", $content );
-		// closing tag
-		$rep = preg_replace ( "/(<p>|<pre>)?\[\/($block)](<\/p>|<br \/>|<\/pre>)?/", "[/$2]", $rep );
 
-		return $rep;
-	}
+    // Add buttons to tinyMCE
+    add_action ( 'init', array( $this, 'add_Button' ) );
+  }
 
-	/**
-	 * @param $params
-	 * @param null $content
-	 * @return string
-	 * Google maps short code
-	 */
-	public function shortcode_gm( $params, $content = null ) {
-		wp_enqueue_script ( 'gmaps.api' );
-		wp_enqueue_script ( 'jquery.ui.map' );
+  public function shortcodes_formatter( $content ) {
+    $block = join ( "|", $this->short_code_list );
+    // opening tag
+    $rep = preg_replace ( "/(<p>|<pre>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>|<\/pre>)?/", "[$2$3]", $content );
+    // closing tag
+    $rep = preg_replace ( "/(<p>|<pre>)?\[\/($block)](<\/p>|<br \/>|<\/pre>)?/", "[/$2]", $rep );
 
-		$params = shortcode_atts ( array('address' => '', 'type' => 'satellite', 'width' => '100%', 'height' => '300px', 'zoom' => '14', 'scrollwheel' => 'true', 'scale' => 'true', 'zoom_pancontrol' => 'true',), $params );
+    return $rep;
+  }
 
-		static $mapCounter = 1;
-		$params['mapCounter'] = $mapCounter;
-		$mapCounter++;
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Google maps short code
+   */
+  public function shortcode_gm( $params, $content = null ) {
+    wp_enqueue_script ( 'gmaps.api' );
+    wp_enqueue_script ( 'jquery.ui.map' );
 
-		return Helper::render ( VIEWS_PATH . 'shortcodes' . DS . 'map.php', $params );
-	}
+    $params = shortcode_atts ( array('address' => '', 'type' => 'satellite', 'width' => '100%', 'height' => '300px', 'zoom' => '14', 'scrollwheel' => 'true', 'scale' => 'true', 'zoom_pancontrol' => 'true',), $params );
 
-	/**
-	 * @param $params
-	 * @return string
-	 * Vimeo short code
-	 */
-	public function shortcode_vimeo($params) {
-		$params = shortcode_atts(
-			array(
-				'id' => '',
-				'width' => 600,
-				'height' => 360
-			), $params);
+    static $mapCounter = 1;
+    $params['mapCounter'] = $mapCounter;
+    $mapCounter++;
 
-			return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'vimeo.php', $params);
-	}
+    return Helper::render ( VIEWS_PATH . 'shortcodes' . DS . 'map.php', $params );
+  }
 
-	/**
-	 * @param $params
-	 * @return string
-	 * Youtube short code
-	 */
-	public function shortcode_youtube($params) {
-		$params = shortcode_atts(
-			array(
-				'id' => '',
-				'width' => 600,
-				'height' => 360
-			), $params);
+  /**
+   * @param $params
+   * @return string
+   * Vimeo short code
+   */
+  public function shortcode_vimeo($params) {
+    $params = shortcode_atts(
+      array(
+        'id' => '',
+        'width' => 600,
+        'height' => 360
+      ), $params);
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'youtube.php', $params);
-	}
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'vimeo.php', $params);
+  }
 
-	/**
-	 * @param $params
-	 * @return string
-	 * SoundCloud short code
-	 */
-	public function shortcode_soundcloud($params) {
-		$params = shortcode_atts(
-			array(
-				'url' => '',
-				'width' => '100%',
-				'height' => 81,
-				'comments' => 'false',
-				'auto_play' => 'false',
-				'color' => 'ff7700',
-			), $params);
+  /**
+   * @param $params
+   * @return string
+   * Youtube short code
+   */
+  public function shortcode_youtube($params) {
+    $params = shortcode_atts(
+      array(
+        'id' => '',
+        'width' => 600,
+        'height' => 360
+      ), $params);
 
-		if($params['comments'] == 'yes') {
-			$params['comments'] = 'true';
-		} elseif($params['comments'] == 'no') {
-			$params['comments'] = 'false';
-		}
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'youtube.php', $params);
+  }
 
-		if($params['auto_play'] == 'yes') {
-			$params['auto_play'] = 'true';
-		} elseif($params['auto_play'] == 'no') {
-			$params['auto_play'] = 'false';
-		}
+  /**
+   * @param $params
+   * @return string
+   * SoundCloud short code
+   */
+  public function shortcode_soundcloud($params) {
+    $params = shortcode_atts(
+      array(
+        'url' => '',
+        'width' => '100%',
+        'height' => 81,
+        'comments' => 'false',
+        'auto_play' => 'false',
+        'color' => 'ff7700',
+      ), $params);
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'soundcloud.php', $params);
-	}
+    if($params['comments'] == 'yes') {
+      $params['comments'] = 'true';
+    } elseif($params['comments'] == 'no') {
+      $params['comments'] = 'false';
+    }
 
-	/**
-	 * @param $params
-	 * @param null $content
-	 * @return string
-	 * Button short code
-	 */
-	public function shortcode_button(	$params, $content = null	) {
-		$params = shortcode_atts(
-			array(
-			'size' => 'bt-md',
-			'link' => '',
-			'color' => 'default',
-			'target' => '_parent',
-			'content' => do_shortcode($content),
-			), $params);
+    if($params['auto_play'] == 'yes') {
+      $params['auto_play'] = 'true';
+    } elseif($params['auto_play'] == 'no') {
+      $params['auto_play'] = 'false';
+    }
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'button.php', $params);
-	}
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'soundcloud.php', $params);
+  }
 
-	/**
-	 * @param $params
-	 * @param null $content
-	 * @return string
-	 * Dropcap shortcode
-	 */
-	public function shortcode_dropcap( $params, $content = null ) {
-		$params['content'] = do_shortcode($content);
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Button short code
+   */
+  public function shortcode_button(	$params, $content = null	) {
+    $params = shortcode_atts(
+      array(
+        'size' => 'bt-md',
+        'link' => '',
+        'color' => 'default',
+        'target' => '_parent',
+        'content' => do_shortcode($content),
+      ), $params);
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'dropcap.php', $params);
-	}
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'button.php', $params);
+  }
 
-	/**
-	 * @param $params
-	 * @param null $content
-	 * @return string
-	 * Highlight short code
-	 */
-	public function shortcode_highlight($params, $content = null) {
-		$params = shortcode_atts(
-			array(
-				'color' => 'yellow',
-			), $params);
-		$params['class'] = 'light-highlight';
-		if($params['color'] == 'black') {
-			$params['class'] = 'dark-highlight';
-		}
-		$params['content'] = do_shortcode($content);
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Dropcap shortcode
+   */
+  public function shortcode_dropcap( $params, $content = null ) {
+    $params['content'] = do_shortcode($content);
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'highlight.php', $params);
-	}
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'dropcap.php', $params);
+  }
 
-	/**
-	 * @param $params
-	 * @param null $content
-	 * @return mixed|string
-	 *
-	 * Check list shortcode
-	 */
-	public function shortcode_checklist( $params, $content = null ) {
-		static $checklist_counter = 1;
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Highlight short code
+   */
+  public function shortcode_highlight($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'color' => 'yellow',
+      ), $params);
+    $params['class'] = 'light-highlight';
+    if($params['color'] == 'black') {
+      $params['class'] = 'dark-highlight';
+    }
+    $params['content'] = do_shortcode($content);
 
-		$params = shortcode_atts(
-			array(
-				'icon' => 'arrow',
-				'color' => '',
-				'circle' => 'yes',
-			), $params);
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'highlight.php', $params);
+  }
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return mixed|string
+   *
+   * Check list shortcode
+   */
+  public function shortcode_checklist( $params, $content = null ) {
+    static $checklist_counter = 1;
+
+    $params = shortcode_atts(
+      array(
+        'icon' => 'arrow',
+        'color' => '',
+        'circle' => 'yes',
+      ), $params);
 
     $class = '';
-		if( ! $params['color'] ) {
-			 $class = 'list-icon-color-' . strtolower( Salamander::getData( 'checklist_icons_color' ) );
-		}
-		$params['content'] = str_replace('<ul>', '<ul class="list-icon circle-' . $params['circle'] . ' list-icon-' . $params['icon'] . ' ' . $class . '">', $content);
-		$checklist_counter++;
+    if( ! $params['color'] ) {
+      $class = 'list-icon-color-' . strtolower( Salamander::getData( 'checklist_icons_color' ) );
+    }
+    $params['content'] = str_replace('<ul>', '<ul class="list-icon circle-' . $params['circle'] . ' list-icon-' . $params['icon'] . ' ' . $class . '">', $content);
+    $checklist_counter++;
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'checklist.php', $params);
-	}
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'checklist.php', $params);
+  }
 
   //[tabs tab1=\"Tab 1\" tab2=\"Tab 2\" tab3=\"Tab 3\" layout="horizontal or vertical" backgroundcolor="" inactivecolor=""]<br /><br />[tab id=1]Tab content 1[/tab]<br />[tab id=2]Tab content 2[/tab]<br />[tab id=3]Tab content 3[/tab]<br /><br />[/tabs]
-	public function shortcode_tabs( $params, $content = null ) {
+  public function shortcode_tabs( $params, $content = null ) {
     static $tabs_counter = 1;
     $tabs_counter++;
     $tabs = array();
@@ -240,206 +258,187 @@ class Short_Codes {
 
       return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'tabs.php', $params);
     }
-	}
+  }
 
-	public function shortcode_tab( $params, $content = null ) {
+  public function shortcode_tab( $params, $content = null ) {
     if ( isset( $params['id'] ) ) {
       $params['content'] = do_shortcode($content);
-      return '<div id="tab' . $params['id'] . '" class="tab tab_content">' . $params['content'] . '</div>';
+      return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'tab.php', $params);
     }
-	}
+  }
 
-////////////////////////////////////////////////////////////////////
-//// Accordian
-////////////////////////////////////////////////////////////////////
-//add_shortcode('accordian', 'shortcode_accordian');
-//	function shortcode_accordian( $atts, $content = null ) {
-//		$out = '';
-//		$out .= '<div class="accordian">';
-//		$out .= do_shortcode($content);
-//		$out .= '</div>';
-//
-//		return $out;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Toggle shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('toggle', 'shortcode_toggle');
-//	function shortcode_toggle( $atts, $content = null ) {
-//		extract(shortcode_atts(array(
-//			'title'      => '',
-//			'open' => 'no'
-//		), $atts));
-//
-//		$toggleclass = '';
-//		$toggleclass2 = '';
-//		$togglestyle = '';
-//
-//		if($open == 'yes'){
-//			$toggleclass = "active";
-//			$toggleclass2 = "default-open";
-//			$togglestyle = "display: block;";
-//		}
-//
-//		$out = '';
-//		$out .= '<h5 class="toggle '.$toggleclass.'"><a href="#"><span class="arrow"></span>' .$title. '</a></h5>';
-//		$out .= '<div class="toggle-content '.$toggleclass2.'" style="'.$togglestyle.'">';
-//		$out .= do_shortcode($content);
-//		$out .= '</div>';
-//
-//		return $out;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Column one_half shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('one_half', 'shortcode_one_half');
-//	function shortcode_one_half($atts, $content = null) {
-//		$atts = shortcode_atts(
-//			array(
-//				'last' => 'no',
-//			), $atts);
-//
-//		if($atts['last'] == 'yes') {
-//			return '<div class="one_half last">' .do_shortcode($content). '</div><div class="clearboth"></div>';
-//		} else {
-//			return '<div class="one_half">' .do_shortcode($content). '</div>';
-//		}
-//
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Column one_third shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('one_third', 'shortcode_one_third');
-//	function shortcode_one_third($atts, $content = null) {
-//		$atts = shortcode_atts(
-//			array(
-//				'last' => 'no',
-//			), $atts);
-//
-//		if($atts['last'] == 'yes') {
-//			return '<div class="one_third last">' .do_shortcode($content). '</div><div class="clearboth"></div>';
-//		} else {
-//			return '<div class="one_third">' .do_shortcode($content). '</div>';
-//		}
-//
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Column two_third shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('two_third', 'shortcode_two_third');
-//	function shortcode_two_third($atts, $content = null) {
-//		$atts = shortcode_atts(
-//			array(
-//				'last' => 'no',
-//			), $atts);
-//
-//		if($atts['last'] == 'yes') {
-//			return '<div class="two_third last">' .do_shortcode($content). '</div><div class="clearboth"></div>';
-//		} else {
-//			return '<div class="two_third">' .do_shortcode($content). '</div>';
-//		}
-//
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Column one_fourth shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('one_fourth', 'shortcode_one_fourth');
-//	function shortcode_one_fourth($atts, $content = null) {
-//		$atts = shortcode_atts(
-//			array(
-//				'last' => 'no',
-//			), $atts);
-//
-//		if($atts['last'] == 'yes') {
-//			return '<div class="one_fourth last">' .do_shortcode($content). '</div><div class="clearboth"></div>';
-//		} else {
-//			return '<div class="one_fourth">' .do_shortcode($content). '</div>';
-//		}
-//
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Column three_fourth shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('three_fourth', 'shortcode_three_fourth');
-//	function shortcode_three_fourth($atts, $content = null) {
-//		$atts = shortcode_atts(
-//			array(
-//				'last' => 'no',
-//			), $atts);
-//
-//		if($atts['last'] == 'yes') {
-//			return '<div class="three_fourth last">' .do_shortcode($content). '</div><div class="clearboth"></div>';
-//		} else {
-//			return '<div class="three_fourth">' .do_shortcode($content). '</div>';
-//		}
-//
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Tagline box shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('tagline_box', 'shortcode_tagline_box');
-//	function shortcode_tagline_box($atts, $content = null) {
-//		global $data;
-//
-//		static $tagline_box_counter = 1;
-//
-//		extract(shortcode_atts(array(
-//			'backgroundcolor' => '',
-//			'shadow' => 'no',
-//			'shadowopacity' => '0.7',
-//			'border' => '0px',
-//			'bordercolor' => '',
-//			'highlightposition' => 'left',
-//			'linktarget' => '_self',
-//			'buttoncolor' => 'default'
-//		), $atts));
-//
-//		if(!$backgroundcolor) {
-//			$backgroundcolor = $data['tagline_bg'];
-//		}
-//
-//		if(!$bordercolor) {
-//			$bordercolor = $data['tagline_border_color'];
-//		}
-//
-//		if(!$buttoncolor) {
-//			$buttoncolor = 'default';
-//		}
-//
-//		$class = '';
-//
-//		if($shadow == 'yes') {
-//			$class = 'tagline-shadow';
-//		}
-//
-//		$str = "<style type='text/css'>#reading-box-container-{$tagline_box_counter} .tagline-shadow:before,#reading-box-container-{$tagline_box_counter} .tagline-shadow:after{opacity:{$shadowopacity};}</style>";
-//		$str .= '<div class="reading-box-container" id="reading-box-container-'.$tagline_box_counter.'"><section class="reading-box '.$class.'" style="background-color:'.$backgroundcolor.' !important;border-width:'.$border.';border-color:'.$bordercolor.'!important;border-'.$highlightposition.'-width:3px !important;border-'.$highlightposition.'-color:'.$data['primary_color'].'!important;border-style:solid;">';
-//		if((isset($atts['link']) && $atts['link']) && (isset($atts['button']) && $atts['button'])):
-//			$str .= '<a href="'.$atts['link'].'" target="'.$linktarget.'" class="continue button large '.$buttoncolor.'">'.$atts['button'].'</a>';
-//		endif;
-//		if(isset($atts['title']) && $atts['title']):
-//			$str .= '<h2>'.$atts['title'].'</h2>';
-//		endif;
-//		if(isset($atts['description']) && $atts['description']):
-//			$str.= '<p>'.$atts['description'].'</p>';
-//		endif;
-//		if(isset($atts['link']) && $atts['link'] && isset($atts['button']) && $atts['button']):
-//			$str .= '<a href="'.$atts['link'].'" target="'.$linktarget.'" class="continue mobile-button button large '.$buttoncolor.'">'.$atts['button'].'</a>';
-//		endif;
-//		$str .= '</section></div>';
-//
-//		$tagline_box_counter++;
-//
-//		return $str;
-//	}
-//
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Accordion short code
+   */
+  public function shortcode_accordion( $params, $content = null ) {
+    $params['content'] = do_shortcode($content);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'accordion.php', $params);
+  }
+
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Toggle short code
+   */
+  //[accordian][toggle title="Title" open="yes"]...[/toggle][toggle title="Title" open="no"]...[/toggle][toggle title="Title" open="no"]...[/toggle][toggle title="Title" open="no"]...[/toggle][toggle title="Title" open="no"]...[/toggle][/accordian]
+  public function shortcode_toggle( $params, $content = null ) {
+    $params = shortcode_atts(
+      array(
+        'title' => '',
+        'open' => 'no',
+        'content' => do_shortcode($content),
+      ), $params);
+
+    $params['toggleclass'] = '';
+    $params['toggleclass2'] = '';
+    $params['togglestyle'] = '';
+
+    if($params['open'] == 'yes') {
+      $params['toggleclass'] = 'active';
+      $params['toggleclass2'] = 'default-open';
+      $params['togglestyle'] = 'display: block;';
+    }
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'toggles.php', $params);
+  }
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Column one_half shortcode
+   */
+  //[one_half last="no"]...[/one_half]
+  public function shortcode_one_half($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'one-half.php', $params);
+  }
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Column one_third shortcode
+   */
+  //[one_third last="no"]...[/one_third]
+  public function shortcode_one_third($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'one-third.php', $params);
+  }
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Column two_third shortcode
+   */
+  //[two_third last="no"]...[/two_third]
+  public function shortcode_two_third($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'two-third.php', $params);
+  }
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Column one_fourth shortcode
+   */
+  //[one_fourth last="no"]...[/one_fourth]
+  public function shortcode_one_fourth($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'one-fourth.php', $params);
+  }
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Column three_fourth shortcode
+   */
+  //[three_fourth last="no"]...[/three_fourth]
+  public function shortcode_three_fourth($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'three-fourth.php', $params);
+  }
+
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Tagline short code
+   */
+  //[tagline_box backgroundcolor="" shadow="no" border="1px" bordercolor="" highlightposition="right, left, top or bottom" link="http://themeforest.net/user/ThemeFusion" linktarget="" button="Purchase Now" title="Avada is incredibly responsive, with a refreshingly clean design" description="And it has some awesome features, premium sliders, unlimited colors, advanced theme options and so much more!"][/tagline_box]
+  public function shortcode_tagline_box($params, $content = null) {
+    static $counter = 1;
+
+    $params = shortcode_atts(
+      array(
+        'link' => '',
+        'title' => '',
+        'description' => '',
+        'button' => '',
+        'bg_color' => '',
+        'shadow' => 'no',
+        'shadow_opacity' => '0.7',
+        'border' => '0px',
+        'border_color' => '',
+        'highlight_position' => 'left',
+        'link_target' => '_self',
+        'button_color' => 'default'
+      ), $params);
+
+    $params['primary_color'] = Salamander::getData( 'primary_color' );
+    if( ! $params['bg_color']) {
+      $params['bg_color'] = Salamander::getData( 'tagline_bg' );
+    }
+
+    if( ! $params['border_color']) {
+      $params['border_color'] = Salamander::getData( 'tagline_border_color' );
+    }
+
+    if(!$params['button_color']) {
+      $params['button_color'] = 'default';
+    }
+
+    $params['class'] = '';
+    if($params['shadow'] == 'yes') {
+      $params['class'] = 'tagline-shadow';
+    }
+    $params['counter'] = $counter;
+    $counter++;
+
+    return Helper::render(VIEWS_PATH. 'shortcodes' . DS . 'tagline-box.php', $params);
+  }
+
 ////////////////////////////////////////////////////////////////////
 //// Pricing table
 ////////////////////////////////////////////////////////////////////
@@ -2971,16 +2970,16 @@ class Short_Codes {
 //
 //		if ( $products->have_posts() ) :
 
-	//woocommerce_product_loop_start();
+  //woocommerce_product_loop_start();
 
   //while ( $products->have_posts() ) : $products->the_post();
-	//woocommerce_get_template_part( 'content', 'product' );
+  //woocommerce_get_template_part( 'content', 'product' );
 
- //endwhile; // end of the loop.
+  //endwhile; // end of the loop.
 
-						 //woocommerce_product_loop_end();
+  //woocommerce_product_loop_end();
 
-					 //endif;
+  //endif;
 //
 //		wp_reset_postdata();
 //
@@ -3038,47 +3037,54 @@ class Short_Codes {
 
 
 
-	public function add_button()
-	{
-		if(strstr($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') || strstr($_SERVER['REQUEST_URI'], 'wp-admin/post.php')) {
+  public function add_button()
+  {
+    if(strstr($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') || strstr($_SERVER['REQUEST_URI'], 'wp-admin/post.php')) {
       if ( current_user_can('edit_posts') && current_user_can('edit_pages')) {
         add_filter('mce_buttons', array($this, 'register_button'));
         add_filter('mce_external_plugins', array($this, 'add_plugin'));
         add_action('edit_form_after_editor', array($this, 'short_codes_form'));
       }
-   	}
-	}
+    }
+  }
 
 
-	public function short_codes_form()
-	{
-		$params = array(
-    	'list' => array(
-				'vimeo' => 'Vimeo',
-				'map' => 'Google Map',
-				'youtube' => 'Youtube',
-				'soundcloud' => 'Sound Cloud',
-				'button' => 'Button',
-				'dropcap' => 'Dropcap',
-				'highlight' => 'Highlight',
-				'checklist' => 'Checklist',
-				'tabs' => 'Tabs',
-			),
+  public function short_codes_form()
+  {
+    $params = array(
+      'list' => array(
+        'vimeo' => 'Vimeo',
+        'map' => 'Google Map',
+        'youtube' => 'Youtube',
+        'soundcloud' => 'Sound Cloud',
+        'button' => 'Button',
+        'dropcap' => 'Dropcap',
+        'highlight' => 'Highlight',
+        'checklist' => 'Checklist',
+        'tabs' => 'Tabs',
+        'accordion' => 'Toggle accordion',
+        'one_half' => 'One half',
+        'one_third' => 'One third',
+        'one_fourth' => 'One fourth',
+        'two_third' => 'Two third',
+        'three_fourth' => 'Three fourth',
+        'tagline_box' => 'Tagline Box',
+      ),
     );
 
-		print Helper::render(VIEWS_PATH . 'admin' . DS . 'shortcodes_form.php', $params);
-	}
+    print Helper::render(VIEWS_PATH . 'admin' . DS . 'shortcodes_form.php', $params);
+  }
 
-	public function register_button( $buttons )
-	{
-	   array_push($buttons, 'ssc_button');
+  public function register_button( $buttons )
+  {
+    array_push($buttons, 'ssc_button');
 
-	   return $buttons;
-	}
+    return $buttons;
+  }
 
-	public function add_plugin( $plugin_array ) {
-	   $plugin_array['ssc_button'] = ASSETS_DIR . 'js/admin/shortcodes.js';
+  public function add_plugin( $plugin_array ) {
+    $plugin_array['ssc_button'] = ASSETS_DIR . 'js/admin/shortcodes.js';
 
-	   return $plugin_array;
-	}
+    return $plugin_array;
+  }
 }

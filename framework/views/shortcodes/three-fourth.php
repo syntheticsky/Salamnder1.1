@@ -1,0 +1,1 @@
+<div class="col-xs-16 col-sm-16 col-md-12"><?php echo $content; ?></div>

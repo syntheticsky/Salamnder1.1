@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
 	    jQuery(this).find('li:last').css({'width': lastItemSize +'px'});
 	});
 
-	jQuery('#sidebar .tabset').each(function() {
+	jQuery('#left-sidebar .tabset, #right-sidebar .tabset').each(function() {
 		var menuWidth = jQuery(this).width();
 	    var menuItems = jQuery(this).find('li').size();
 	    var itemWidth = (menuWidth/menuItems)-1;
@@ -182,15 +182,15 @@ jQuery(document).ready(function($) {
 	});
 
 	jQuery("h5.toggle").click(function(){
-		if(jQuery(this).parents('.accordian').length >=1){
-			var accordian = jQuery(this).parents('.accordian');
+		if(jQuery(this).parents('.accordion').length >=1){
+			var accordion = jQuery(this).parents('.accordion');
 
 			if(jQuery(this).hasClass('active')){
-				jQuery(accordian).find('h5.toggle').removeClass('active');
-				jQuery(accordian).find(".toggle-content").slideUp();
+				jQuery(accordion).find('h5.toggle').removeClass('active');
+				jQuery(accordion).find(".toggle-content").slideUp();
 			} else {
-				jQuery(accordian).find('h5.toggle').removeClass('active');
-				jQuery(accordian).find(".toggle-content").slideUp();
+				jQuery(accordion).find('h5.toggle').removeClass('active');
+				jQuery(accordion).find(".toggle-content").slideUp();
 
 				jQuery(this).addClass('active');
 				jQuery(this).next(".toggle-content").slideToggle();
@@ -207,7 +207,7 @@ jQuery(document).ready(function($) {
 	});
 
 	jQuery("h5.toggle").click(function(){
-		if(!jQuery(this).parents('.accordian').length >=1){
+		if(!jQuery(this).parents('.accordion').length >=1){
 			jQuery(this).next(".toggle-content").slideToggle();
 		}
 	});

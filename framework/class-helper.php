@@ -40,7 +40,7 @@ class Helper
 	  extract($params);
 	  // require $template;
     if (is_file($template))
-	    require_once $template;
+	    require $template;
 	}
 
   /**

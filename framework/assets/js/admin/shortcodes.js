@@ -103,9 +103,10 @@ jQuery(function($) {
     }
 
     function getShortCodeTemplate(type) {
+        console.log(type.replace('_', '-'))
         $.post(
             //global var viewsDir
-            viewsDir + 'admin/shortcodes/' + type + '.php',
+            viewsDir + 'admin/shortcodes/' + type.replace('_', '-') + '.php',
             {},
             function(data) {
                 $('#shortcode-data').replaceWith($(data).find('#shortcode-data'));

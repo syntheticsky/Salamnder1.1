@@ -1,1 +1,1 @@
-<div id="tab<?php echo $id; ?> class="tab tab_content"><?php echo $content; ?></div>
+<div id="tab<?php echo $id; ?>" class="tab tab_content"><?php echo $content; ?></div>
