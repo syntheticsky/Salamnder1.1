@@ -49,7 +49,16 @@ class Short_Codes {
     add_shortcode('three_fourth', array($this, 'shortcode_three_fourth'));
     // Tagline box shortcode
     add_shortcode('tagline_box', array($this, 'shortcode_tagline_box'));
-
+    // Pricing table
+    add_shortcode('pricing_table', array($this, 'shortcode_pricing_table'));
+    // Pricing Column
+    add_shortcode('pricing_column', array($this, 'shortcode_pricing_column'));
+    // Pricing price
+    add_shortcode('pricing_price', array($this, 'shortcode_pricing_price'));
+    // Pricing Row
+    add_shortcode('pricing_row', array($this, 'shortcode_pricing_row'));
+    // Pricing Footer
+    add_shortcode('pricing_footer', array($this, 'shortcode_pricing_footer'));
 
     // Add buttons to tinyMCE
     add_action ( 'init', array( $this, 'add_Button' ) );
@@ -439,133 +448,114 @@ class Short_Codes {
     return Helper::render(VIEWS_PATH. 'shortcodes' . DS . 'tagline-box.php', $params);
   }
 
-////////////////////////////////////////////////////////////////////
-//// Pricing table
-////////////////////////////////////////////////////////////////////
-//add_shortcode('pricing_table', 'shortcode_pricing_table');
-//	function shortcode_pricing_table($atts, $content = null) {
-//		global $data;
-//
-//		extract(shortcode_atts(array(
-//			'backgroundcolor' => '',
-//			'bordercolor' => '',
-//			'dividercolor' => ''
-//		), $atts));
-//
-//		static $avada_pricing_table_counter = 1;
-//
-//		if(!$backgroundcolor) {
-//			$backgroundcolor = $data['pricing_bg_color'];
-//		}
-//
-//		if(!$bordercolor) {
-//			$bordercolor = $data['pricing_border_color'];
-//		}
-//
-//		if(!$dividercolor) {
-//			$dividercolor = $data['pricing_divider_color'];
-//		}
-//
-//		$str = "<style type='text/css'>
-//		#pricing-table-{$avada_pricing_table_counter}.full-boxed-pricing{background-color:{$bordercolor} !important;}
-//		#pricing-table-{$avada_pricing_table_counter} .column{background-color:{$backgroundcolor} !important;border-color:{$dividercolor} !important;}
-//		#pricing-table-{$avada_pricing_table_counter}.sep-boxed-pricing .column{background-color:{$bordercolor} !important;}
-//		#pricing-table-{$avada_pricing_table_counter} .column li{border-color:{$dividercolor} !important;}
-//		#pricing-table-{$avada_pricing_table_counter} li.normal-row{background-color:{$backgroundcolor} !important;}
-//		#pricing-table-{$avada_pricing_table_counter}.full-boxed-pricing li.title-row{background-color:{$backgroundcolor} !important;}
-//		#pricing-table-{$avada_pricing_table_counter} li.pricing-row,#pricing-table-{$avada_pricing_table_counter} li.footer-row{background-color:{$bordercolor} !important;}
-//		</style>";
-//
-//		if($atts['type'] == '2') {
-//			$type = 'sep';
-//		} elseif($atts['type'] == '1') {
-//			$type = 'full';
-//		} else {
-//			$type = 'third';
-//		}
-//		$str .= '<div id="pricing-table-'.$avada_pricing_table_counter.'" class="'.$type.'-boxed-pricing">';
-//		$str .= do_shortcode($content);
-//		$str .= '</div><div class="clear"></div>';
-//
-//		$avada_pricing_table_counter++;
-//
-//		return $str;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Pricing Column
-////////////////////////////////////////////////////////////////////
-//add_shortcode('pricing_column', 'shortcode_pricing_column');
-//	function shortcode_pricing_column($atts, $content = null) {
-//		$str = '<div class="column">';
-//		$str .= '<ul>';
-//		if($atts['title']):
-//			$str .= '<li class="title-row">'.$atts['title'].'</li>';
-//		endif;
-//		$str .= do_shortcode($content);
-//		$str .= '</ul>';
-//		$str .= '</div>';
-//
-//		return $str;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Pricing Row
-////////////////////////////////////////////////////////////////////
-//add_shortcode('pricing_price', 'shortcode_pricing_price');
-//	function shortcode_pricing_price($atts, $content = null) {
-//		$str = '';
-//		$str .= '<li class="pricing-row">';
-//		if(isset($atts['currency']) && !empty($atts['currency']) && isset($atts['price']) && !empty($atts['price'])) {
-//			$class = '';
-//			$price = explode('.', $atts['price']);
-//			if($price[1]){
-//				$class .= 'price-with-decimal';
-//			}
-//			$str .= '<div class="price '.$class.'">';
-//			$str .= '<strong>'.$atts['currency'].'</strong>';
-//			$str .= '<em class="exact_price">'.$price[0].'</em>';
-//			if($price[1]){
-//				$str .= '<sup>'.$price[1].'</sup>';
-//			}
-//			if($atts['time']) {
-//				$str .= '<em class="time">'.$atts['time'].'</em>';
-//			}
-//			$str .= '</div>';
-//		} else {
-//			$str .= do_shortcode($content);
-//		}
-//		$str .= '</li>';
-//
-//		return $str;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Pricing Row
-////////////////////////////////////////////////////////////////////
-//add_shortcode('pricing_row', 'shortcode_pricing_row');
-//	function shortcode_pricing_row($atts, $content = null) {
-//		$str = '';
-//		$str .= '<li class="normal-row">';
-//		$str .= do_shortcode($content);
-//		$str .= '</li>';
-//
-//		return $str;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Pricing Footer
-////////////////////////////////////////////////////////////////////
-//add_shortcode('pricing_footer', 'shortcode_pricing_footer');
-//	function shortcode_pricing_footer($atts, $content = null) {
-//		$str = '';
-//		$str .= '<li class="footer-row">';
-//		$str .= do_shortcode($content);
-//		$str .= '</li>';
-//
-//		return $str;
-//	}
-//
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Pricing table short code
+   * [pricing_table type="e.g. 1 or 2" backgroundcolor="" bordercolor="" dividercolor=""][pricing_column title="Standard"][pricing_price currency="$" price="15.55" time="monthly"][/pricing_price][pricing_row]Feature 1[/pricing_row][pricing_footer]Signup[/pricing_footer][/pricing_column][/pricing_table]
+   */
+	function shortcode_pricing_table($params, $content = null) {
+    static $counter = 1;
+		$params = shortcode_atts(
+      array(
+        'bg_color' => '',
+        'border_color' => '',
+        'divider_color' => '',
+        'content' => do_shortcode($content),
+      ), $params);
+
+    if ( !$params['bg_color'] ) {
+      $params['bg_color'] = Salamander::getData ( 'pricing_bg_color' );
+    }
+
+    if ( !$params['border_color'] ) {
+      $params['border_color'] = Salamander::getData ( 'pricing_border_color' );
+    }
+
+    if ( !$params['divider_color'] ) {
+      $params['divider_color'] = Salamander::getData ( 'pricing_divider_color' );
+    }
+
+    $params['type'] = 'third';
+    if($params['type'] == '2') {
+      $params['type'] = 'sep';
+    } elseif($params['type'] == '1') {
+      $params['type'] = 'full';
+    }
+
+    $params['counter'] = $counter;
+		$counter++;
+
+		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-table.php', $params);
+	}
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Pricing Column
+   */
+	public function shortcode_pricing_column($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'title' => '',
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-column.php', $params);
+	}
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Pricing price
+   */
+	function shortcode_pricing_price($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'currency' => '',
+        'price' => '',
+        'time' => '',
+        'content' => do_shortcode($content),
+      ), $params);
+
+    if(!empty($params['currency']) && !empty($params['price'])) {
+      $params['class'] = '';
+      $params['price'] = explode('.', $params['price']);
+      if($params['price'][1]){
+        $params['class'] .= 'price-with-decimal';
+      }
+    }
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-price.php', $params);
+	}
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Pricing Row
+   */
+	public function shortcode_pricing_row($params, $content = null) {
+		$params['content'] = do_shortcode($content);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-row.php', $params);
+	}
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Pricing Footer
+   */
+	public function shortcode_pricing_footer($params, $content = null) {
+    $params['content'] = do_shortcode($content);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-footer.php', $params);
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Content box shortcode
 ////////////////////////////////////////////////////////////////////
@@ -3069,6 +3059,7 @@ class Short_Codes {
         'two_third' => 'Two third',
         'three_fourth' => 'Three fourth',
         'tagline_box' => 'Tagline Box',
+        'pricing_table' => 'Pricing Table',
       ),
     );
 
