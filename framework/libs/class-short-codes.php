@@ -328,6 +328,7 @@ class Short_Codes {
   public function shortcode_one_half($params, $content = null) {
     $params = shortcode_atts(
       array(
+        'last' => 'no',
         'content' => do_shortcode($content),
       ), $params);
 
@@ -344,6 +345,7 @@ class Short_Codes {
   public function shortcode_one_third($params, $content = null) {
     $params = shortcode_atts(
       array(
+        'last="no',
         'content' => do_shortcode($content),
       ), $params);
 
@@ -360,6 +362,7 @@ class Short_Codes {
   public function shortcode_two_third($params, $content = null) {
     $params = shortcode_atts(
       array(
+        'last' => 'no',
         'content' => do_shortcode($content),
       ), $params);
 
@@ -376,6 +379,7 @@ class Short_Codes {
   public function shortcode_one_fourth($params, $content = null) {
     $params = shortcode_atts(
       array(
+        'last' => 'no',
         'content' => do_shortcode($content),
       ), $params);
 
@@ -392,6 +396,7 @@ class Short_Codes {
   public function shortcode_three_fourth($params, $content = null) {
     $params = shortcode_atts(
       array(
+        'last' => 'no',
         'content' => do_shortcode($content),
       ), $params);
 
