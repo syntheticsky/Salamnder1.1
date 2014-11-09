@@ -59,6 +59,10 @@ class Short_Codes {
     add_shortcode('pricing_row', array($this, 'shortcode_pricing_row'));
     // Pricing Footer
     add_shortcode('pricing_footer', array($this, 'shortcode_pricing_footer'));
+    // Content box shortcode
+    add_shortcode('content_boxes', array($this, 'shortcode_content_boxes'));
+    // Content box shortcode
+    add_shortcode('content_box', array($this, 'shortcode_content_box'));
 
     // Add buttons to tinyMCE
     add_action ( 'init', array( $this, 'add_Button' ) );
@@ -561,101 +565,62 @@ class Short_Codes {
     return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-footer.php', $params);
 	}
 
-////////////////////////////////////////////////////////////////////
-//// Content box shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('content_boxes', 'shortcode_content_boxes');
-//	function shortcode_content_boxes($atts, $content = null) {
-//		global $data;
-//
-//		extract(shortcode_atts(array(
-//			'layout' => 'icon-with-title',
-//			'iconcolor' => '',
-//			'circlecolor' => '',
-//			'circlebordercolor' => '',
-//			'backgroundcolor' => ''
-//		), $atts));
-//
-//		static $avada_content_box_counter = 1;
-//
-//		if(!$iconcolor) {
-//			$iconcolor = $data['icon_color'];
-//		}
-//
-//		if(!$circlecolor) {
-//			$circlecolor = $data['icon_circle_color'];
-//		}
-//
-//		if(!$circlebordercolor) {
-//			$circlebordercolor = $data['icon_border_color'];
-//		}
-//
-//		if(!$backgroundcolor) {
-//			$backgroundcolor = $data['content_box_bg_color'];
-//		}
-//
-//		$str = "<style type='text/css'>
-//		#content-boxes-{$avada_content_box_counter} article.col{background-color:{$backgroundcolor} !important;}
-//		#content-boxes-{$avada_content_box_counter} .fontawesome-icon.circle-yes{color:{$iconcolor} !important;background-color:{$circlecolor} !important;border:1px solid {$circlebordercolor} !important;}
-//		</style>";
-//		$str .= '<section class="clearfix columns content-boxes content-boxes-'.$layout.'" id="content-boxes-'.$avada_content_box_counter.'">';
-//		$str .= do_shortcode($content);
-//		$str .= '</section>';
-//
-//		$avada_content_box_counter++;
-//
-//		return $str;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Content box shortcode
-////////////////////////////////////////////////////////////////////
-//add_shortcode('content_box', 'shortcode_content_box');
-//	function shortcode_content_box($atts, $content = null) {
-//		extract(shortcode_atts(array(
-//			'linktarget' => '_self',
-//		), $atts));
-//
-//		$str = '';
-//		if(!empty($atts['last']) && $atts['last'] == 'yes'):
-//			$str .= '<article class="col last">';
-//		else:
-//			$str .= '<article class="col">';
-//		endif;
-//
-//		if((isset($atts['image']) && $atts['image']) || (isset($atts['title']) && $atts['title'])):
-//			if(!empty($atts['image']) || !empty($atts['icon'])){
-//				$str .=	'<div class="heading heading-and-icon">';
-//			} else {
-//				$str .=	'<div class="heading">';
-//			}
-//			if(isset($atts['image']) && $atts['image']):
-//				$str .= '<img src="'.$atts['image'].'" width="35" height="35" alt="">';
-//			endif;
-//			if(!empty($atts['icon']) && $atts['icon']):
-//				$str .= '<i class="fontawesome-icon medium circle-yes icon-'.$atts['icon'].'"></i>';
-//			endif;
-//			if($atts['title']):
-//				$str .= '<h2>'.$atts['title'].'</h2>';
-//			endif;
-//			$str .= '</div>';
-//		endif;
-//
-//		$str .= '<div class="col-content-container">';
-//
-//		$str .= do_shortcode($content);
-//
-//		if(isset($atts['link']) && $atts['link'] && isset($atts['linktext']) && $atts['linktext']):
-//			$str .= '<span class="more"><a href="'.$atts['link'].'" target="'.$linktarget.'">'.$atts['linktext'].'</a></span>';
-//		endif;
-//
-//		$str .= '</div>';
-//
-//		$str .= '</article>';
-//
-//		return $str;
-//	}
-//
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Content box shortcode
+   */
+	function shortcode_content_boxes($params, $content = null) {
+    static $counter = 1;
+    $params = shortcode_atts(
+      array(
+			'layout' => 'icon-with-title',
+			'icon_color' => '',
+			'circle_color' => '',
+			'circle_border_color' => '',
+			'bg_color' => '',
+      'content' => do_shortcode($content),
+		), $params);
+
+		if(!$params['icon_color']) {
+			$params['icon_color'] = Salamander::getData( 'icon_color' );
+		}
+
+		if(!$params['circle_color']) {
+      $params['circle_color'] = Salamander::getData( 'icon_circle_color' );
+		}
+
+		if(!$params['circle_border_color']) {
+      $params['circle_border_color'] = Salamander::getData( 'icon_border_color' );
+		}
+
+		if(!$params['bg_color']) {
+      $params['bg_color'] = Salamander::getData( 'content_box_bg_color' );
+		}
+    $params['counter'] = $counter;
+		$counter++;
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'content-boxes.php', $params);
+	}
+
+	function shortcode_content_box($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'last' => 'no',
+        'title' => '',
+        'icon' => '',
+        'image' => '',
+        'link_target' => '_self',
+        'link_text' => '',
+        'link' => '',
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'content-box.php', $params);
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Slider
 ////////////////////////////////////////////////////////////////////
@@ -3065,6 +3030,7 @@ class Short_Codes {
         'three_fourth' => 'Three fourth',
         'tagline_box' => 'Tagline Box',
         'pricing_table' => 'Pricing Table',
+        'content_boxes' => 'Content boxes',
       ),
     );
 
