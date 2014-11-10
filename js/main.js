@@ -180,6 +180,23 @@ jQuery(document).ready(function($) {
 			jQuery(this).hide();
 		}
 	});
+    //!!!!!!!!!!!!!!!!!!
+    //DELETE this AFTER RESLOVING javascripts.php
+    function onAfter(curr, next, opts, fwd) {
+        var $ht = jQuery(this).height();
+
+        //set the container's height to that of the current slide
+        $(this).parent().css('height', $ht);
+    }
+
+    if(jQuery().cycle) {
+        jQuery('.reviews').cycle({
+            fx: 'fade',
+            after: onAfter,
+            timeout: 800
+      });
+    }
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	jQuery("h5.toggle").click(function(){
 		if(jQuery(this).parents('.accordion').length >=1){
