@@ -63,6 +63,10 @@ class Short_Codes {
     add_shortcode('content_boxes', array($this, 'shortcode_content_boxes'));
     // Content box shortcode
     add_shortcode('content_box', array($this, 'shortcode_content_box'));
+    // Testimonials
+    add_shortcode('testimonials', array($this, 'shortcode_testimonials'));
+    // Testimonial
+    add_shortcode('testimonial', array($this, 'shortcode_testimonial'));
 
     // Add buttons to tinyMCE
     add_action ( 'init', array( $this, 'add_Button' ) );
@@ -680,83 +684,63 @@ class Short_Codes {
 //		return $str;
 //	}
 //
-////////////////////////////////////////////////////////////////////
-//// Testimonials
-////////////////////////////////////////////////////////////////////
-//add_shortcode('testimonials', 'shortcode_testimonials');
-//	function shortcode_testimonials($atts, $content = null) {
-//		global $data;
-//
-//		wp_enqueue_script( 'jquery.cycle' );
-//
-//		extract(shortcode_atts(array(
-//			'backgroundcolor' => '',
-//			'textcolor' => ''
-//		), $atts));
-//
-//		static $avada_testimonials_id = 1;
-//
-//		if(!$backgroundcolor) {
-//			$backgroundcolor = $data['testimonial_bg_color'];
-//		}
-//
-//
-//		if(!$textcolor) {
-//			$textcolor = $data['testimonial_text_color'];
-//		}
-//
-//		$getRgb = avada_hex2rgb($stylecolor);
-//
-//		$str = "<style type='text/css'>
-//		#testimonials-{$avada_testimonials_id} q{background-color:{$backgroundcolor} !important;color:{$textcolor} !important;}
-//		#testimonials-{$avada_testimonials_id} .review blockquote div:after{border-top-color:{$backgroundcolor} !important;}
-//		</style>
-//		";
-//
-//		$str .= '<div id="testimonials-'.$avada_testimonials_id.'" class="reviews clearfix">';
-//		$str .= do_shortcode($content);
-//		$str .= '</div>';
-//
-//		$avada_testimonials_id++;
-//
-//		return $str;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// Testimonial
-////////////////////////////////////////////////////////////////////
-//add_shortcode('testimonial', 'shortcode_testimonial');
-//	function shortcode_testimonial($atts, $content = null) {
-//		if(!isset($atts['gender'])) {
-//			$atts['gender'] = 'male';
-//		}
-//		$str = '';
-//		$str .= '<div class="review '.$atts['gender'].'">';
-//		$str .= '<blockquote>';
-//		$str .= '<q>';
-//		$str .= do_shortcode($content);
-//		$str .= '</q>';
-//		if($atts['name']):
-//			$str .= '<div class="clearfix"><span class="company-name">';
-//			$str .= '<strong>'.$atts['name'].'</strong>,';
-//			if($atts['company']):
-//				if(!empty($atts['link']) && $atts['link']):
-//					$str .= '<a href="'.$atts['link'].'" target="'.$atts['target'].'">';
-//				endif;
-//				$str .= '<span> '.$atts['company'].'</span>';
-//				if(!empty($atts['link']) && $atts['link']):
-//					$str .= '</a>';
-//				endif;
-//			endif;
-//			$str .= '</span></div>';
-//		endif;
-//		$str .= '</blockquote>';
-//		$str .= '</div>';
-//
-//		return $str;
-//	}
-//
-//
+
+
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Testimonials
+   */
+	public function shortcode_testimonials($params, $content = null) {
+		global $data;
+
+		wp_enqueue_script( 'jquery.cycle' );
+
+    $params = shortcode_atts(
+      array(
+			'bg_color' => '',
+			'text_color' => '',
+      'style_color' => '',
+      'content' => do_shortcode($content),
+		), $params);
+
+		static $counter = 1;
+
+		if ( ! $params['bg_color'] ) {
+			$params['bg_color'] = Salamander::getData( 'testimonial_bg_color' );
+		}
+
+
+		if ( ! $params['text_color'] ) {
+			$params['text_color'] = Salamander::getData( 'testimonial_text_color' );
+		}
+
+//		$getRgb = Helper::hex2rgb($style_color);
+
+    $params['counter'] = $counter;
+		$counter++;
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'testimonials.php', $params);
+	}
+
+// Testimonial
+
+	public function shortcode_testimonial($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+        'company' => '',
+        'gender' => 'male',
+        'name' => '',
+        'link' => '',
+        'target' => '_blank',
+        'content' => do_shortcode($content),
+      ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'testimonial.php', $params);
+	}
+
+
 ////////////////////////////////////////////////////////////////////
 //// Progess Bar
 ////////////////////////////////////////////////////////////////////
@@ -3031,6 +3015,7 @@ class Short_Codes {
         'tagline_box' => 'Tagline Box',
         'pricing_table' => 'Pricing Table',
         'content_boxes' => 'Content boxes',
+        'testimonials' => 'Testimonials',
       ),
     );
 

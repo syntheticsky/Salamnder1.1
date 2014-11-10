@@ -546,6 +546,80 @@ h5.toggle.active + .toggle-content{
     padding-left:45px;
 }
 
+.review {
+    margin-bottom: 45px;
+}
+
+.review blockquote{
+    background:none !important;
+    border-left:none !important;
+    padding:0 !important;
+    margin:0 !important;
+}
+.review blockquote q{
+    display:block;
+    padding:25px 14px 24px 24px;
+    background:#f6f3f3;
+    font:13px/20px 'PTSansItalic', arial, helvetica, sans-serif;
+}
+.review blockquote q::before,.review blockquote q::after{
+    content:'';
+}
+.review blockquote q p:first-child::before{
+    content:open-quote;
+}
+.review blockquote q p:last-child::after{
+    content:close-quote;
+}
+.review blockquote div{
+    display:block;
+    padding:12px 0 0 2px;
+    color:#333;
+    font-style:normal !important;
+    position:relative;
+}
+.review blockquote div:after{
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.review blockquote div:after{
+    border-color: rgba(72, 71, 71, 0);
+    border-top-color: #f6f3f3;
+    border-width: 10px;
+    bottom:27px;
+    left:30px;
+}
+.review blockquote div strong{
+    padding:0;
+    font:13px/15px 'PTSansBold', arial, helvetica, sans-serif;
+    font-style:normal !important;
+}
+.review blockquote div span{
+    font-style:normal !important;
+}
+.review blockquote div{
+    float:left;
+    line-height:15px;
+}
+.review blockquote div .company-name{
+    padding-left:53px;
+    background:url(images/ico-user.png) no-repeat;
+    display:block;
+    min-height:29px;
+    padding-top:6px;
+    font-style:normal !important;
+}
+.review.male blockquote div .company-name{
+    background:url(images/ico-user.png) no-repeat;
+}
+.review.female blockquote div .company-name{
+    background:url(images/ico-user-girl.png) no-repeat;
+}
 
 
 
