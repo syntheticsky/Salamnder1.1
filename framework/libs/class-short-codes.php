@@ -6,76 +6,16 @@
 class Short_Codes {
   private $helper;
 
-  private $short_code_list;
+  private $shortCodesList;
 
   public function __construct() {
     $this->helper = Helper::get_instance ();
-    $this->short_code_list = array("youtube", "vimeo", "soundcloud", "button", "dropcap", "highlight", "checklist", "tabs", "tab", "accordion", "toggle", "one_half", "one_third", "one_fourth", "two_third", "three_fourth", "tagline_box", "pricing_table", "pricing_column", "pricing_price", "pricing_row", "pricing_footer", "content_boxes", "content_box", "slider", "slide", "testimonials", "testimonial", "progress", "person", "recent_posts", "recent_works", "alert", "fontawesome", "social_links", "clients", "client", "title", "separator", "tooltip", "fullwidth", "map", "counters_circle", "counter_circle", "counters_box", "counter_box", "flexslider", "blog", "imageframe", "images", "image", "sharing");
-    add_filter ( 'widget_text', 'do_shortcode' );
-    add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
-    add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
-    // Google Map
-    add_shortcode ( 'map', array($this, 'shortcode_gm') );
-    // Vimeo short code
-    add_shortcode ( 'vimeo', array($this, 'shortcode_vimeo') );
-    // YouTube short code
-    add_shortcode( 'youtube', array( $this, 'shortcode_youtube' ) );
-    //sound cloud short code
-    add_shortcode( 'soundcloud', array( $this, 'shortcode_soundcloud' ) );
-    // button short code
-    add_shortcode( 'button', array( $this, 'shortcode_button' ) );
-    // Dropcap short code
-    add_shortcode( 'dropcap', array( $this, 'shortcode_dropcap' ) );
-    //Highlight shortcode
-    add_shortcode( 'highlight', array( $this, 'shortcode_highlight' ) );
-    // Check list short code
-    add_shortcode ( 'checklist', array($this, 'shortcode_checklist') );
-    // Tabs shortcode
-    add_shortcode ( 'tabs', array($this, 'shortcode_tabs') );
-    add_shortcode ( 'tab', array($this, 'shortcode_tab') );
-    // Accordion
-    add_shortcode ( 'accordion', array($this, 'shortcode_accordion') );
-    // Toggle shortcode
-    add_shortcode ( 'toggle', array($this, 'shortcode_toggle') );
-    // Column one_half shortcode
-    add_shortcode ( 'one_half', array($this, 'shortcode_one_half') );
-    // Column one_third shortcode
-    add_shortcode ( 'one_third', array($this, 'shortcode_one_third') );
-    // Column two_third shortcode
-    add_shortcode ( 'two_third', array($this, 'shortcode_two_third') );
-    // Column one_fourth shortcode
-    add_shortcode ( 'one_fourth', array($this, 'shortcode_one_fourth') );
-    // Column three_fourth shortcode
-    add_shortcode ( 'three_fourth', array($this, 'shortcode_three_fourth') );
-    // Tagline box shortcode
-    add_shortcode ( 'tagline_box', array($this, 'shortcode_tagline_box') );
-    // Pricing table
-    add_shortcode ( 'pricing_table', array($this, 'shortcode_pricing_table') );
-    // Pricing Column
-    add_shortcode ( 'pricing_column', array($this, 'shortcode_pricing_column') );
-    // Pricing price
-    add_shortcode ( 'pricing_price', array($this, 'shortcode_pricing_price') );
-    // Pricing Row
-    add_shortcode ( 'pricing_row', array($this, 'shortcode_pricing_row') );
-    // Pricing Footer
-    add_shortcode( 'pricing_footer', array($this, 'shortcode_pricing_footer') );
-    // Content box shortcode
-    add_shortcode( 'content_boxes', array($this, 'shortcode_content_boxes') );
-    // Content box shortcode
-    add_shortcode( 'content_box', array($this, 'shortcode_content_box') );
-    // Testimonials
-    add_shortcode( 'testimonials', array($this, 'shortcode_testimonials') );
-    // Testimonial
-    add_shortcode( 'testimonial', array($this, 'shortcode_testimonial') );
-    // Progess Bar
-    add_shortcode( 'progress', array($this, 'shortcode_progress') );
-
-    // Add buttons to tinyMCE
-    add_action ( 'init', array( $this, 'add_Button' ) );
+    $this->shortCodesList = $this->getShortCodesList();
+    $this->initShortCodes();
   }
 
   public function shortcodes_formatter( $content ) {
-    $block = join ( "|", $this->short_code_list );
+    $block = join ( "|", $this->shortCodesList );
     // opening tag
     $rep = preg_replace ( "/(<p>|<pre>)?\[($block)(\s[^\]]+)?\](<\/p>|<br \/>|<\/pre>)?/", "[$2$3]", $content );
     // closing tag
@@ -733,58 +673,29 @@ class Short_Codes {
     return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'progress-bar.php', $params);
 	}
 
-////////////////////////////////////////////////////////////////////
-//// Person
-////////////////////////////////////////////////////////////////////
-//add_shortcode('person', 'shortcode_person');
-//	function shortcode_person($atts, $content = null) {
-//		$html = '';
-//		$html .= '<div class="person">';
-//		if($atts['picture']):
-//			$html .= '<img class="person-img" src="' . $atts['picture'] . '" alt="' . $atts['name'] . '" />';
-//		endif;
-//		if($atts['name'] || $atts['title'] || $atts['facebooklink'] || $atts['twitterlink'] || $atts['linkedinlink'] || $content) {
-//			$html .= '<div class="person-desc">';
-//			$html .= '<div class="person-author clearfix">';
-//			$html .= '<div class="person-author-wrapper"><span class="person-name">' . $atts['name'] . '</span>';
-//			$html .= '<span class="person-title">' . $atts['title'] . '</span></div>';
-//			if($atts['facebook']) {
-//				$html .= '<span class="social-icon"><a href="' . $atts['facebook'] . '" target="'.$atts['linktarget'].'" class="facebook">Facebook</a><div class="popup">
-//						<div class="holder">
-//							<p>Facebook</p>
-//						</div>
-//					</div></span>';
-//			}
-//			if($atts['twitter']) {
-//				$html .= '<span class="social-icon"><a href="' . $atts['twitter'] . '" target="'.$atts['linktarget'].'" class="twitter">Twitter</a><div class="popup">
-//						<div class="holder">
-//							<p>Twitter</p>
-//						</div>
-//					</div></span>';
-//			}
-//			if($atts['linkedin']) {
-//				$html .= '<span class="social-icon"><a href="' . $atts['linkedin'] . '" target="'.$atts['linktarget'].'" class="linkedin">LinkedIn</a><div class="popup">
-//						<div class="holder">
-//							<p>LinkedIn</p>
-//						</div>
-//					</div></span>';
-//			}
-//			if($atts['dribbble']) {
-//				$html .= '<span class="social-icon"><a href="' . $atts['dribbble'] . '" target="'.$atts['linktarget'].'" class="dribbble">Dribbble</a><div class="popup">
-//						<div class="holder">
-//							<p>Dribbble</p>
-//						</div>
-//					</div></span>';
-//			}
-//			$html .= '<div class="clear"></div></div>';
-//			$html .= '<div class="person-content">' . do_shortcode($content) . '</div>';
-//			$html .= '</div>';
-//		}
-//		$html .= '</div>';
-//
-//		return $html;
-//	}
-//
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Person
+   */
+	function shortcode_person($params, $content = null) {
+    $params = shortcode_atts(
+      array(
+      'name' => '',
+      'title' => '',
+      'picture' => '',
+      'link_target' => '_blank',
+      'facebook_link' => '',
+      'twitter_link' => '',
+      'linkedin_link' => '',
+      'dribbble_link' => '',
+      'content' => do_shortcode($content),
+    ), $params);
+
+    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'person.php', $params);
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Recent Posts
 ////////////////////////////////////////////////////////////////////
@@ -2976,6 +2887,7 @@ class Short_Codes {
         'content_boxes' => 'Content boxes',
         'testimonials' => 'Testimonials',
         'progress' => 'Progress Bar',
+        'person' => 'Person',
       ),
     );
 
@@ -2989,9 +2901,134 @@ class Short_Codes {
     return $buttons;
   }
 
-  public function add_plugin( $plugin_array ) {
+  public function add_plugin( $plugin_array )
+  {
     $plugin_array['ssc_button'] = ASSETS_DIR . 'js/admin/shortcodes.js';
 
     return $plugin_array;
+  }
+
+  private function initShortCodes()
+  {
+    add_filter ( 'widget_text', 'do_shortcode' );
+    add_filter ( 'the_content', array($this, 'shortcodes_formatter') );
+    add_filter ( 'widget_text', array($this, 'shortcodes_formatter') );
+    // Google Map
+    add_shortcode ( 'map', array($this, 'shortcode_gm') );
+    // Vimeo short code
+    add_shortcode ( 'vimeo', array($this, 'shortcode_vimeo') );
+    // YouTube short code
+    add_shortcode( 'youtube', array( $this, 'shortcode_youtube' ) );
+    //sound cloud short code
+    add_shortcode( 'soundcloud', array( $this, 'shortcode_soundcloud' ) );
+    // button short code
+    add_shortcode( 'button', array( $this, 'shortcode_button' ) );
+    // Dropcap short code
+    add_shortcode( 'dropcap', array( $this, 'shortcode_dropcap' ) );
+    //Highlight shortcode
+    add_shortcode( 'highlight', array( $this, 'shortcode_highlight' ) );
+    // Check list short code
+    add_shortcode ( 'checklist', array($this, 'shortcode_checklist') );
+    // Tabs shortcode
+    add_shortcode ( 'tabs', array($this, 'shortcode_tabs') );
+    add_shortcode ( 'tab', array($this, 'shortcode_tab') );
+    // Accordion
+    add_shortcode ( 'accordion', array($this, 'shortcode_accordion') );
+    // Toggle shortcode
+    add_shortcode ( 'toggle', array($this, 'shortcode_toggle') );
+    // Column one_half shortcode
+    add_shortcode ( 'one_half', array($this, 'shortcode_one_half') );
+    // Column one_third shortcode
+    add_shortcode ( 'one_third', array($this, 'shortcode_one_third') );
+    // Column two_third shortcode
+    add_shortcode ( 'two_third', array($this, 'shortcode_two_third') );
+    // Column one_fourth shortcode
+    add_shortcode ( 'one_fourth', array($this, 'shortcode_one_fourth') );
+    // Column three_fourth shortcode
+    add_shortcode ( 'three_fourth', array($this, 'shortcode_three_fourth') );
+    // Tagline box shortcode
+    add_shortcode ( 'tagline_box', array($this, 'shortcode_tagline_box') );
+    // Pricing table
+    add_shortcode ( 'pricing_table', array($this, 'shortcode_pricing_table') );
+    // Pricing Column
+    add_shortcode ( 'pricing_column', array($this, 'shortcode_pricing_column') );
+    // Pricing price
+    add_shortcode ( 'pricing_price', array($this, 'shortcode_pricing_price') );
+    // Pricing Row
+    add_shortcode ( 'pricing_row', array($this, 'shortcode_pricing_row') );
+    // Pricing Footer
+    add_shortcode( 'pricing_footer', array($this, 'shortcode_pricing_footer') );
+    // Content box shortcode
+    add_shortcode( 'content_boxes', array($this, 'shortcode_content_boxes') );
+    // Content box shortcode
+    add_shortcode( 'content_box', array($this, 'shortcode_content_box') );
+    // Testimonials
+    add_shortcode( 'testimonials', array($this, 'shortcode_testimonials') );
+    // Testimonial
+    add_shortcode( 'testimonial', array($this, 'shortcode_testimonial') );
+    // Progess Bar
+    add_shortcode( 'progress', array($this, 'shortcode_progress') );
+    // Person
+    add_shortcode( 'person', array( $this, 'shortcode_person' ) );
+
+    // Add buttons to tinyMCE
+    add_action ( 'init', array( $this, 'add_Button' ) );
+  }
+
+  private function getShortCodesList()
+  {
+    return array(
+            'accordion',
+            'alert',
+            'blog',
+            'button',
+            'checklist',
+            'client',
+            'clients',
+            'content_box',
+            'content_boxes',
+            'counter_box',
+            'counter_circle',
+            'counters_box',
+            'counters_circle',
+            'dropcap',
+            'flexslider',
+            'fontawesome',
+            'fullwidth',
+            'highlight',
+            'image',
+            'imageframe',
+            'images',
+            'map',
+            'one_fourth',
+            'one_half',
+            'one_third',
+            'person',
+            'pricing_column',
+            'pricing_footer',
+            'pricing_price',
+            'pricing_row',
+            'pricing_table',
+            'progress',
+            'recent_posts',
+            'recent_works',
+            'separator',
+            'sharing',
+            'slide',
+            'slider',
+            'social_links',
+            'soundcloud',
+            'tabs', 'tab',
+            'tagline_box',
+            'testimonial',
+            'testimonials',
+            'three_fourth',
+            'title',
+            'toggle',
+            'tooltip',
+            'two_third',
+            'vimeo',
+            'youtube',
+          );
   }
 }

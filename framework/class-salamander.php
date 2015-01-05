@@ -6,6 +6,7 @@
 
 class Salamander {
 	public $init;
+  public $theme;
 	public $multiSidebars;
 	public $metaBoxes;
 	public $shortCodes;
@@ -16,8 +17,12 @@ class Salamander {
 
 
 	private function __construct() {
-		//SalamanderInit class defined in framwork folder
-    $this->init = Salamander_Init::get_instance( is_admin() );
+    //SalamanderInit class defined in framwork folder
+    $this->init = Salamander_Init::get_instance();
+
+    //Set theme data
+    $this->setData();
+
     //Init multipleSidebars
     //Register Custom Sidebars (widget zones)
 //    $this->multiSidebars = MultipleSidebars::getInstance();
@@ -42,72 +47,73 @@ class Salamander {
   public static function __callStatic( $method, $args ) {
     if ( $args ) {
       $cols = '';
-      if ( ! isset($args[1]) ) {
-        $args[1] = '';
-      }
+      if ( ! isset($args[1]) ) $args[1] = '';
       switch ( $method ) {
         case 'classes':
-          if ($args[0] == 'layout') {
-            return (self::getData( $args[0] ) == 'wide' ? 'container-fluid' : 'container');
-          }
-          if ( $args[0] == 'layout' ) {
-            return (self::getData( $args[0] ) == 'wide') ? $args[1] . '-fluid' : $args[1];
-          }
-          if ( $args[0] == 'blog_sidebar_position' ) {
-            //Left Sidebar
-            if ( $args[1] == 'left-sidebar' ) {
-              $cols = (self::getData( $args[0] ) == 'both') ? 'col-xs-16 col-sm-4 col-sm-pull-8 col-md-4 col-md-pull-8' : 'col-xs-16 col-sm-4 col-sm-pull-12 col-md-4 col-md-pull-12';
-            }
-            //Right Sidebar
-            if ( $args[1] == 'right-sidebar' ) {
-              $cols = (self::getData( $args[0] ) == 'both') ? 'col-xs-16 col-sm-4 col-md-4' : 'col-xs-16 col-sm-4 col-sm-4 col-md-4 col-md-4';
-            }
-            //content
-            if ( $args[1] == 'main-content' ) {
-              if ( self::getData( $args[0] ) == 'both' ) {
-                $cols = 'col-xs-16 col-sm-8 col-sm-push-4 col-md-8 col-md-push-4';
+          switch ($args[0]) {
+            case 'layout':
+              return (self::getData( $args[0] ) == 'wide' ? 'container-fluid' : 'container');
+              break;
+            case 'main-content':
+              return $args[1] . ' col-sm-12';
+              break;
+            case 'blog_sidebar_position':
+              //Left Sidebar
+              if ( $args[1] == 'left-sidebar' ) {
+                $cols = (self::getData( $args[0] ) == 'both') ? 'col-xs-12 col-sm-3 col-sm-pull-6 col-md-3 col-md-pull-6' : 'col-xs-12 col-sm-3 col-sm-pull-9 col-md-3 col-md-pull-9';
               }
-              if ( self::getData( $args[0] ) == 'left' ) {
-                $cols = 'col-xs-16 col-sm-12 col-sm-push-4 col-md-12 col-md-push-4';
+              //Right Sidebar
+              if ( $args[1] == 'right-sidebar' ) {
+                $cols = (self::getData( $args[0] ) == 'both') ? 'col-xs-12 col-sm-3 col-md-3' : 'col-xs-12 col-sm-3 col-sm-3 col-md-3 col-md-3';
               }
-              if ( self::getData( $args[0] ) == 'right' ) {
-                $cols = 'col-xs-16 col-sm-12 col-md-12';
-              }
-            }
-            return $args[1] . ' ' . $cols;
-          }
-          if ( $args[0] == 'footer_widgets' ) {
-            static $i = 0;
-            $columns = (int) self::getData( 'footer_widgets_columns' );
-            switch ( $columns ) {
-              case 1:
-                if ( $i < $columns )
-                  $cols = 'col-xs-16 col-sm-16 col-md-16';
-                else
-                  $cols = 'hidden';
-                break;
-              case 2:
-                if ( $i < $columns )
-                  $cols = 'col-xs-16 col-sm-16 col-md-8';
-                else
-                  $cols = 'hidden';
-                break;
-              case 3:
-                if ( $i < $columns ) {
-                  if ( $i == 1 )
-                    $cols = 'col-xs-16 col-sm-16 col-md-6';
-                  else
-                    $cols = 'col-xs-16 col-sm-16 col-md-5';
+              //content
+              if ( $args[1] == 'main-content' ) {
+                if ( self::getData( $args[0] ) == 'both' ) {
+                  $cols = 'col-xs-12 col-sm-6 col-sm-push-3 col-md-6 col-md-push-3';
                 }
-                else
-                  $cols = 'hidden';
-                break;
-              case 4:
-                $cols = 'col-xs-16 col-sm-16 col-md-4';
-                break;
-            }
-            $i++;
-            return $args[1] . ' ' . $cols;
+                if ( self::getData( $args[0] ) == 'left' ) {
+                  $cols = 'col-xs-12 col-sm-9 col-sm-push-3 col-md-9 col-md-push-3';
+                }
+                if ( self::getData( $args[0] ) == 'right' ) {
+                  $cols = 'col-xs-12 col-sm-9 col-md-9';
+                }
+              }
+              return $args[1] . ' ' . $cols;
+              break;
+            case 'footer_widgets':
+              static $i = 0;
+              $columns = (int) self::getData( 'footer_widgets_columns' );
+              switch ( $columns ) {
+                case 1:
+                  if ( $i < $columns )
+                    $cols = 'col-xs-12 col-sm-12 col-md-12';
+                  else
+                    $cols = 'hidden';
+                  break;
+                case 2:
+                  if ( $i < $columns )
+                    $cols = 'col-xs-12 col-sm-12 col-md-6';
+                  else
+                    $cols = 'hidden';
+                  break;
+                case 3:
+                  if ( $i < $columns ) {
+                    if ( $i == 1 )
+                      $cols = 'col-xs-12 col-sm-12 col-md-4';
+                  }
+                  else
+                    $cols = 'hidden';
+                  break;
+                case 4:
+                  $cols = 'col-xs-12 col-sm-12 col-md-3';
+                  break;
+              }
+              $i++;
+              return $args[1] . ' ' . $cols;
+              break;
+            default:
+              return $args[1];
+              break;
           }
           break;
         default:
@@ -116,7 +122,7 @@ class Salamander {
       }
     }
 
-    return '';
+    return false;
   }
 
 	public function registerNavMenus()

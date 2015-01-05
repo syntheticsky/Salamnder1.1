@@ -6,7 +6,7 @@
 class Salamander_Init
 {
   public $post;
-  public $pageNow;
+  public $theme;
 
   private static $instance;
   private $helper;
@@ -15,25 +15,23 @@ class Salamander_Init
   private $default_values;
   private $optionsMachine = array(); //default
 
-  private function __construct($is_admin) {
-    global $pagenow;
-    $this->pageNow = $pagenow;
+  private function __construct() {
 		//Define site constants
 		$this->defineConstants();
 		$this->helper = Helper::get_instance();
     $this->options = get_option(THEME_OPTIONS);
-    if ( $is_admin ) {
+    if ( is_admin() ) {
       $this->get_default_options();
       $this->parse_options($this->default_options);
     }
+    $this->initHooks();
 //		new Widgets();
 	}
 
-	public static function get_instance($is_admin = true)
+	public static function get_instance()
 	{
-	  if (self::$instance == null)
-	  {
-	    self::$instance = new self($is_admin);
+	  if (self::$instance == null) {
+	    self::$instance = new self();
 	  }
 
 	  return self::$instance;
@@ -41,31 +39,22 @@ class Salamander_Init
 
 	public function defineConstants()
 	{
-		if( function_exists('wp_get_theme'))
-		{
-			if(is_child_theme())
-			{
-				$temp_obj = wp_get_theme();
-				$theme_obj = wp_get_theme( $temp_obj->get('Template') );
-			}
-			else
-			{
-				$theme_obj = wp_get_theme();
-			}
+		if( function_exists('wp_get_theme') ) {
+		  $tmp_obj = wp_get_theme();
+		  $theme_obj = (is_child_theme() 
+		    ? $theme_obj = wp_get_theme( $tmp_obj->get('Template') ) 
+		    : $tmp_obj);
+		}
+		else {
+		  $theme_obj = (object) get_theme_data( TEMPLATEPATH . '/style.css' );
+		}
 
-			$theme_version = $theme_obj->get('Version');
-			$theme_name = $theme_obj->get('Name');
-			$theme_uri = $theme_obj->get('ThemeURI');
-			$author_uri = $theme_obj->get('AuthorURI');
-		}
-		else
-		{
-			$theme_data = get_theme_data( TEMPLATEPATH.'/style.css' );
-			$theme_version = $theme_data['Version'];
-			$theme_name = $theme_data['Name'];
-			$theme_uri = $theme_data['ThemeURI'];
-			$author_uri = $theme_data['AuthorURI'];
-		}
+		$this->theme = array(
+		  'version' => $theme_obj->Version,
+		  'name' => $theme_obj->Name,
+		  'uri' => $theme_obj->ThemeURI,
+		  'author_uri' => $theme_obj->AuthorURI,
+		);
 
 		define('DS', DIRECTORY_SEPARATOR);
 		define('SMOF_VERSION', '1.0');
@@ -83,15 +72,15 @@ class Salamander_Init
 		define('LIBS_PATH', TEMPLATEPATH . DS . 'framework' . DS . 'libs' . DS);
 		define('LIBS_DIR', TEMPLATE_DIR . '/framework/libs/');
 		define('LAYOUT_PATH', ADMIN_PATH . DS . 'layouts' . DS);
-		define('THEMENAME', $theme_name);
+		define('THEMENAME', $this->theme['name']);
 		define('SITE_URL', get_option('siteurl'));
 		/* Theme version, uri, and the author uri are not completely necessary, but may be helpful in adding functionality */
-		define('THEMEVERSION', $theme_version);
-		define('THEMEURI', $theme_uri);
-		define('THEMEAUTHORURI', $author_uri);
+		define('THEMEVERSION', $this->theme['version']);
+		define('THEMEURI', $this->theme['uri']);
+		define('THEMEAUTHORURI', $this->theme['author_uri']);
 
-		define('THEME_OPTIONS', strtolower($theme_name) . '_options');
-		define('THEME_OPTIONS_BACKUPS', strtolower($theme_name) . '_backups');
+		define('THEME_OPTIONS', strtolower($this->theme['name']) . '_options');
+		define('THEME_OPTIONS_BACKUPS', strtolower($this->theme['name']) . '_backups');
 	}
 
 	public function registerNavMenus()
@@ -286,7 +275,7 @@ class Salamander_Init
 	 *
 	 * @since 1.0.0
 	 */
-	function adminSetJs()
+	public function adminSetJs()
 	{
     print '<script type="text/javascript">
     				var templateDir = "' . TEMPLATE_DIR . '";
@@ -415,18 +404,15 @@ class Salamander_Init
 		}
 	}
 
-	public function stylesheets()
-	{
-		if ( ! is_admin() && ! in_array($this->pageNow, array('wp-login.php', 'wp-register.php' ) ) ) {
+	public function stylesheets() {
 //    	wp_deregister_style('normalize');
 //	    wp_register_style('normalize', TEMPLATE_DIR . '/css/normalize.css', array(), false, 'all');
 //	    wp_enqueue_style('normalize');
-    }
 	}
 
 	public function scripts() {
     global $post;
-    if (!is_admin() && !in_array($this->pageNow, array('wp-login.php', 'wp-register.php'))) {
+
     wp_reset_query();
 
     $slider_page_id = $post->ID;
@@ -538,7 +524,6 @@ class Salamander_Init
     wp_deregister_script( 'salamander' );
     wp_register_script( 'salamander', get_bloginfo('template_directory').'/js/main.js', array(), false, true);
     wp_enqueue_script( 'salamander' );
-    }
 	}
 
   public function setPostViews() {
@@ -595,7 +580,36 @@ class Salamander_Init
     <?php
   }
 
-  private function get_default_options() {
+  private function initHooks() 
+  {
+  	// Registe nav menus
+    add_action('init', array($this, 'registerNavMenus'));
+    // Register custom post types
+    add_action('init', array($this, 'registerPosts'));
+    //Register Basic Sidebars (widget zones)
+    add_action('init', array($this, 'registerSidebars'));
+
+    //Setup default options when theme enabled
+    global $pagenow;
+    if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == 'themes.php' ) {
+      add_action('admin_head', array($this, 'optionsSetup'));
+    }
+
+    add_action('admin_menu', array($this, 'initAdmin'));
+
+    add_action('wp_ajax_options_post_action', array($this, 'ajaxCallback'));
+
+    add_action('admin_head', array($this, 'adminSetJs'));
+
+    add_action('init', 'mediauploader_init');
+    if ( ! is_admin() && ! in_array( $pagenow, array('wp-login.php', 'wp-register.php' ) ) ) {
+      add_action('wp_enqueue_scripts', array($this, 'stylesheets'), 0, 1);
+      add_action('wp_enqueue_scripts', array($this, 'scripts'));
+    }
+  }
+
+  private function get_default_options() 
+  {
     $options = Yaml::parse(FRAMEWORK_PATH . 'options.yml');
 
     $this->default_options = ( is_array( $options ) &&  isset( $options['options'] ) )
@@ -603,7 +617,8 @@ class Salamander_Init
       : array();
   }
 
-  private function parse_options( $default_options ) {
+  private function parse_options( $default_options ) 
+  {
     if ( is_array($default_options) && !empty( $default_options )) {
        foreach ( $default_options as $values ) {
          foreach ( $values['children'] as $value ) {
