@@ -696,349 +696,62 @@ class Short_Codes {
     return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'person.php', $params);
 	}
 
-////////////////////////////////////////////////////////////////////
-//// Recent Posts
-////////////////////////////////////////////////////////////////////
-//add_shortcode('recent_posts', 'shortcode_recent_posts');
-//	function shortcode_recent_posts($atts, $content = null) {
-//		global $data;
-//
-//		wp_enqueue_script( 'jquery.flexslider' );
-//
-//		extract(shortcode_atts(array(
-//			'layout' => 'default',
-//			'columns' => 1,
-//			'number_posts' => 4,
-//			'exclude_cats' =>  ''
-//		), $atts));
-//
-//		if(!isset($atts['columns'])) {
-//			$atts['columns'] = 3;
-//		}
-//
-//		if(!isset($atts['excerpt_words'])) {
-//			$atts['excerpt_words'] = 15;
-//		}
-//
-//		if(!isset($atts['number_posts'])) {
-//			$atts['number_posts'] = 3;
-//		}
-//
-//		if(!isset($atts['strip_html'])) {
-//			$atts['strip_html'] = 'true';
-//		}
-//
-//		if($atts['strip_html'] == 'yes') {
-//			$atts['strip_html'] = 'true';
-//		} elseif($atts['strip_html'] == 'no') {
-//			$atts['strip_html'] = 'false';
-//		}
-//
-//		if(!empty($atts['cat_id']) && $atts['cat_id']){
-//			$query_atts['category_name'] = $atts['cat_id'];
-//		} elseif(!empty($atts['cat_slug']) && $atts['cat_slug']){
-//			$query_atts['category_name'] = $atts['cat_slug'];
-//		}
-//		$query_atts['posts_per_page'] = $atts['number_posts'];
-//
-//		if($exclude_cats) {
-//			$cats_to_exclude = explode(',', $exclude_cats);
-//			foreach($cats_to_exclude as $cat_to_exclude) {
-//				$idObj = get_category_by_slug($cat_to_exclude);
-//				if($idObj) {
-//					$cats_id_to_exclude[] = $idObj->term_id;
-//				}
-//			}
-//			if($cats_id_to_exclude) {
-//				$query_atts['category__not_in'] = $cats_id_to_exclude;
-//			}
-//		}
-//
-//		$recent_posts = new WP_Query($query_atts);
-//		if($layout == 'default'):
-//			$attachment = '';
-//			$html = '<div class="avada-container">';
-//			$html .= '<section class="columns columns-'.$atts['columns'].'" style="width:100%">';
-//			$html .= '<div class="holder">';
-//			$count = 1;
-//			while($recent_posts->have_posts()): $recent_posts->the_post();
-//				$html .= '<article class="col">';
-//				if($atts['thumbnail'] == "yes"):
-//					if($data['legacy_posts_slideshow']):
-//						$args = array(
-//							'post_type' => 'attachment',
-//							'numberposts' => $data['posts_slideshow_number']-1,
-//							'post_status' => null,
-//							'post_mime_type' => 'image',
-//							'post_parent' => get_the_ID(),
-//							'orderby' => 'menu_order',
-//							'order' => 'ASC',
-//							'exclude' => get_post_thumbnail_id()
-//						);
-//						$attachments = get_posts($args);
-//						if($attachments || has_post_thumbnail() || get_post_meta(get_the_ID(), 'pyre_video', true)):
-//							$html .= '<div class="flexslider floated-post-slideshow">';
-//							$html .= '<ul class="slides">';
-//							if(get_post_meta(get_the_ID(), 'pyre_video', true)):
-//								$html .= '<li class="full-video">';
-//								$html .= get_post_meta(get_the_ID(), 'pyre_video', true);
-//								$html .= '</li>';
-//							endif;
-//							if(has_post_thumbnail()):
-//								$attachment_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'recent-posts');
-//								$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-//								$attachment_data = wp_get_attachment_metadata(get_post_thumbnail_id());
-//								$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'.$attachment_image[0].'" alt="'.get_the_title().'" /></a>
-//				</li>';
-//							endif;
-//							if($data['posts_slideshow']):
-//								foreach($attachments as $attachment):
-//									$attachment_image = wp_get_attachment_image_src($attachment->ID, 'recent-posts');
-//									$full_image = wp_get_attachment_image_src($attachment->ID, 'full');
-//									$attachment_data = wp_get_attachment_metadata($attachment->ID);
-//									$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'. $attachment_image[0].'" alt="'.$attachment->post_title.'" /></a>
-//				</li>';
-//								endforeach;
-//							endif;
-//							$html .= '</ul>
-//		</div>';
-//						endif;
-//					else:
-//						if(has_post_thumbnail() || get_post_meta(get_the_ID(), 'pyre_video', true)):
-//							$html .= '<div class="flexslider floated-post-slideshow">';
-//							$html .= '<ul class="slides">';
-//							if(get_post_meta(get_the_ID(), 'pyre_video', true)):
-//								$html .= '<li class="full-video">';
-//								$html .= get_post_meta(get_the_ID(), 'pyre_video', true);
-//								$html .= '</li>';
-//							endif;
-//							if(has_post_thumbnail()):
-//								$attachment_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'recent-posts');
-//								$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-//								$attachment_data = wp_get_attachment_metadata(get_post_thumbnail_id());
-//								$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'.$attachment_image[0].'" alt="'.get_the_title().'" /></a>
-//				</li>';
-//							endif;
-//							if($data['posts_slideshow']):
-//								$i = 2;
-//								while($i <= $data['posts_slideshow_number']):
-//									$attachment_new_id = kd_mfi_get_featured_image_id('featured-image-'.$i, 'post');
-//									if($attachment_new_id):
-//										$attachment_image = wp_get_attachment_image_src($attachment_new_id, 'recent-posts');
-//										$full_image = wp_get_attachment_image_src($attachment_new_id, 'full');
-//										$attachment_data = wp_get_attachment_metadata($attachment_new_id);
-//										$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'. $attachment_image[0].'" alt="" /></a>
-//				</li>';
-//									endif; $i++; endwhile;
-//							endif;
-//							$html .= '</ul>
-//		</div>';
-//						endif;
-//					endif;
-//				endif;
-//				if($atts['title'] == "yes"):
-//					$html .= '<h4><a href="'.get_permalink(get_the_ID()).'">'.get_the_title().'</a></h4>';
-//				endif;
-//				if($atts['meta'] == "yes"):
-//					$html .= '<ul class="meta">';
-//					$html .= '<li><em class="date">'.get_the_time($data['date_format'], get_the_ID()).'</em></li>';
-//					if(get_comments_number(get_the_ID()) >= 1):
-//						$html .= '<li><a href="'.get_permalink(get_the_ID()).'">'.get_comments_number(get_the_ID()).' '.__('Comments', 'Avada').'</a></li>';
-//					endif;
-//					$html .= '</ul>';
-//				endif;
-//				if($atts['excerpt'] == "yes"):
-//					$stripped_content = tf_content( $atts['excerpt_words'], $atts['strip_html'] );
-//					$html .= '<p>'.$stripped_content.'</p>';
-//				endif;
-//				$html .= '</article>';
-//				$count++;
-//			endwhile;
-//			$html .= '</div>';
-//			$html .= '</section>';
-//			$html .= '</div>';
-//		elseif($layout == 'thumbnails-on-side'):
-//			$attachment = '';
-//			$html = '<div class="avada-container layout-'.$layout.' layout-columns-'.$columns.'">';
-//			$html .= '<section class="columns columns-'.$atts['columns'].'" style="width:100%">';
-//			$html .= '<div class="holder">';
-//			$count = 1;
-//			while($recent_posts->have_posts()): $recent_posts->the_post();
-//				$html .= '<article class="col clearfix">';
-//				if($atts['thumbnail'] == "yes"):
-//					if($data['legacy_posts_slideshow']):
-//						$args = array(
-//							'post_type' => 'attachment',
-//							'numberposts' => $data['posts_slideshow_number']-1,
-//							'post_status' => null,
-//							'post_mime_type' => 'image',
-//							'post_parent' => get_the_ID(),
-//							'orderby' => 'menu_order',
-//							'order' => 'ASC',
-//							'exclude' => get_post_thumbnail_id()
-//						);
-//						$attachments = get_posts($args);
-//						if($attachments || has_post_thumbnail() || get_post_meta(get_the_ID(), 'pyre_video', true)):
-//							$html .= '<div class="flexslider floated-post-slideshow">';
-//							$html .= '<ul class="slides">';
-//							if(get_post_meta(get_the_ID(), 'pyre_video', true)):
-//								$html .= '<li class="full-video">';
-//								$html .= get_post_meta(get_the_ID(), 'pyre_video', true);
-//								$html .= '</li>';
-//							endif;
-//							if(has_post_thumbnail()):
-//								$attachment_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'portfolio-two');
-//								$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-//								$attachment_data = wp_get_attachment_metadata(get_post_thumbnail_id());
-//								$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'.$attachment_image[0].'" alt="'.get_the_title().'" /></a>
-//				</li>';
-//							endif;
-//							if($data['posts_slideshow']):
-//								foreach($attachments as $attachment):
-//									$attachment_image = wp_get_attachment_image_src($attachment->ID, 'portfolio-two');
-//									$full_image = wp_get_attachment_image_src($attachment->ID, 'full');
-//									$attachment_data = wp_get_attachment_metadata($attachment->ID);
-//									$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'. $attachment_image[0].'" alt="'.$attachment->post_title.'" /></a>
-//				</li>';
-//								endforeach;
-//							endif;
-//							$html .= '</ul>
-//		</div>';
-//						endif;
-//					else:
-//						if(has_post_thumbnail() || get_post_meta(get_the_ID(), 'pyre_video', true)):
-//							$html .= '<div class="flexslider floated-post-slideshow">';
-//							$html .= '<ul class="slides">';
-//							if(get_post_meta(get_the_ID(), 'pyre_video', true)):
-//								$html .= '<li class="full-video">';
-//								$html .= get_post_meta(get_the_ID(), 'pyre_video', true);
-//								$html .= '</li>';
-//							endif;
-//							if(has_post_thumbnail()):
-//								$attachment_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'portfolio-two');
-//								$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-//								$attachment_data = wp_get_attachment_metadata(get_post_thumbnail_id());
-//								$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'.$attachment_image[0].'" alt="'.get_the_title().'" /></a>
-//				</li>';
-//							endif;
-//							if($data['posts_slideshow']):
-//								$i = 2;
-//								while($i <= $data['posts_slideshow_number']):
-//									$attachment_new_id = kd_mfi_get_featured_image_id('featured-image-'.$i, 'post');
-//									if($attachment_new_id):
-//										$attachment_image = wp_get_attachment_image_src($attachment_new_id, 'portfolio-two');
-//										$full_image = wp_get_attachment_image_src($attachment_new_id, 'full');
-//										$attachment_data = wp_get_attachment_metadata($attachment_new_id);
-//										$html .= '<li>
-//					<a href="'.get_permalink(get_the_ID()).'" rel=""><img src="'. $attachment_image[0].'" alt="" /></a>
-//				</li>';
-//									endif; $i++; endwhile;
-//							endif;
-//							$html .= '</ul>
-//		</div>';
-//						endif;
-//					endif;
-//				endif;
-//				$html .= '<div class="recent-posts-content">';
-//				if($atts['title'] == "yes"):
-//					$html .= '<h4><a href="'.get_permalink(get_the_ID()).'">'.get_the_title().'</a></h4>';
-//				endif;
-//				if($atts['meta'] == "yes"):
-//					$html .= '<ul class="meta">';
-//					$html .= '<li>'.get_the_time($data['date_format'], get_the_ID()).'</li>';
-//					if(get_comments_number(get_the_ID()) >= 1):
-//						$html .= '<li><a href="'.get_permalink(get_the_ID()).'">'.get_comments_number(get_the_ID()).' '.__('Comments', 'Avada').'</a></li>';
-//					endif;
-//					$html .= '</ul>';
-//				endif;
-//				if($atts['excerpt'] == "yes"):
-//					$stripped_content = tf_content( $atts['excerpt_words'], $atts['strip_html'] );
-//					$html .= $stripped_content;
-//				endif;
-//				$html .= '</div>';
-//				$html .= '</article>';
-//				$count++;
-//			endwhile;
-//			$html .= '</div>';
-//			$html .= '</section>';
-//			$html .= '</div>';
-//		elseif($layout == 'date-on-side'):
-//			$attachment = '';
-//			$html = '<div class="avada-container layout-'.$layout.' layout-columns-'.$columns.'">';
-//			$html .= '<section class="columns columns-'.$atts['columns'].'" style="width:100%">';
-//			$html .= '<div class="holder">';
-//			$count = 1;
-//			while($recent_posts->have_posts()): $recent_posts->the_post();
-//				$html .= '<article class="col clearfix">';
-//				$html .= '<div class="date-and-formats">
-//			<div class="date-box">
-//				<span class="date">'.get_the_time('j').'</span>
-//				<span class="month-year">'.get_the_time('m, Y').'</span>
-//			</div>';
-//				$html .= '<div class="format-box">';
-//				switch(get_post_format()) {
-//					case 'gallery':
-//						$format_class = 'camera-retro';
-//						break;
-//					case 'link':
-//						$format_class = 'link';
-//						break;
-//					case 'image':
-//						$format_class = 'picture';
-//						break;
-//					case 'quote':
-//						$format_class = 'quote-left';
-//						break;
-//					case 'video':
-//						$format_class = 'film';
-//						break;
-//					case 'audio':
-//						$format_class = 'headphones';
-//						break;
-//					case 'chat':
-//						$format_class = 'comments-alt';
-//						break;
-//					default:
-//						$format_class = 'book';
-//						break;
-//				}
-//				$html .= '<i class="icon-'.$format_class.'"></i>
-//			</div>
-//		</div>';
-//				$html .= '<div class="recent-posts-content">';
-//				if($atts['title'] == "yes"):
-//					$html .= '<h4><a href="'.get_permalink(get_the_ID()).'">'.get_the_title().'</a></h4>';
-//				endif;
-//				if($atts['meta'] == "yes"):
-//					$html .= '<ul class="meta">';
-//					$html .= '<li>'.get_the_time($data['date_format'], get_the_ID()).'</li>';
-//					if(get_comments_number(get_the_ID()) >= 1):
-//						$html .= '<li><a href="'.get_permalink(get_the_ID()).'">'.get_comments_number(get_the_ID()).' '.__('Comments', 'Avada').'</a></li>';
-//					endif;
-//					$html .= '</ul>';
-//				endif;
-//				if($atts['excerpt'] == "yes"):
-//					$stripped_content = tf_content( $atts['excerpt_words'], $atts['strip_html'] );
-//					$html .= $stripped_content;
-//				endif;
-//				$html .= '</div>';
-//				$html .= '</article>';
-//				$count++;
-//			endwhile;
-//			$html .= '</div>';
-//			$html .= '</section>';
-//			$html .= '</div>';
-//		endif;
-//
-//		return $html;
-//	}
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Recent Posts
+   */
+   function shortcode_recent_posts($params, $content = null) {
+		global $data;
+
+		wp_enqueue_script( 'jquery.flexslider' );
+
+		$params = shortcode_atts(
+			array(
+			'layout' => 'default',
+			'title' => 'yes',
+			'meta' => 'yes',
+			'columns' => 1,
+			'thumbnail' => 'yes',
+			'number_posts' => 4,
+			'exclude_cats' =>  '',
+			'excerpt' => 'yes',
+			'excerpt_words' => 15,
+			'strip_html' => true,
+
+		), $params);
+
+		if($params['strip_html'] == 'yes') {
+			$params['strip_html'] = true;
+		} elseif($params['strip_html'] == 'no') {
+			$params['strip_html'] = false;
+		}
+
+		if(!empty($params['cat_id']) && $params['cat_id']){
+			$query_atts['category_name'] = $params['cat_id'];
+		} elseif(!empty($params['cat_slug']) && $params['cat_slug']){
+			$query_atts['category_name'] = $params['cat_slug'];
+		}
+		$query_atts['posts_per_page'] = $params['number_posts'];
+
+		if($exclude_cats) {
+			$cats_to_exclude = explode(',', $exclude_cats);
+			foreach($cats_to_exclude as $cat_to_exclude) {
+				$idObj = get_category_by_slug( trim( $cat_to_exclude ) );
+				if($idObj) {
+					$cats_id_to_exclude[] = $idObj->term_id;
+				}
+			}
+			if($cats_id_to_exclude) {
+				$query_atts['category__not_in'] = $cats_id_to_exclude;
+			}
+		}
+
+		$params['recent_posts'] = new WP_Query($query_atts);
+
+		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'recent_posts.php', $params);
+	}
 //
 ////////////////////////////////////////////////////////////////////
 //// Recent Works
@@ -2888,6 +2601,7 @@ class Short_Codes {
         'testimonials' => 'Testimonials',
         'progress' => 'Progress Bar',
         'person' => 'Person',
+        'recent_posts' => 'Recent Posts',
       ),
     );
 
@@ -2970,6 +2684,8 @@ class Short_Codes {
     add_shortcode( 'progress', array($this, 'shortcode_progress') );
     // Person
     add_shortcode( 'person', array( $this, 'shortcode_person' ) );
+    // Recent Posts
+	add_shortcode( 'recent_posts', array( $this, 'shortcode_recent_posts' ) );
 
     // Add buttons to tinyMCE
     add_action ( 'init', array( $this, 'add_Button' ) );

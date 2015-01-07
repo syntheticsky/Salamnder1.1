@@ -7,63 +7,12 @@ error_reporting(-1);
 header('Content-Type: text/html; charset=utf-8');
 
 require_once 'framework' . DIRECTORY_SEPARATOR . 'libs' . DIRECTORY_SEPARATOR . 'Krumo' . DIRECTORY_SEPARATOR . 'krumo.php';
-/**
- * Define autoload function
- */
-function salamanderAutoload($class_name) {
-    //class directories
-    $directories = array(
-        'admin',
-        'framework',
-        // 'framework' . DIRECTORY_SEPARATOR . 'views',
-        'framework' . DIRECTORY_SEPARATOR . 'libs',
-        'framework' . DIRECTORY_SEPARATOR . 'libs' . DIRECTORY_SEPARATOR . 'Yaml',
-//        'framework' . DIRECTORY_SEPARATOR . 'widgets',
-//        'framework' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . 'kdMultipleFeaturedImages',
-    );
+require_once 'framework' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-    //for each directory
-    foreach ( $directories as $dir ) {
-      //see if the file exsists
-
-      $file_name = (false !== strpos($class_name, 'Yaml'))
-        ? $class_name . '.php'
-        : 'class-' . str_replace('_', '-', strtolower($class_name)) . '.php';
-
-      if( file_exists( get_template_directory() . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $file_name ) ) {
-        require_once( get_template_directory() . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $file_name );
-        return;
-      }
-    }
-}
-// Register autoload function
-spl_autoload_register('salamanderAutoload');
 //Init theme framework class
 $salamander = Salamander::get_instance();
-// Registe nav menus
-add_action('init', array($salamander, 'registerNavMenus'));
-// Register custom post types
-add_action('init', array($salamander, 'registerPosts'));
-//Register Basic Sidebars (widget zones)
-add_action('init', array($salamander, 'registerSidebars'));
-//Setup default options when theme enabled
-if ( is_admin() && isset( $_GET['activated'] ) && $pagenow == 'themes.php' ) {
-  add_action('admin_head', array($salamander->init, 'optionsSetup'));
-}
-$salamander->setData();
-
-add_action('admin_menu', array($salamander->init, 'initAdmin'));
 
 require_once LIBS_PATH . 'mediauploader.php'; ///////////////////////
-
-add_action('wp_ajax_options_post_action', array($salamander->init, 'ajaxCallback'));
-
-add_action('admin_head', array($salamander->init, 'adminSetJs'));
-
-add_action('init', 'mediauploader_init');
-
-add_action('wp_enqueue_scripts', array($salamander->init, 'stylesheets'), 0, 1);
-add_action('wp_enqueue_scripts', array($salamander->init, 'scripts'));
 
 ////set latest theme options to theme object
 //if (!is_admin())
