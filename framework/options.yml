@@ -80,6 +80,60 @@ options:
         id      : 'space_body'
         default : ''
         type    : 'textarea'
+#Site Layout
+  - name        : 'Site Layout'
+    children    :
+      - name    : 'Layout'
+        desc    : 'Select boxed or wide layout.'
+        id      : 'layout'
+        default : 'wide'
+        type    : 'select'
+        options : {wide : 'Wide', boxed : 'Boxed'}
+
+      - name    : 'Content and sidebar width'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Content and sidebar width</h3><p>These settings are used on pages with 1 sidebar. Total values must add up to 100.</p>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Content width'
+        desc    : 'Controls the width of the content area. In px or %, ex: 100% or 1170px.'
+        id      : 'content_width_1'
+        default : '77%'
+        type    : 'text'
+
+      - name    : 'Sidebar width'
+        desc    : 'Controls the width of the sidebar. In px or %, ex: 100% or 1170px.'
+        id      : 'sidebar_width'
+        default : '23%'
+        type    : 'text'
+
+      - name    : 'Content and two sidebars width'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">Content and two sidebars width</h3><p>These settings are used on pages with 1 sidebar. Total values must add up to 100.</p>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Content width'
+        desc    : 'Controls the width of the content area. In px or %, ex: 100% or 1170px.'
+        id      : 'content_width_2'
+        default : '58%'
+        type    : 'text'
+
+      - name    : 'Sidebar 1 width'
+        desc    : 'Controls the width of the sidebar 1. In px or %, ex: 100% or 1170px.'
+        id      : 'sidebar_1_width'
+        default : '21%'
+        type    : 'text'
+
+      - name    : 'Sidebar 2 width'
+        desc    : 'Controls the width of the sidebar 2. In px or %, ex: 100% or 1170px.'
+        id      : 'sidebar_2_width'
+        default : '21%'
+        type    : 'text'
+
 #Header options
   - name        : 'Header Options'
     children    :
@@ -749,57 +803,57 @@ options:
         default : 'light'
         type    : 'select'
         options : {light: 'Light', dark: 'Dark'}
-        
+
       - name    : 'Predefined Color Scheme'
         desc    : ''
         id      : 'color_scheme'
         default : 'Green'
         type    : 'select'
         options : {default: 'Default', red: 'Red', lighred: 'Light Red', blue: 'Blue', lightblue: 'Light Blue', green: 'Green', darkgreen: 'Dark Green', orange: 'Orange', pink: 'Pink', brown: 'Brown', lightgrey: 'Light Grey'}
-        
+
       - name    : 'Custom Color Scheme'
         desc    : ''
         id      : ''
         default : '<h3 style="margin: 0;">Background Colors</h3>'
         icon    : true
         type    : 'info'
-        
+
       - name    : 'Primary Color'
         desc    : ''
         id      : 'primary_color'
         default : '#a0ce4e'
         type    : 'color'
-        
+
       - name    : 'Header Background Color'
         desc    : ''
         id      : 'header_bg_color'
         default : '#ffffff'
         type    : 'color'
-        
+
       - name    : 'Header Border Color'
         desc    : ''
         id      : 'header_border_color'
         default : '#e1e1e1'
         type    : 'color'
-        
+
       - name    : 'Header Top Background Color'
         desc    : ''
         id      : 'header_top_bg_color'
         default : '#a0ce4e'
         type    : 'color'
-        
+
       - name    :  'Content Background Color'
         desc    : ''
         id      : 'content_bg_color'
         default : '#ffffff'
         type    : 'color'
-        
+
       - name    : 'Footer Background Color'
         desc    : ''
         id      : 'footer_bg_color'
         default : '#363839'
         type    : 'color'
-        
+
       - name    : 'Footer Border Color'
         desc    : ''
         id      : 'footer_border_color'
@@ -817,14 +871,14 @@ options:
         id      : 'copyright_border_color'
         default : '#4b4c4d'
         type    : 'color'
-        
+
       - name    : 'Custom Color Scheme'
         desc    : ''
         id      : ''
         default : '<h3 style="margin: 0;">Element Colors</h3>'
         icon    : true
         type    : 'info'
-        
+
       - name    : 'Rollover Image Gradient Top Color'
         desc    : ''
         id      : 'image_gradient_top_color'
@@ -854,57 +908,57 @@ options:
         id      : 'button_gradient_bottom_color'
         default : '#AAD75B'
         type    : 'color'
-        
+
       - name    :  'Form Background Color'
         desc    : ''
         id      : 'form_bg_color'
         default : '#ffffff'
         type    : 'color'
-        
+
       - name    :  'Form Text Color'
         desc    : ''
         id      : 'form_text_color'
         default : '#aaa9a9'
         type    : 'color'
-        
+
       - name    :  'Form Border Color'
         desc    : ''
         id      : 'form_border_color'
         default : '#d2d2d2'
         type    : 'color'
-        
+
       - name    :  'Blog Grid & Timeline Element Colors'
         desc    : 'Controls blog grid & timeline post box border, divider lines, date box and border, timeline dots, timeline icon, timeline arrow.'
         id      : 'timeline_color'
         default : '#f6f6f6'
         type    : 'color'
-        
+
       - name    : 'Social Share Box Icons Color Scheme'
         desc    : ''
         id      : 'socialbox_icons_color'
         default : 'dark'
         type    : 'select'
         options : {light: 'Light', dark: 'Dark'}
-        
+
       - name    : 'Header Social Icons Color Scheme'
         desc    : ''
         id      : 'header_icons_color'
         default : 'light'
         type    : 'select'
         options : {light: 'Light', dark: 'Dark'}
-        
+
       - name    : 'Disable Button Text Shadow'
         desc    : 'Check to disable button text shadow'
         id      : 'button_text_shadow'
         default : 0
         type    : 'checkbox'
-        
+
       - name    : 'Disable Footer Text Shadow'
         desc    : 'Check to disable footer text shadow'
         id      : 'footer_text_shadow'
         default : 0
         type    : 'checkbox'
-        
+
       - name    : 'Custom Color Scheme'
         desc    : ''
         id      : ''
@@ -917,158 +971,158 @@ options:
         id      : 'tagline_font_color'
         default : '#747474'
         type    : 'color'
-        
+
       - name    :  'Page Title Font Color'
         desc    : ''
         id      : 'page_title_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Heading 1 (H1) Font Color'
         desc    : ''
         id      : 'h1_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Heading 2 (H2) Font Color'
         desc    : ''
         id      : 'h2_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Heading 3 (H3) Font Color'
         desc    : ''
         id      : 'h3_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Heading 4 (H4) Font Color'
         desc    : ''
         id      : 'h4_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Heading 5 (H5) Font Color'
         desc    : ''
         id      : 'h5_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Heading 6 (H6) Font Color'
         desc    : ''
         id      : 'h6_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Body Text Color'
         desc    : ''
         id      : 'body_text_color'
         default : '#747474'
         type    : 'color'
-        
+
       - name    :  'Link Color'
         desc    : ''
         id      : 'link_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Breadcrumbs Text Color'
         desc    : ''
         id      : 'breadcrumbs_text_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Footer Headings Color'
         desc    : ''
         id      : 'footer_headings_color'
         default : '#DDDDDD'
         type    : 'color'
-        
+
       - name    :  'Footer Font Color'
         desc    : ''
         id      : 'footer_text_color'
         default : '#8C8989'
         type    : 'color'
-        
+
       - name    :  'Footer Link Color'
         desc    : ''
         id      : 'footer_link_color'
         default : '#BFBFBF'
         type    : 'color'
-        
+
       - name    : 'Menu Colors'
         desc    : ''
         id      : ''
         default : '<h3 style="margin: 0;">Menu Colors</h3>'
         icon    : true
         type    : 'info'
-        
+
       - name    : 'Menu Font Color - First Level'
         desc    : ''
         id      : 'menu_first_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Menu Background Color - Sublevels'
         desc    : ''
         id      : 'menu_sub_bg_color'
         default : '#edebeb'
         type    : 'color'
-        
+
       - name    :  'Menu Font Color - Sublevels'
         desc    : ''
         id      : 'menu_sub_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Menu Hover Background Color - Sublevels'
         desc    : ''
         id      : 'menu_bg_hover_color'
         default : '#f5f4f4'
         type    : 'color'
-        
+
       - name    :  'Menu Separator - Sublevels'
         desc    : ''
         id      : 'menu_sub_sep_color'
         default : '#dcdadb'
         type    : 'color'
-        
+
       - name    :  'Secondary Menu - First Level & Top Contact Info Color'
         desc    : ''
         id      : 'snav_color'
         default : '#747474'
         type    : 'color'
-        
+
       - name    :  'Header Top Menu Divider Color - First Level'
         desc    : ''
         id      : 'header_top_first_border_color'
         default : '#ffffff'
         type    : 'color'
-        
+
       - name    :  'Header Top Menu Background Color - Sublevels'
         desc    : ''
         id      : 'header_top_sub_bg_color'
         default : '#ffffff'
         type    : 'color'
-        
+
       - name    :  'Header Top Menu Font Color - Sublevels'
         desc    : ''
         id      : 'header_top_menu_sub_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Header Top Menu Hover Background Color - Sublevels'
         desc    : ''
         id      : 'header_top_menu_bg_hover_color'
         default : '#fafafa'
         type    : 'color'
-        
+
       - name    :  'Header Top Menu Hover Font Color - Sublevels'
         desc    : ''
         id      : 'header_top_menu_sub_hover_color'
         default : '#333333'
         type    : 'color'
-        
+
       - name    :  'Header Top Menu Border  - Sublevels'
         desc    : ''
         id      : 'header_top_menu_sub_sep_color'
@@ -1246,3 +1300,211 @@ options:
         default : 'dark'
         type    : 'select'
         options : {light: 'Light', dark: 'Dark'}
+#Blog options
+  - name        : 'Blog'
+    children    :
+      - name    : 'General Blog Options'
+        desc    : ''
+        id      : ''
+        default : '<h3 style="margin: 0;">General Blog Options</h3>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Blog Page Title'
+        desc    : 'This text will display in the page title bar of the assigned blog page.'
+        id      : 'blog_title'
+        default : 'Blog'
+        type    : 'text'
+
+      - name    : 'Blog Page Subtitle'
+        desc    : 'This text will display as subheading in the page title bar of the assigned blog page.'
+        id      : 'blog_subtitle'
+        default : ''
+        type    : 'text'
+
+      - name    : 'Page Title Bar'
+        desc    : 'Check the box to show the page title bar for the assigned blog page.'
+        id      : 'blog_show_page_title_bar'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Blog Layout'
+        desc    : 'Select the layout for the assigned blog page in settings > reading.'
+        id      : 'blog_layout'
+        default : 'large'
+        type    : 'select'
+        options : {large:'Large', medium:'Medium', large_alt:'Large Alternate', medium_alt:'Medium Alternate', grid:'Grid', timeline:'Timeline'}
+
+      - name    : 'Blog Archive/Category Layout'
+        desc    : 'Select the layout for the blog archive/category pages.'
+        id      : 'blog_archive_layout'
+        default : 'large'
+        type    : 'select'
+        options : {large:'Large', medium:'Medium', large_alt:'Large Alternate', medium_alt:'Medium Alternate', grid:'Grid', timeline:'Timeline'}
+
+      - name    : 'Pagination Type'
+        desc    : 'Select the pagination type for the assigned blog page in settings > reading.'
+        id      : 'blog_pagination_type'
+        default : 'pagination'
+        type    : 'select'
+        options : {pagination:'Pagination',infinite_scroll:'Infinite Scroll'}
+
+      - name    : 'Grid Layout # of Columns'
+        desc    : 'Select whether to display the grid layout in 2, 3 or 4 columns.'
+        id      : 'blog_grid_columns'
+        default : 3
+        type    : 'select'
+        options : {2:'2', 3:'3', 4:'4', 5:'5', 6:'6'}
+
+      - name    : 'Excerpt or Full Blog Content'
+        desc    : 'Choose to display an excerpt or full content on blog pages.'
+        id      : 'content_length'
+        default : 'excerpt'
+        type    : 'select'
+        options : {excerpt:'Excerpt', full:'Full Content'}
+
+      - name    : 'Excerpt Length'
+        desc    : 'Insert the number of words you want to show in the post excerpts.'
+        id      : excerpt_length_blog
+        default : 55
+        type    : text
+
+      - name    : 'Strip HTML from Excerpt'
+        desc    : 'Check the box if you want to strip HTML from the excerpt content only.'
+        id      : 'strip_html_excerpt'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Set All Post Items Full Width'
+        desc    : 'Check the box to turn all single post items to full width with no sidebar.'
+        id      : 'single_post_full_width'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Featured Image On Blog Archive Page'
+        desc    : 'Check the box to display featured images on blog archive page.'
+        id      : 'featured_images'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Blog Alternate Date Format - Month and Year'
+        desc    : '<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Date and Time</a>'
+        id      : 'alt_date_format_month_year'
+        default : 'm, Y'
+        type    : 'text'
+
+      - name    : 'Blog Alternate Date Format - Day'
+        desc    : '<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Date and Time</a>'
+        id      : 'alt_date_format_day'
+        default : 'j'
+        type    : 'text'
+
+      - name    : 'Blog Timeline Date Format - Timeline Labels'
+        desc    : '<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Date</a>'
+        id      : 'timeline_date_format'
+        default : 'F Y'
+        type    : 'text'
+
+      - name    : 'Blog Single Post'
+        desc    : ''
+        id      : 'blog_single_post'
+        default : '<h3 style="margin: 0;">Blog Single Post Page Options</h3>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Featured Image / Video on Single Post Page'
+        desc    : 'Check the box to display featured images and videos on single post pages.'
+        id      : 'featured_images_single'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Disable Previous/Next Pagination'
+        desc    : 'Check the box to disable previous/next pagination.'
+        id      : 'blog_pn_nav'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Post Title'
+        desc    : 'Check the box to display the post title that goes below the featured images.'
+        id      : 'blog_post_title'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Author Info Box'
+        desc    : 'Check the box to display the author info box below posts.'
+        id      : 'author_info'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Social Sharing Box'
+        desc    : 'Check the box to display the social sharing box.'
+        id      : 'social_sharing_box'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Related Posts'
+        desc    : 'Check the box to display related posts.'
+        id      : 'related_posts'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Comments'
+        desc    : 'Check the box to display comments.'
+        id      : 'blog_comments'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Blog Meta'
+        desc    : ''
+        id      : 'blog_meta'
+        default : '<h3 style="margin: 0;">Blog Meta Options</h3>'
+        icon    : true
+        type    : 'info'
+
+      - name    : 'Post Meta'
+        desc    : 'Check the box to display post meta on blog posts.'
+        id      : 'post_meta'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Disable Post Meta Author'
+        desc    : 'Check the box to hide the author name from post meta.'
+        id      : 'post_meta_author'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Disable Post Meta Date'
+        desc    : 'Check the box to hide the date from post meta.'
+        id      : 'post_meta_date'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Disable Post Meta Categories'
+        desc    : 'Check the box to hide the categories from post meta.'
+        id      : 'post_meta_cats'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Disable Post Meta Comments'
+        desc    : 'Check the box to hide the comments from post meta.'
+        id      : 'post_meta_comments'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Disable Post Meta Read More Link'
+        desc    : 'Check the box to hide the read more link from post meta.'
+        id      : 'post_meta_read'
+        default : 0
+        type    : 'checkbox'
+
+      - name    : 'Disable Post Meta Tags'
+        desc    : 'Check the box to hide the tags from post meta.'
+        id      : 'post_meta_tags'
+        default : 1
+        type    : 'checkbox'
+
+      - name    : 'Date Format'
+        desc    : '<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Formatting Date and Time</a>'
+        id      : 'date_format'
+        default : 'F jS, Y'
+        type    : 'text'

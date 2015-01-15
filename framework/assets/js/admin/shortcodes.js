@@ -34,7 +34,11 @@ jQuery(function($) {
                     {
                         text: 'Cancel',
                         id: 'plugin-slug-button-cancel',
-                        onclick: 'close'
+                        onclick: function ( e ) {
+                            $( '#shrtcodes-form-wrapper' ).append( $('#shortcodes-form') );
+                            tinyMCE.activeEditor.windowManager.close();
+                        }
+                        // onclick: 'close'
                     }],
                 });
                 //Move form to dialog

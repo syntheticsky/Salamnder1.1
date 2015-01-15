@@ -702,9 +702,7 @@ class Short_Codes {
    * @return string
    * Recent Posts
    */
-   function shortcode_recent_posts($params, $content = null) {
-		global $data;
-
+	function shortcode_recent_posts($params, $content = null) {
 		wp_enqueue_script( 'jquery.flexslider' );
 
 		$params = shortcode_atts(
@@ -752,439 +750,143 @@ class Short_Codes {
 
 		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'recent_posts.php', $params);
 	}
-//
-////////////////////////////////////////////////////////////////////
-//// Recent Works
-////////////////////////////////////////////////////////////////////
-//add_shortcode('recent_works', 'shortcode_recent_works');
-//	function shortcode_recent_works($atts, $content = null) {
-//		global $data;
-//
-//		static $recent_works_counter = 1;
-//
-//		wp_enqueue_script( 'jquery.isotope' );
-//		wp_enqueue_script( 'jquery.carouFredSel' );
-//
-//		extract(shortcode_atts(array(
-//			'layout' => 'carousel',
-//			'filters' => 'true',
-//			'columns' => 4,
-//			'cat_slug' => '',
-//			'number_posts' => 10,
-//			'excerpt_words' => 15,
-//		), $atts));
-//
-//		if($columns == 1) {
-//			$columns_words = 'one';
-//			$portfolio_image_size = 'full';
-//		} elseif($columns == 2) {
-//			$columns_words = 'two';
-//			$portfolio_image_size = 'portfolio-two';
-//		} elseif($columns == 3) {
-//			$columns_words = 'three';
-//			$portfolio_image_size = 'portfolio-three';
-//		} elseif($columns == 4) {
-//			$columns_words = 'four';
-//			$portfolio_image_size = 'portfolio-four';
-//		}
-//
-//		if($filters == 'yes') {
-//			$filters = 'true';
-//		} elseif($filters == 'no') {
-//			$filters = 'false';
-//		}
-//
-//		$html = '';
-//
-//		wp_reset_query();
-//
-//		if($layout == 'carousel') {
-//			$html .= '<div class="related-posts related-projects">';
-//			$html .= '<div id="carousel" class="es-carousel-wrapper">';
-//			$html .= '<div class="es-carousel">';
-//			$html .= '<ul class="">';
-//			if(isset($atts['number_posts']) && !empty($atts['number_posts'])) {
-//				$number_posts = $atts['number_posts'];
-//			} else {
-//				$number_posts = 10;
-//			}
-//			$args = array(
-//				'post_type' => 'avada_portfolio',
-//				'paged' => 1,
-//				'posts_per_page' => $number_posts,
-//			);
-//			if(isset($atts['cat_id']) && !empty($atts['cat_id'])){
-//				$cat_id = explode(',', $atts['cat_id']);
-//				$args['tax_query'] = array(
-//					array(
-//						'taxonomy' => 'portfolio_category',
-//						'field' => 'slug',
-//						'terms' => $cat_id
-//					)
-//				);
-//			} elseif(isset($atts['cat_slug']) && !empty($atts['cat_slug'])){
-//				$cat_id = explode(',', $atts['cat_slug']);
-//				$args['tax_query'] = array(
-//					array(
-//						'taxonomy' => 'portfolio_category',
-//						'field' => 'slug',
-//						'terms' => $cat_id
-//					)
-//				);
-//			}
-//
-//			$works = new WP_Query($args);
-//			while($works->have_posts()): $works->the_post();
-//				if(has_post_thumbnail()):
-//					$html .= '<li>';
-//					$html .= '<div class="image">';
-//					if($data['image_rollover']):
-//						$html .= get_the_post_thumbnail(get_the_ID(), 'related-img');
-//					else:
-//						$html .= '<a href="'.get_permalink(get_the_ID()).'">'.get_the_post_thumbnail(get_the_ID(), 'related-img').'</a>';
-//					endif;
-//					//$html .= '<a href="'.get_permalink(get_the_ID()).'">'.get_the_post_thumbnail(get_the_ID(), 'related-img').'</a>';
-//					if(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'link') {
-//						$link_icon_css = 'display:inline-block;';
-//						$zoom_icon_css = 'display:none;';
-//					} elseif(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'zoom') {
-//						$link_icon_css = 'display:none;';
-//						$zoom_icon_css = 'display:inline-block;';
-//					} elseif(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'no') {
-//						$link_icon_css = 'display:none;';
-//						$zoom_icon_css = 'display:none;';
-//					} else {
-//						$link_icon_css = 'display:inline-block;';
-//						$zoom_icon_css = 'display:inline-block;';
-//					}
-//
-//					$icon_url_check = get_post_meta(get_the_ID(), 'pyre_link_icon_url', true); if(!empty($icon_url_check)) {
-//					$icon_permalink = get_post_meta(get_the_ID(), 'pyre_link_icon_url', true);
-//				} else {
-//					$icon_permalink = get_permalink(get_the_ID());
-//				}
-//					$html .= '<div class="image-extras">';
-//					$html .= '<div class="image-extras-content">';
-//					$html .= '<a style="'.$link_icon_css.'" class="icon link-icon" style="margin-right:3px;" href="'.$icon_permalink.'">';
-//					$html .= 'Permalink';
-//					$html .= '</a>';
-//					$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'full');
-//					if(get_post_meta(get_the_ID(), 'pyre_video_url', true)) {
-//						$full_image[0] = get_post_meta(get_the_ID(), 'pyre_video_url', true);
-//					}
-//					$html .= '<a style="'.$zoom_icon_css.'" class="icon gallery-icon" href="'.$full_image[0].'" rel="prettyPhoto[gallery_recent_'.$recent_works_counter.']">Gallery</a>';
-//					$html .= '<h3>'.get_the_title().'</h3>';
-//					$html .= '</div>
-//								</div>
-//						</div>
-//					</li>';
-//				endif; endwhile;
-//			$html .= '</ul>
-//			</div>
-//			<div class="es-nav"><span class="es-nav-prev">Previous</span><span class="es-nav-next">Next</span></div>
-//		</div>
-//	</div>';
-//			wp_reset_query();
-//		} elseif($layout == 'grid') {
-//			$html .= '<div class="portfolio portfolio-grid clearfix portfolio-'.$columns_words.'" data-columns="'.$columns_words.'">';
-//
-//			$portfolio_category = get_terms('portfolio_category');
-//			if($portfolio_category && $filters == 'true'):
-//				$html .= '<ul class="portfolio-tabs clearfix">
-//			<li class="active"><a data-filter="*" href="#">'.__('All', 'Avada').'</a></li>';
-//				foreach($portfolio_category as $portfolio_cat):
-//					if($atts['cat_slug']):
-//						$cat_slug = preg_replace('/\s+/', '', $atts['cat_slug']);
-//						$cat_slug = explode(',', $cat_slug);
-//						if(in_array($portfolio_cat->slug, $cat_slug)):
-//							$html .='<li><a data-filter=".'.$portfolio_cat->slug.'" href="#">'.$portfolio_cat->name.'</a></li>';
-//						endif;
-//					else:
-//						$html .= '<li><a data-filter=".'.$portfolio_cat->slug.'" href="#">'.$portfolio_cat->name.'</a></li>';
-//					endif;
-//				endforeach;
-//				$html .= '</ul>';
-//			endif;
-//
-//			$html .= '<div class="portfolio-wrapper">';
-//
-//			$args = array(
-//				'post_type' => 'avada_portfolio',
-//				'posts_per_page' => $number_posts
-//			);
-//			if(isset($atts['cat_id']) && !empty($atts['cat_id'])){
-//				$cat_id = explode(',', $atts['cat_id']);
-//				$args['tax_query'] = array(
-//					array(
-//						'taxonomy' => 'portfolio_category',
-//						'field' => 'slug',
-//						'terms' => $cat_id
-//					)
-//				);
-//			} elseif(isset($atts['cat_slug']) && !empty($atts['cat_slug'])){
-//				$cat_id = explode(',', $atts['cat_slug']);
-//				$args['tax_query'] = array(
-//					array(
-//						'taxonomy' => 'portfolio_category',
-//						'field' => 'slug',
-//						'terms' => $cat_id
-//					)
-//				);
-//			}
-//			$gallery = new WP_Query($args);
-//			while($gallery->have_posts()): $gallery->the_post();
-//				if(has_post_thumbnail() || get_post_meta(get_the_ID(), 'pyre_video', true)):
-//					$item_classes = '';
-//					$item_cats = get_the_terms(get_the_ID(), 'portfolio_category');
-//					if($item_cats):
-//						foreach($item_cats as $item_cat) {
-//							$item_classes .= $item_cat->slug . ' ';
-//						}
-//					endif;
-//
-//					$permalink = get_permalink();
-//
-//					$html .= '<div class="portfolio-item '.$item_classes.'">';
-//					if(has_post_thumbnail()):
-//						$html .= '<div class="image">';
-//						if($data['image_rollover']):
-//							$thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), $portfolio_image_size);
-//							$html .= '<img src="'.$thumbnail[0].'" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" />';
-//						else:
-//							$thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), $portfolio_image_size);
-//							$html .= '<a href="'.$permalink.'">'.'<img src="'.$thumbnail[0].'" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" />'.'</a>';
-//						endif;
-//						if(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'link') {
-//							$link_icon_css = 'display:inline-block;';
-//							$zoom_icon_css = 'display:none;';
-//						} elseif(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'zoom') {
-//							$link_icon_css = 'display:none;';
-//							$zoom_icon_css = 'display:inline-block;';
-//						} elseif(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'no') {
-//							$link_icon_css = 'display:none;';
-//							$zoom_icon_css = 'display:none;';
-//						} else {
-//							$link_icon_css = 'display:inline-block;';
-//							$zoom_icon_css = 'display:inline-block;';
-//						}
-//
-//						$icon_url_check = get_post_meta(get_the_ID(), 'pyre_link_icon_url', true); if(!empty($icon_url_check)) {
-//						$icon_permalink = get_post_meta(get_the_ID(), 'pyre_link_icon_url', true);
-//					} else {
-//						$icon_permalink = get_permalink(get_the_ID());
-//					}
-//						$html .= '<div class="image-extras">
-//							<div class="image-extras-content">';
-//						$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'full');
-//						$html .= '<a style="'.$link_icon_css.'" class="icon link-icon" href="'.$icon_permalink.'">Permalink</a>';
-//
-//						if(get_post_meta(get_the_ID(), 'pyre_video_url', true)) {
-//							$full_image[0] = get_post_meta(get_the_ID(), 'pyre_video_url', true);
-//						}
-//
-//						$html .= '<a style="'.$zoom_icon_css.'" class="icon gallery-icon" href="'.$full_image[0].'" rel="prettyPhoto[gallery_recent_'.$recent_works_counter.']" title="'.get_post_field('post_content', get_post_thumbnail_id(get_the_ID())).'"><img style="display:none;" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" />Gallery</a>';
-//						$html .= '<h3>'.get_the_title().'</h3>';
-//						$html .= '<h4>'.get_the_term_list(get_the_ID(), 'portfolio_category', '', ', ', '').'</h4>';
-//						$html .= '</div>
-//						</div>
-//					</div>';
-//					endif;
-//					$html .= '</div>';
-//				endif;
-//			endwhile;
-//			wp_reset_query();
-//
-//			$html .= '</div>';
-//
-//			$html .= '</div>';
-//		} elseif($layout == 'grid-with-excerpts') {
-//			$html .= '<div class="portfolio clearfix portfolio-'.$columns_words.'-text portfolio-'.$columns_words.'" data-columns="'.$columns_words.'">';
-//
-//			$portfolio_category = get_terms('portfolio_category');
-//			if($portfolio_category && $filters == 'true'):
-//				$html .= '<ul class="portfolio-tabs clearfix">
-//			<li class="active"><a data-filter="*" href="#">'.__('All', 'Avada').'</a></li>';
-//				foreach($portfolio_category as $portfolio_cat):
-//					if($atts['cat_slug']):
-//						$cat_slug = preg_replace('/\s+/', '', $atts['cat_slug']);
-//						$cat_slug = explode(',', $cat_slug);
-//						if(in_array($portfolio_cat->slug, $cat_slug)):
-//							$html .='<li><a data-filter=".'.$portfolio_cat->slug.'" href="#">'.$portfolio_cat->name.'</a></li>';
-//						endif;
-//					else:
-//						$html .= '<li><a data-filter=".'.$portfolio_cat->slug.'" href="#">'.$portfolio_cat->name.'</a></li>';
-//					endif;
-//				endforeach;
-//				$html .= '</ul>';
-//			endif;
-//
-//			$html .= '<div class="portfolio-wrapper">';
-//
-//			$args = array(
-//				'post_type' => 'avada_portfolio',
-//				'posts_per_page' => $number_posts
-//			);
-//			if(isset($atts['cat_id']) && !empty($atts['cat_id'])){
-//				$cat_id = explode(',', $atts['cat_id']);
-//				$args['tax_query'] = array(
-//					array(
-//						'taxonomy' => 'portfolio_category',
-//						'field' => 'slug',
-//						'terms' => $cat_id
-//					)
-//				);
-//			} elseif(isset($atts['cat_slug']) && !empty($atts['cat_slug'])){
-//				$cat_id = explode(',', $atts['cat_slug']);
-//				$args['tax_query'] = array(
-//					array(
-//						'taxonomy' => 'portfolio_category',
-//						'field' => 'slug',
-//						'terms' => $cat_id
-//					)
-//				);
-//			}
-//			$gallery = new WP_Query($args);
-//			while($gallery->have_posts()): $gallery->the_post();
-//				if(has_post_thumbnail() || get_post_meta(get_the_ID(), 'pyre_video', true)):
-//					$item_classes = '';
-//					$item_cats = get_the_terms(get_the_ID(), 'portfolio_category');
-//					if($item_cats):
-//						foreach($item_cats as $item_cat) {
-//							$item_classes .= $item_cat->slug . ' ';
-//						}
-//					endif;
-//
-//					$permalink = get_permalink();
-//
-//					$html .= '<div class="portfolio-item '.$item_classes.'">';
-//					if(has_post_thumbnail()):
-//						$html .= '<div class="image">';
-//						if($data['image_rollover']):
-//							$thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), $portfolio_image_size);
-//							$html .= '<img src="'.$thumbnail[0].'" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" />';
-//						else:
-//							$thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), $portfolio_image_size);
-//							$html .= '<a href="'.$permalink.'"><img src="'.$thumbnail[0].'" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" /></a>';
-//						endif;
-//						if(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'link') {
-//							$link_icon_css = 'display:inline-block;';
-//							$zoom_icon_css = 'display:none;';
-//						} elseif(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'zoom') {
-//							$link_icon_css = 'display:none;';
-//							$zoom_icon_css = 'display:inline-block;';
-//						} elseif(get_post_meta(get_the_ID(), 'pyre_image_rollover_icons', true) == 'no') {
-//							$link_icon_css = 'display:none;';
-//							$zoom_icon_css = 'display:none;';
-//						} else {
-//							$link_icon_css = 'display:inline-block;';
-//							$zoom_icon_css = 'display:inline-block;';
-//						}
-//
-//						$icon_url_check = get_post_meta(get_the_ID(), 'pyre_link_icon_url', true); if(!empty($icon_url_check)) {
-//						$icon_permalink = get_post_meta(get_the_ID(), 'pyre_link_icon_url', true);
-//					} else {
-//						$icon_permalink = get_permalink(get_the_ID());
-//					}
-//						$html .= '<div class="image-extras">
-//							<div class="image-extras-content">';
-//						$full_image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'full');
-//						$html .= '<a style="'.$link_icon_css.'" class="icon link-icon" href="'.$icon_permalink.'">Permalink</a>';
-//
-//						if(get_post_meta(get_the_ID(), 'pyre_video_url', true)) {
-//							$full_image[0] = get_post_meta(get_the_ID(), 'pyre_video_url', true);
-//						}
-//
-//						$html .= '<a style="'.$zoom_icon_css.'" class="icon gallery-icon" href="'.$full_image[0].'" rel="prettyPhoto[gallery_recent_'.$recent_works_counter.']" title="'.get_post_field('post_content', get_post_thumbnail_id(get_the_ID())).'"><img style="display:none;" alt="'.get_post_field('post_excerpt', get_post_thumbnail_id(get_the_ID())).'" />Gallery</a>';
-//						$html .= '<h3>'.get_the_title().'</h3>';
-//						$html .= '<h4>'.get_the_term_list(get_the_ID(), 'portfolio_category', '', ', ', '').'</h4>';
-//						$html .= '</div>
-//						</div>
-//					</div>';
-//						$html .= '<div class="portfolio-content">
-//						<h2><a href="'.$permalink.'">'.get_the_title().'</a></h2>
-//						<h4>'.get_the_term_list(get_the_ID(), 'portfolio_category', '', ', ', '').'</h4>';
-//
-//						$excerpt_length = $excerpt_words;
-//
-//						$stripped_content = strip_shortcodes( tf_content( $excerpt_length, $data['strip_html_excerpt'] ) );
-//						$html .= $stripped_content;
-//
-//						if($columns == 1):
-//							$html .= '<div class="buttons">
-//							<a href="'.$permalink.'" class="green button small">'.__('Learn More', 'Avada').'</a>';
-//							if(get_post_meta(get_the_ID(), 'pyre_project_url', true)):
-//								$html .= '<a href="'.get_post_meta(get_the_ID(), 'pyre_project_url', true).'" class="green button small">'.__('View Project', 'Avada').'</a>';
-//							endif;
-//							$html .= '</div>';
-//						endif;
-//						$html .= '</div>';
-//					endif;
-//					$html .= '</div>';
-//				endif;
-//			endwhile;
-//			wp_reset_query();
-//
-//			$html .= '</div>';
-//
-//			$html .= '</div>';
-//		}
-//
-//		$recent_works_counter++;
-//
-//		return $html;
-//	}
-//
-//
-////////////////////////////////////////////////////////////////////
-//// Alert Message
-////////////////////////////////////////////////////////////////////
-//add_shortcode('alert', 'shortcode_alert');
-//	function shortcode_alert($atts, $content = null) {
-//		$html = '';
-//		$html .= '<div class="alert '.$atts['type'].'">';
-//		$html .= '<div class="msg">'.do_shortcode($content).'</div>';
-//		$html .= '<a href="#" class="toggle-alert">Toggle</a>';
-//		$html .= '</div>';
-//
-//		return $html;
-//	}
-//
-////////////////////////////////////////////////////////////////////
-//// FontAwesome Icons
-////////////////////////////////////////////////////////////////////
-//add_shortcode('fontawesome', 'shortcode_fontawesome');
-//	function shortcode_fontawesome($atts, $content = null) {
-//		global $data;
-//
-//		extract(shortcode_atts(array(
-//			'iconcolor' => '',
-//			'circlecolor' => '',
-//			'circlebordercolor' => '',
-//		), $atts));
-//
-//		if(!$iconcolor) {
-//			$iconcolor = $data['icon_color'];
-//		}
-//
-//		if(!$circlecolor) {
-//			$circlecolor = $data['icon_circle_color'];
-//		}
-//
-//		if(!$circlebordercolor) {
-//			$circlebordercolor = $data['icon_border_color'];
-//		}
-//
-//		$style = 'color:'.$iconcolor.' !important;';
-//
-//		if($atts['circle'] == 'yes') {
-//			$style .= 'background-color:'.$circlecolor.' !important;border:1px solid '.$circlebordercolor.' !important;';
-//		}
-//
-//		$html = '<i style="'.$style.'"class="fontawesome-icon '.$atts['size'].' circle-'.$atts['circle'].' icon-'.$atts['icon'].'"></i>';
-//
-//		return $html;
-//	}
-//
+
+	/**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Recent Works
+   */
+	function shortcode_recent_works($params, $content = null) {
+
+		static $counter = 1;
+
+		wp_enqueue_script( 'jquery.isotope' );
+		wp_enqueue_script( 'jquery.carouFredSel' );
+
+		$params = shortcode_atts(
+			array(
+			'layout' => 'carousel',
+			'filters' => true,
+			'columns' => 4,
+			'cat_id' => '',
+			'cat_slug' => '',
+			'number_posts' => 10,
+			'excerpt_words' => 15,
+		), $params);
+
+		if ( $params['columns'] == 1 ) {
+			$params['columns_words'] = 'one';
+			$params['portfolio_image_size'] = 'full';
+		} elseif ( $params['columns'] == 2 ) {
+			$params['columns_words'] = 'two';
+			$params['portfolio_image_size'] = 'portfolio-two';
+		} elseif ( $params['columns'] == 3 ) {
+			$params['columns_words'] = 'three';
+			$params['portfolio_image_size'] = 'portfolio-three';
+		} elseif($params['columns'] == 4) {
+			$params['columns_words'] = 'four';
+			$params['portfolio_image_size'] = 'portfolio-four';
+		}
+
+		if($params['filters'] == 'yes')
+			$params['filters'] = true;
+		elseif($params['filters'] == 'no')
+			$params['filters'] = false;
+
+		$counter++;
+		$params['counter'] = $counter;
+
+		$args = array(
+			'post_type' => 'salamander_portfolio',
+			'posts_per_page' => $params['number_posts'],
+		);
+
+		if ( $params['layout'] == 'carousel' )
+			$args['paged'] = 1;
+
+		if ( ! empty( $params['cat_id'] ) )
+			$cat_id = explode( ',', $params['cat_id'] );
+		elseif( ! empty( $params['cat_slug'] ) )
+			$cat_id = explode( ',', $params['cat_slug'] );
+		if ($cat_id) {
+			$cat_id = array_map( 'trim', $cat_id );
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'portfolio_category',
+					'field' => 'slug',
+					'terms' => $cat_id
+				)
+			);
+		}
+
+		$params['gallery'] = new WP_Query($args);
+
+		if ( $params['layout'] == 'carousel' )
+			return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'recent_works_carousel.php', $params );
+
+		if ( $params['layout'] == 'grid' )
+			return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'recent_works_grid.php', $params );
+
+		if ( $params['layout'] == 'grid-with-excerpts' )
+			return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'recent_works_grid_excerpts.php', $params );
+	}
+
+	/**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Alert Message
+   */
+	function shortcode_alert($params, $content = null) {
+
+		$params = shortcode_atts(
+			array(
+			'type' => 'danger',
+			'content' => do_shortcode($content),
+		), $params);
+
+		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'alert.php' );
+	}
+
+	/**
+   * @param $params
+   * @param null $content
+   * @return string
+   * FontAwesome Icons
+   */
+	function shortcode_fontawesome($params, $content = null) {
+		global $data;
+
+		$params = shortcode_atts(
+			array(
+			'circle' => 'no',
+			'size' => '',
+			'icon' => '',
+			'circle' => '',
+			'icon_color' => '',
+			'circle_color' => '',
+			'circle_border_color' => '',
+		), $params);
+
+		if ( ! $params['icon_color'] )
+			$params['icon_color'] = Salamander::getData( 'icon_color' );
+
+		if( ! $params['circle_color'] )
+			$params['circle_color'] = Salamander::getData( 'icon_circle_color' );
+
+		if( ! $params['circle_border_color'])
+			$params['circle_border_color'] = Salamander::getData( 'icon_border_color' );
+
+		$params['style'] = 'color:' . $params['icon_color'] . ' !important;';
+
+		if($params['circle'] == 'yes') {
+			$style .= 'background-color:'.$circlecolor.' !important;border:1px solid '.$circlebordercolor.' !important;';
+		}
+
+		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'fontawesome.php');
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Social Links
 ////////////////////////////////////////////////////////////////////
@@ -2155,130 +1857,36 @@ class Short_Codes {
 //		return $html;
 //	}
 //
-////////////////////////////////////////////////////////////////////
-//// Social Sharing Box
-////////////////////////////////////////////////////////////////////
-//add_shortcode('sharing', 'shortcode_sharing');
-//	function shortcode_sharing($atts, $content = null) {
-//		global $data;
-//
-//		extract(shortcode_atts(array(
-//			'tagline' => '',
-//			'title' => '',
-//			'link' => '',
-//			'description' => '',
-//			'backgroundcolor' => ''
-//		), $atts));
-//
-//		if(!$backgroundcolor) {
-//			$backgroundcolor = $data['social_bg_color'];
-//		}
-//
-//		$html = '<div class="share-box" style="background-color:'.$backgroundcolor.';">
-//		<h4>'.$tagline.'</h4>
-//		<ul class="social-networks social-networks-'.strtolower($data['socialbox_icons_color']).'">';
-//		if($data['sharing_facebook']):
-//			$html .= '<li class="facebook">
-//				<a href="http://www.facebook.com/sharer.php?u='.$link.'&amp;t='.$title.'">
-//					Facebook
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Facebook</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_twitter']):
-//			$html .= '<li class="twitter">
-//				<a href="http://twitter.com/home?status='.$title.' '.$link.'">
-//					Twitter
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Twitter</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_linkedin']):
-//			$html .= '<li class="linkedin">
-//				<a href="http://linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'">
-//					LinkedIn
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>LinkedIn</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_reddit']):
-//			$html .= '<li class="reddit">
-//				<a href="http://reddit.com/submit?url='.$link.'&amp;title='.$title.'">
-//					Reddit
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Reddit</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_tumblr']):
-//			$html .= '<li class="tumblr">
-//				<a href="http://www.tumblr.com/share/link?url='.urlencode($link).'&amp;name='.urlencode($title).'&amp;description='.urlencode($description).'">
-//					Tumblr
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Tumblr</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_google']):
-//			$html .= '<li class="google">
-//				<a href="https://plus.google.com/share?url='.$link.'" onclick="javascript:window.open(this.href,
-//  \'\', \'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600\');return false;">
-//					Google +1
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Google +1</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_pinterest']):
-//			$html .= '<li class="pinterest">
-//				<a href="http://pinterest.com/pin/create/button/?url='.urlencode($link).'&amp;description='.urlencode($title).'">
-//					Pinterest
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Pinterest</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		if($data['sharing_email']):
-//			$html .= '<li class="email">
-//				<a href="mailto:?subject='.$title.'&amp;body='.$link.'">
-//					Email
-//				</a>
-//				<div class="popup">
-//					<div class="holder">
-//						<p>Email</p>
-//					</div>
-//				</div>
-//			</li>';
-//		endif;
-//		$html .= '</ul>
-//	</div>';
-//		return $html;
-//	}
-//
+	/**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Social Sharing Box
+   */
+	function shortcode_sharing($params, $content = null) {
+
+		$params = shortcode_atts(
+			array(
+			'tagline' => '',
+			'title' => '',
+			'link' => '',
+			'description' => '',
+			'bg_color' => ''
+		), $params);
+		if ( $params['link'] )
+			$params['link'] = urlencode( $params['link'] );
+		if ( $params['title'] )
+			$params['title'] = urlencode( $params['title'] );
+		if ( $params['description'] )
+			$params['description'] = urlencode( $params['description'] );
+
+		if ( ! $params['bg_color'] )
+			$params['bg_color'] = Salamander::getData( 'social_bg_color' );
+		$params['socialbox_icons_color'] = strtolower( Salamander::getData( 'socialbox_icons_color' ) );
+
+		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'sharing.php' );
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Featured Products Slider
 ////////////////////////////////////////////////////////////////////
@@ -2602,6 +2210,10 @@ class Short_Codes {
         'progress' => 'Progress Bar',
         'person' => 'Person',
         'recent_posts' => 'Recent Posts',
+        'recent_works' => 'Recent Works',
+        'alert' => 'Alert',
+        'fontawesome' => 'FontAwesome',
+        'sharing' => 'Sharing',
       ),
     );
 
@@ -2685,7 +2297,15 @@ class Short_Codes {
     // Person
     add_shortcode( 'person', array( $this, 'shortcode_person' ) );
     // Recent Posts
-	add_shortcode( 'recent_posts', array( $this, 'shortcode_recent_posts' ) );
+		add_shortcode( 'recent_posts', array( $this, 'shortcode_recent_posts' ) );
+		// Recent Works
+		add_shortcode( 'recent_works', array( $this, 'shortcode_recent_works' ) );
+		// Alert Message
+		add_shortcode('alert', array( $this, 'shortcode_alert' ) );
+		// FontAwesome Icons
+		add_shortcode('fontawesome', array( $this, 'shortcode_fontawesome' ) );
+		// Social Sharing Box
+		add_shortcode('sharing', array( $this, 'shortcode_sharing' ) );
 
     // Add buttons to tinyMCE
     add_action ( 'init', array( $this, 'add_Button' ) );
