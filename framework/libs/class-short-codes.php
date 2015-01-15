@@ -73,17 +73,15 @@ class Short_Codes {
   public function shortcode_soundcloud( $params ) {
     $params = shortcode_atts ( array('url' => '', 'width' => '100%', 'height' => 81, 'comments' => 'false', 'auto_play' => 'false', 'color' => 'ff7700',), $params );
 
-    if ( $params['comments'] == 'yes' ) {
+    if ( $params['comments'] == 'yes' )
       $params['comments'] = 'true';
-    } elseif ( $params['comments'] == 'no' ) {
+    elseif ( $params['comments'] == 'no' )
       $params['comments'] = 'false';
-    }
 
-    if ( $params['auto_play'] == 'yes' ) {
+    if ( $params['auto_play'] == 'yes' )
       $params['auto_play'] = 'true';
-    } elseif ( $params['auto_play'] == 'no' ) {
+    elseif ( $params['auto_play'] == 'no' )
       $params['auto_play'] = 'false';
-    }
 
     return Helper::render ( VIEWS_PATH . 'shortcodes' . DS . 'soundcloud.php', $params );
   }
@@ -121,9 +119,8 @@ class Short_Codes {
   public function shortcode_highlight( $params, $content = null ) {
     $params = shortcode_atts ( array('color' => 'yellow',), $params );
     $params['class'] = 'light-highlight';
-    if ( $params['color'] == 'black' ) {
+    if ( $params['color'] == 'black' )
       $params['class'] = 'dark-highlight';
-    }
     $params['content'] = do_shortcode ( $content );
 
     return Helper::render ( VIEWS_PATH . 'shortcodes' . DS . 'highlight.php', $params );
@@ -139,12 +136,12 @@ class Short_Codes {
   public function shortcode_checklist( $params, $content = null ) {
     static $checklist_counter = 1;
 
-    $params = shortcode_atts ( array('icon' => 'arrow', 'color' => '', 'circle' => 'yes',), $params );
+    $params = shortcode_atts( array('icon' => 'arrow', 'color' => '', 'circle' => 'yes',), $params );
 
     $class = '';
-    if ( !$params['color'] ) {
+    if ( !$params['color'] )
       $class = 'list-icon-color-' . strtolower ( Salamander::getData ( 'checklist_icons_color' ) );
-    }
+
     $params['content'] = str_replace ( '<ul>', '<ul class="list-icon circle-' . $params['circle'] . ' list-icon-' . $params['icon'] . ' ' . $class . '">', $content );
     $checklist_counter++;
 
@@ -157,20 +154,18 @@ class Short_Codes {
     $tabs_counter++;
     $tabs = array();
     foreach ( $params as $key => $val ) {
-      if ( substr ( $key, 0, 3 ) == 'tab' ) {
+      if ( substr ( $key, 0, 3 ) == 'tab' )
         $tabs[$key] = $val;
-      }
     }
     if ( !empty ( $tabs ) ) {
-      $params = shortcode_atts ( array('layout' => 'horizontal', 'bg_color' => '', 'inactive_color' => '', 'content' => do_shortcode ( $content ),), $params );
+      $params = shortcode_atts( array('layout' => 'horizontal', 'bg_color' => '', 'inactive_color' => '', 'content' => do_shortcode ( $content ),), $params );
 
-      if ( !$params['bg_color'] ) {
+      if ( !$params['bg_color'] )
         $params['bg_color'] = Salamander::getData ( 'tabs_bg_color' );
-      }
 
-      if ( !$params['inactive_color'] ) {
+      if ( !$params['inactive_color'] )
         $params['inactive_color'] = Salamander::getData ( 'tabs_inactive_color' );
-      }
+
       $params['counter'] = $tabs_counter;
       $params['primary_color'] = Salamander::getData ( 'primary_color' );
       $params['body_text_color'] = Salamander::getData ( 'body_text_color' );
@@ -213,8 +208,8 @@ class Short_Codes {
       array(
         'title' => '',
         'open' => 'no',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
     $params['toggleclass'] = '';
     $params['toggleclass2'] = '';
@@ -236,12 +231,12 @@ class Short_Codes {
    * Column one_half shortcode
    */
   //[one_half last="no"]...[/one_half]
-  public function shortcode_one_half($params, $content = null) {
+  public function shortcode_one_half( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'last' => 'no',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
     return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'one-half.php', $params);
   }
@@ -253,14 +248,14 @@ class Short_Codes {
    * Column one_third shortcode
    */
   //[one_third last="no"]...[/one_third]
-  public function shortcode_one_third($params, $content = null) {
+  public function shortcode_one_third( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'last="no',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'one-third.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'one-third.php', $params );
   }
 
   /**
@@ -270,14 +265,14 @@ class Short_Codes {
    * Column two_third shortcode
    */
   //[two_third last="no"]...[/two_third]
-  public function shortcode_two_third($params, $content = null) {
+  public function shortcode_two_third( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'last' => 'no',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'two-third.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'two-third.php', $params );
   }
 
   /**
@@ -287,14 +282,14 @@ class Short_Codes {
    * Column one_fourth shortcode
    */
   //[one_fourth last="no"]...[/one_fourth]
-  public function shortcode_one_fourth($params, $content = null) {
+  public function shortcode_one_fourth( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'last' => 'no',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'one-fourth.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'one-fourth.php', $params );
   }
 
   /**
@@ -308,10 +303,10 @@ class Short_Codes {
     $params = shortcode_atts(
       array(
         'last' => 'no',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'three-fourth.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'three-fourth.php', $params );
   }
 
 
@@ -322,7 +317,7 @@ class Short_Codes {
    * Tagline short code
    */
   //[tagline_box backgroundcolor="" shadow="no" border="1px" bordercolor="" highlightposition="right, left, top or bottom" link="http://themeforest.net/user/ThemeFusion" linktarget="" button="Purchase Now" title="Avada is incredibly responsive, with a refreshingly clean design" description="And it has some awesome features, premium sliders, unlimited colors, advanced theme options and so much more!"][/tagline_box]
-  public function shortcode_tagline_box($params, $content = null) {
+  public function shortcode_tagline_box( $params, $content = null ) {
     static $counter = 1;
 
     $params = shortcode_atts(
@@ -339,29 +334,26 @@ class Short_Codes {
         'highlight_position' => 'left',
         'link_target' => '_self',
         'button_color' => 'default'
-      ), $params);
+      ), $params );
 
     $params['primary_color'] = Salamander::getData( 'primary_color' );
-    if( ! $params['bg_color']) {
+    if( ! $params['bg_color'])
       $params['bg_color'] = Salamander::getData( 'tagline_bg' );
-    }
 
-    if( ! $params['border_color']) {
+    if( ! $params['border_color'])
       $params['border_color'] = Salamander::getData( 'tagline_border_color' );
-    }
 
-    if(!$params['button_color']) {
+    if(!$params['button_color'])
       $params['button_color'] = 'default';
-    }
 
     $params['class'] = '';
-    if($params['shadow'] == 'yes') {
+    if($params['shadow'] == 'yes')
       $params['class'] = 'tagline-shadow';
-    }
+
     $params['counter'] = $counter;
     $counter++;
 
-    return Helper::render(VIEWS_PATH. 'shortcodes' . DS . 'tagline-box.php', $params);
+    return Helper::render( VIEWS_PATH. 'shortcodes' . DS . 'tagline-box.php', $params );
   }
 
   /**
@@ -371,15 +363,15 @@ class Short_Codes {
    * Pricing table short code
    * [pricing_table type="e.g. 1 or 2" backgroundcolor="" bordercolor="" dividercolor=""][pricing_column title="Standard"][pricing_price currency="$" price="15.55" time="monthly"][/pricing_price][pricing_row]Feature 1[/pricing_row][pricing_footer]Signup[/pricing_footer][/pricing_column][/pricing_table]
    */
-	function shortcode_pricing_table($params, $content = null) {
+	function shortcode_pricing_table( $params, $content = null ) {
     static $counter = 1;
 		$params = shortcode_atts(
       array(
         'bg_color' => '',
         'border_color' => '',
         'divider_color' => '',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
     if ( !$params['bg_color'] ) {
       $params['bg_color'] = Salamander::getData ( 'pricing_bg_color' );
@@ -403,7 +395,7 @@ class Short_Codes {
     $params['counter'] = $counter;
 		$counter++;
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-table.php', $params);
+		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'pricing-table.php', $params );
 	}
 
   /**
@@ -412,14 +404,14 @@ class Short_Codes {
    * @return string
    * Pricing Column
    */
-	public function shortcode_pricing_column($params, $content = null) {
+	public function shortcode_pricing_column( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'title' => '',
-        'content' => do_shortcode($content),
+        'content' => do_shortcode( $content ),
       ), $params);
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-column.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'pricing-column.php', $params );
 	}
 
   /**
@@ -428,21 +420,20 @@ class Short_Codes {
    * @return string
    * Pricing price
    */
-	function shortcode_pricing_price($params, $content = null) {
+	function shortcode_pricing_price( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'currency' => '',
         'price' => '',
         'time' => '',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
-    if(!empty($params['currency']) && !empty($params['price'])) {
+    if ( ! empty( $params['currency'] ) && ! empty( $params['price'] ) ) {
       $params['class'] = '';
       $params['price'] = explode('.', $params['price']);
-      if($params['price'][1]){
+      if ( $params['price'][1] )
         $params['class'] .= 'price-with-decimal';
-      }
     }
 
     return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-price.php', $params);
@@ -454,10 +445,10 @@ class Short_Codes {
    * @return string
    * Pricing Row
    */
-	public function shortcode_pricing_row($params, $content = null) {
-		$params['content'] = do_shortcode($content);
+	public function shortcode_pricing_row( $params, $content = null ) {
+		$params['content'] = do_shortcode( $content );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-row.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'pricing-row.php', $params );
 	}
 
   /**
@@ -466,10 +457,10 @@ class Short_Codes {
    * @return string
    * Pricing Footer
    */
-	public function shortcode_pricing_footer($params, $content = null) {
-    $params['content'] = do_shortcode($content);
+	public function shortcode_pricing_footer( $params, $content = null ) {
+    $params['content'] = do_shortcode( $content );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'pricing-footer.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'pricing-footer.php', $params );
 	}
 
 
@@ -479,7 +470,7 @@ class Short_Codes {
    * @return string
    * Content box shortcode
    */
-	function shortcode_content_boxes($params, $content = null) {
+	function shortcode_content_boxes( $params, $content = null ) {
     static $counter = 1;
     $params = shortcode_atts(
       array(
@@ -488,31 +479,28 @@ class Short_Codes {
 			'circle_color' => '',
 			'circle_border_color' => '',
 			'bg_color' => '',
-      'content' => do_shortcode($content),
-		), $params);
+      'content' => do_shortcode( $content ),
+		), $params );
 
-		if(!$params['icon_color']) {
+		if ( ! $params['icon_color'] )
 			$params['icon_color'] = Salamander::getData( 'icon_color' );
-		}
 
-		if(!$params['circle_color']) {
+		if ( ! $params['circle_color'] )
       $params['circle_color'] = Salamander::getData( 'icon_circle_color' );
-		}
 
-		if(!$params['circle_border_color']) {
+		if ( ! $params['circle_border_color'] )
       $params['circle_border_color'] = Salamander::getData( 'icon_border_color' );
-		}
 
-		if(!$params['bg_color']) {
+		if ( ! $params['bg_color'] )
       $params['bg_color'] = Salamander::getData( 'content_box_bg_color' );
-		}
+
     $params['counter'] = $counter;
 		$counter++;
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'content-boxes.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'content-boxes.php', $params );
 	}
 
-	function shortcode_content_box($params, $content = null) {
+	function shortcode_content_box( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'last' => 'no',
@@ -522,10 +510,10 @@ class Short_Codes {
         'link_target' => '_self',
         'link_text' => '',
         'link' => '',
-        'content' => do_shortcode($content),
-      ), $params);
+        'content' => do_shortcode( $content ),
+      ), $params );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'content-box.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'content-box.php', $params );
 	}
 
 ////////////////////////////////////////////////////////////////////
@@ -595,8 +583,7 @@ class Short_Codes {
    * @return string
    * Testimonials
    */
-	public function shortcode_testimonials($params, $content = null) {
-		global $data;
+	public function shortcode_testimonials( $params, $content = null ) {
 
 		wp_enqueue_script( 'jquery.cycle' );
 
@@ -605,31 +592,28 @@ class Short_Codes {
 			'bg_color' => '',
 			'text_color' => '',
       'style_color' => '',
-      'content' => do_shortcode($content),
+      'content' => do_shortcode( $content ),
 		), $params);
 
 		static $counter = 1;
 
-		if ( ! $params['bg_color'] ) {
+		if ( ! $params['bg_color'] )
 			$params['bg_color'] = Salamander::getData( 'testimonial_bg_color' );
-		}
 
-
-		if ( ! $params['text_color'] ) {
+		if ( ! $params['text_color'] )
 			$params['text_color'] = Salamander::getData( 'testimonial_text_color' );
-		}
 
 //		$getRgb = Helper::hex2rgb($style_color);
 
     $params['counter'] = $counter;
 		$counter++;
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'testimonials.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'testimonials.php', $params );
 	}
 
 // Testimonial
 
-	public function shortcode_testimonial($params, $content = null) {
+	public function shortcode_testimonial( $params, $content = null ) {
     $params = shortcode_atts(
       array(
         'company' => '',
@@ -637,10 +621,10 @@ class Short_Codes {
         'name' => '',
         'link' => '',
         'target' => '_blank',
-        'content' => do_shortcode($content),
+        'content' => do_shortcode( $content ),
       ), $params);
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'testimonial.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'testimonial.php', $params );
 	}
 
   /**
@@ -649,8 +633,7 @@ class Short_Codes {
    * @return string
    * Progess Bar
    */
-	function shortcode_progress($params, $content = null) {
-		global $data;
+	function shortcode_progress( $params, $content = null ) {
 
 		wp_enqueue_script( 'jquery.waypoint' );
 
@@ -660,17 +643,15 @@ class Short_Codes {
 			'unfilled_color' => '',
 			'value' => '70',
       'content' => $content,
-		), $params);
+		), $params );
 
-		if ( ! $params['filled_color'] ) {
+		if ( ! $params['filled_color'] )
 			$params['filled_color']= Salamander::getData( 'counter_filled_color' );
-		}
 
-		if(!$params['unfilled_color'] ) {
+		if ( ! $params['unfilled_color'] )
 			$params['unfilled_color'] = Salamander::getData( 'counter_unfilled_color' );
-		}
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'progress-bar.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'progress-bar.php', $params );
 	}
 
   /**
@@ -679,7 +660,7 @@ class Short_Codes {
    * @return string
    * Person
    */
-	function shortcode_person($params, $content = null) {
+	function shortcode_person( $params, $content = null ) {
     $params = shortcode_atts(
       array(
       'name' => '',
@@ -690,10 +671,10 @@ class Short_Codes {
       'twitter_link' => '',
       'linkedin_link' => '',
       'dribbble_link' => '',
-      'content' => do_shortcode($content),
-    ), $params);
+      'content' => do_shortcode( $content ),
+    ), $params );
 
-    return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'person.php', $params);
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'person.php', $params );
 	}
 
   /**
@@ -702,7 +683,7 @@ class Short_Codes {
    * @return string
    * Recent Posts
    */
-	function shortcode_recent_posts($params, $content = null) {
+	function shortcode_recent_posts( $params, $content = null ) {
 		wp_enqueue_script( 'jquery.flexslider' );
 
 		$params = shortcode_atts(
@@ -717,38 +698,33 @@ class Short_Codes {
 			'excerpt' => 'yes',
 			'excerpt_words' => 15,
 			'strip_html' => true,
+		), $params );
 
-		), $params);
-
-		if($params['strip_html'] == 'yes') {
+		if ( $params['strip_html'] == 'yes' )
 			$params['strip_html'] = true;
-		} elseif($params['strip_html'] == 'no') {
+		elseif ( $params['strip_html'] == 'no' )
 			$params['strip_html'] = false;
-		}
 
-		if(!empty($params['cat_id']) && $params['cat_id']){
+		if ( ! empty($params['cat_id']) && $params['cat_id'] )
 			$query_atts['category_name'] = $params['cat_id'];
-		} elseif(!empty($params['cat_slug']) && $params['cat_slug']){
+		elseif ( ! empty( $params['cat_slug'] ) && $params['cat_slug'] )
 			$query_atts['category_name'] = $params['cat_slug'];
-		}
 		$query_atts['posts_per_page'] = $params['number_posts'];
 
-		if($exclude_cats) {
-			$cats_to_exclude = explode(',', $exclude_cats);
-			foreach($cats_to_exclude as $cat_to_exclude) {
+		if ( $exclude_cats ) {
+			$cats_to_exclude = explode( ',', $exclude_cats );
+			foreach( $cats_to_exclude as $cat_to_exclude ) {
 				$idObj = get_category_by_slug( trim( $cat_to_exclude ) );
-				if($idObj) {
+				if ( $idObj )
 					$cats_id_to_exclude[] = $idObj->term_id;
-				}
 			}
-			if($cats_id_to_exclude) {
+			if ( $cats_id_to_exclude )
 				$query_atts['category__not_in'] = $cats_id_to_exclude;
-			}
 		}
 
-		$params['recent_posts'] = new WP_Query($query_atts);
+		$params['recent_posts'] = new WP_Query( $query_atts );
 
-		return Helper::render(VIEWS_PATH . 'shortcodes' . DS . 'recent_posts.php', $params);
+		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'recent_posts.php', $params );
 	}
 
 	/**
@@ -757,7 +733,7 @@ class Short_Codes {
    * @return string
    * Recent Works
    */
-	function shortcode_recent_works($params, $content = null) {
+	function shortcode_recent_works( $params, $content = null ) {
 
 		static $counter = 1;
 
@@ -773,7 +749,7 @@ class Short_Codes {
 			'cat_slug' => '',
 			'number_posts' => 10,
 			'excerpt_words' => 15,
-		), $params);
+		), $params );
 
 		if ( $params['columns'] == 1 ) {
 			$params['columns_words'] = 'one';
@@ -820,7 +796,7 @@ class Short_Codes {
 			);
 		}
 
-		$params['gallery'] = new WP_Query($args);
+		$params['gallery'] = new WP_Query( $args );
 
 		if ( $params['layout'] == 'carousel' )
 			return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'recent_works_carousel.php', $params );
@@ -838,13 +814,13 @@ class Short_Codes {
    * @return string
    * Alert Message
    */
-	function shortcode_alert($params, $content = null) {
+	function shortcode_alert( $params, $content = null ) {
 
 		$params = shortcode_atts(
 			array(
 			'type' => 'danger',
-			'content' => do_shortcode($content),
-		), $params);
+			'content' => do_shortcode( $content ),
+		), $params );
 
 		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'alert.php' );
 	}
@@ -855,74 +831,46 @@ class Short_Codes {
    * @return string
    * FontAwesome Icons
    */
-	function shortcode_fontawesome($params, $content = null) {
-		global $data;
+	function shortcode_fontawesome( $params, $content = null ) {
 
 		$params = shortcode_atts(
 			array(
 			'circle' => 'no',
 			'size' => '',
 			'icon' => '',
-			'circle' => '',
-			'icon_color' => '',
-			'circle_color' => '',
-			'circle_border_color' => '',
-		), $params);
-
-		if ( ! $params['icon_color'] )
-			$params['icon_color'] = Salamander::getData( 'icon_color' );
-
-		if( ! $params['circle_color'] )
-			$params['circle_color'] = Salamander::getData( 'icon_circle_color' );
-
-		if( ! $params['circle_border_color'])
-			$params['circle_border_color'] = Salamander::getData( 'icon_border_color' );
+			'icon_color' => Salamander::getData( 'icon_color' ),
+			'circle_color' => Salamander::getData( 'icon_circle_color' ),
+			'circle_border_color' => Salamander::getData( 'icon_border_color' ),
+		), $params );
 
 		$params['style'] = 'color:' . $params['icon_color'] . ' !important;';
 
-		if($params['circle'] == 'yes') {
-			$style .= 'background-color:'.$circlecolor.' !important;border:1px solid '.$circlebordercolor.' !important;';
-		}
+		if ( $params['circle'] == 'yes' )
+			$params['style'] .= 'background-color:' . $params['circle_color'] . ' !important;border:1px solid ' . $params['circle_border_color'] . ' !important;';
 
-		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'fontawesome.php');
+		return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'fontawesome.php' );
 	}
 
-////////////////////////////////////////////////////////////////////
-//// Social Links
-////////////////////////////////////////////////////////////////////
-//add_shortcode('social_links', 'shortcode_social_links');
-//	function shortcode_social_links($atts, $content = null) {
-//		global $data;
-//
-//		extract(shortcode_atts(array(
-//			'colorscheme' => '',
-//			'linktarget' => '_self'
-//		), $atts));
-//
-//		if(!$colorscheme) {
-//			$colorscheme = strtolower($data['social_links_color']);
-//		}
-//
-//		$html = '<div class="social_links_shortcode clearfix">';
-//		$html .= '<ul class="social-networks social-networks-'.$colorscheme.' clearfix">';
-//		foreach($atts as $key => $link) {
-//			if($link && $key != 'linktarget' && $key != 'colorscheme') {
-//				$html .= '<li class="'.$key.'">
-//			<a class="'.$key.'" href="'.$link.'" target="'.$linktarget.'">'.ucwords($key).'</a>
-//			<div class="popup">
-//				<div class="holder">
-//					<p>'.ucwords($key).'</p>
-//				</div>
-//			</div>
-//			</li>';
-//			}
-//		}
-//		$html .= '</ul>';
-//		$html .= '</div>';
-//
-//		return $html;
-//	}
-//
+  /**
+   * @param $params
+   * @param null $content
+   * @return string
+   * Social Links
+   */
+	function shortcode_social_links( $params, $content = null ) {
+		$params = shortcode_atts( array(
+			'color' => strtolower( Salamander::getData( 'social_links_color' ) ),
+			'target' => '_self'
+		), $params );
+
+    foreach ( $params as $name => $link ) {
+      if ( $link && ( $name != 'target' || $name != 'color' ) )
+        $params['socials'][$name] = $link;
+    }
+
+    return Helper::render( VIEWS_PATH . 'shortcodes' . DS . 'social_links.php' );
+	}
+
 ////////////////////////////////////////////////////////////////////
 //// Clients container
 ////////////////////////////////////////////////////////////////////
@@ -2148,30 +2096,6 @@ class Short_Codes {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   public function add_button()
   {
     if(strstr($_SERVER['REQUEST_URI'], 'wp-admin/post-new.php') || strstr($_SERVER['REQUEST_URI'], 'wp-admin/post.php')) {
@@ -2214,6 +2138,7 @@ class Short_Codes {
         'alert' => 'Alert',
         'fontawesome' => 'FontAwesome',
         'sharing' => 'Sharing',
+        'social_links' => 'Social links',
       ),
     );
 
@@ -2306,6 +2231,8 @@ class Short_Codes {
 		add_shortcode('fontawesome', array( $this, 'shortcode_fontawesome' ) );
 		// Social Sharing Box
 		add_shortcode('sharing', array( $this, 'shortcode_sharing' ) );
+    // Social Links
+    add_shortcode('social_links', array( $this, 'shortcode_social_links' ) );
 
     // Add buttons to tinyMCE
     add_action ( 'init', array( $this, 'add_Button' ) );

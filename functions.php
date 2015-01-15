@@ -4,8 +4,6 @@ ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
 error_reporting(-1);
 
-header('Content-Type: text/html; charset=utf-8');
-
 require_once 'framework' . DIRECTORY_SEPARATOR . 'libs' . DIRECTORY_SEPARATOR . 'Krumo' . DIRECTORY_SEPARATOR . 'krumo.php';
 require_once 'framework' . DIRECTORY_SEPARATOR . 'autoload.php';
 
